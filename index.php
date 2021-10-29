@@ -12,7 +12,7 @@ if (isset($_GET['r'])) {
 
     $router = new Routeur($request);
 } else {
-    $router = new Routeur('home');
+    $router = new Routeur('login');
 }
 
 $router->renderController();

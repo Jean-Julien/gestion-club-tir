@@ -1,5 +1,5 @@
 <?php
-require 'TestEntity.php';
+
 
 class Manager
 {
@@ -42,5 +42,15 @@ class Manager
             echo 'NOK';
         }
         return $tests;
+    }
+
+    public function validateLogin($username, $password)
+    {
+
+        if ($username == "TKT" && $password == "RoKo") {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

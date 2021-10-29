@@ -15,6 +15,8 @@ class Routeur
      */
     private $routes = [
         "home"              => ["controller" => "Controller", "method" => "showHome"],
+        "login"             => ["controller" => "Controller", "method" => "showLogin"],
+        "connect"           => ["controller" => "Controller", "method" => "connect"],
     ];
     /**
      * Undocumented function

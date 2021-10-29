@@ -3,6 +3,8 @@
         Projet analyse : Tiche Ket Team
     </h1>
 
+    <h2>Page d'accueil</h2>
+
     <table class="table">
         <thead>
             <tr>
