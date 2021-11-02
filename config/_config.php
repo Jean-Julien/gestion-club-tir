@@ -42,6 +42,7 @@ class MyAutoload
 
         // constantes pour les routes
     }
+
     /**
      * Undocumented function
      * Permet d'inclure automatiquement les classes nécéssaires
@@ -52,10 +53,13 @@ class MyAutoload
     public static function autoLoad($class)
     {
         if (file_exists(MODEL . $class . '.php')) {
+
             include_once(MODEL . $class . '.php');
         } elseif (file_exists(CONTROLLER . $class . '.php')) {
+
             include_once(CONTROLLER . $class . '.php');
         } elseif (file_exists(VIEW . $class . '.php')) {
+            
             include_once(VIEW . $class . '.php');
         };
     }
