@@ -28,13 +28,13 @@
         <select class="form-control w-25" id="horaire">
             <option value="horaire1">08:00 - 08:30</option>
             <option value="horaire2" disabled>09:00 - 09:30</option>
-            <option value="horaire2" disabled>10:00 - 10:30</option>
-            <option value="horaire2" disabled>11:00 - 11:30</option>
-            <option value="horaire2" disabled>12:00 - 12:30</option>
-            <option value="horaire2" disabled>13:00 - 13:30</option>
-            <option value="horaire2" disabled>14:00 - 14:30</option>
-            <option value="horaire2" disabled>15:00 - 15:30</option>
-            <option value="horaire2" disabled>16:00 - 16:30</option>
+            <option value="horaire3" >10:00 - 10:30</option>
+            <option value="horaire4" >11:00 - 11:30</option>
+            <option value="horaire5" >12:00 - 12:30</option>
+            <option value="horaire6" >13:00 - 13:30</option>
+            <option value="horaire7" >14:00 - 14:30</option>
+            <option value="horaire8" >15:00 - 15:30</option>
+            <option value="horaire9" >16:00 - 16:30</option>
         </select> 
         <select class="form-control w-25" id="pastir">
             <option value="Pas de tir 1" disabled>Pas de tir 1</option>
