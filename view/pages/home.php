@@ -24,8 +24,10 @@
 <div class="container">
     
     <form role="form" action="myaction.php" method="post">
+
+        <div class="mt-2">
         <input type="date" class="form-control w-25" id="reservation">
-        <select class="form-control w-25" id="horaire">
+        <select class="form-control w-25 mt-2" id="horaire">
             <option value="horaire1">08:00 - 08:30</option>
             <option value="horaire2" disabled>09:00 - 09:30</option>
             <option value="horaire3" >10:00 - 10:30</option>
@@ -36,6 +38,8 @@
             <option value="horaire8" >15:00 - 15:30</option>
             <option value="horaire9" >16:00 - 16:30</option>
         </select> 
+        </div>
+        <div class="mt-2">
         <select class="form-control w-25" id="pastir">
             <option value="Pas de tir 1" disabled>Pas de tir 1</option>
             <option value="Pas de tir 2">Pas de tir 2</option>
@@ -58,7 +62,10 @@
             <option value="Pas de tir 19">Pas de tir 19</option>
             <option value="Pas de tir 20">Pas de tir 20</option>
         </select>  
+        </div>
+        <div class="mt-2">
         <button type="submit" class="btn btn-primary">Réserver</button>
+        </div>
     </form>
     
 </div>
