@@ -65,4 +65,9 @@ class Controller
             $this->showLogin();
         }
     }
+    public function showCalendar()
+    {
+
+        include_once(VIEW . 'pages/calendrier.php');
+    }
 }

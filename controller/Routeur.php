@@ -17,6 +17,7 @@ class Routeur
         "home"              => ["controller" => "Controller", "method" => "showHome"],
         "login"             => ["controller" => "Controller", "method" => "showLogin"],
         "connect"           => ["controller" => "Controller", "method" => "connect"],
+        "calendar"          => ["controller" => "Controller", "method" => "showCalendar"],
     ];
     /**
      * Undocumented function
