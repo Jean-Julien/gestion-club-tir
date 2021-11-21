@@ -22,7 +22,7 @@ class Manager
         } catch (PDOException $e) {
 
             $message = '<p>Erreur à la connexion ! : ' . $e->getMessage() . '</p>';
-            echo 'Non OK';
+            echo 'Problème de connection en DB.';
             die();
             //die("Erreur : " . $e->getMessage());
         }

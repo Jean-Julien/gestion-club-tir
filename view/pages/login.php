@@ -2,8 +2,7 @@
 <html>
 
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
 </head>
 
@@ -24,14 +23,12 @@
 
                     <div class="mb-3">
                         <label for="exampleInputEmail1" class="form-label">Email address (TKT)</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" name="emailLogin"
-                            aria-describedby="emailHelp" placeholder="Email">
+                        <input type="text" class="form-control" id="exampleInputEmail1" name="emailLogin" aria-describedby="emailHelp" placeholder="Email">
                     </div>
 
                     <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Password (RoKo)</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" name="passwordLogin"
-                            placeholder="Password">
+                        <label for="exampleInputPassword1" class="form-label">Password (RoK0)</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" name="passwordLogin" placeholder="Password">
                     </div>
 
                     <label class="mb-3">
