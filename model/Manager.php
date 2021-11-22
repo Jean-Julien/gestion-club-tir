@@ -147,4 +147,13 @@ class Manager
 
         return $tests;
     }
+    public function checkReservation($date, $period){
+        $stmnt =$this->db->prepare('SELECT * FROM users WHERE date = ? and period = ?');
+        $res = $stmnt->execute([$date, $period])->fetchAll(PDO::FETCH_ASSOC)
+            if($res){
+                return 1;
+            }
+            else{ return 0;}
+    }
+    
 }
