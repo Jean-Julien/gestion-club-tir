@@ -149,7 +149,7 @@ class Manager
         }
 
         return $tests;
-    }
+    } //Coucou
 
     public function checkReservation($date, $period)
     {
