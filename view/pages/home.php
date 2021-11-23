@@ -1,5 +1,9 @@
 <div class="container">
-    <form class="shadow p-4 mt-4 bg-body rounded" role="form" action="<?php echo insertReservation ?>" method="post">
+    <form class="shadow p-4 mt-4 bg-body rounded row g-3" role="form" action="<?php echo insertReservation ?>" method="post">
+        <div class="mb-1">
+            <h3>Réservation pas de tir</h3>
+        </div>
+
         <?php
         if (!empty($_SESSION['reserv_error'])) {
             echo "<div class='alert alert-danger' role='alert'>" . $_SESSION['reserv_error'] . "</div>";
@@ -12,16 +16,19 @@
         }
         ?>
 
-        <div class="mt-1">
-            <input type="text" class="form-control w-25" id="pseudo" name="reserv_pseudo" placeholder="Pseudo">
+        <div class="col-12">
+            <label for="pseudo" class="form-label">Pseudo</label>
+            <input type="text" class="form-control" id="pseudo" name="reserv_pseudo" placeholder="Pseudo">
         </div>
 
-        <div class="mt-3">
-            <input type="date" class="form-control w-25" id="reservation" name="reserv_date">
+        <div class="col-md-6">
+            <label for="date" class="form-label">Date de réservation</label>
+            <input type="date" class="form-control" id="date" name="reserv_date">
         </div>
 
-        <div class="mt-3">
-            <select class="form-select w-25 mt-2" id="horaire" name="reserv_time">
+        <div class="col-md-6">
+            <label for="horaire" class="form-label">Plage horaire</label>
+            <select class="form-select" id="horaire" name="reserv_time">
                 <option value="08:00:00">08:00 - 08:30</option>
                 <option value="08:30:00">08:30 - 09:00</option>
                 <option value="09:00:00">09:00 - 09:30</option>
@@ -51,8 +58,9 @@
             </select> 
         </div>
 
-        <div class="mt-3">
-            <select class="form-select w-25" id="pastir" name="reserv_pas_de_tir">
+        <div class="col-12">
+            <label for="pastir" class="form-label">Pas de tir</label>
+            <select class="form-select" id="pastir" name="reserv_pas_de_tir">
                 <option value="1">Pas de tir 1</option>
                 <!--<option value="2">Pas de tir 2</option>
                 <option value="3">Pas de tir 3</option>
@@ -76,7 +84,7 @@
             </select>  
         </div>
 
-        <div class="mt-3">
+        <div class="mt-4">
             <button type="submit" class="btn btn-primary">Réserver</button>
         </div>
     </form>
