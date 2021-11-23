@@ -151,6 +151,53 @@ class Manager
         return $tests;
     }
 
+    public function insertReservationToDb($pseudo, $trancheHoraire, $pasDeTir)
+    {
+
+        $db = $this->db;
+        $req = $db->prepare('SELECT * FROM reservation WHERE reserv_datetime = ? AND reserv_pas_de_tir = ?');
+
+        try {
+
+            if ($req->execute(array($trancheHoraire, $pasDeTir))) {
+
+                $count = $req->rowCount();
+
+                if ($count == 0) {
+
+                    $insert = $db->prepare('INSERT INTO reservation(reserv_pseudo, reserv_datetime, reserv_pas_de_tir) VALUES(?, ?, ?)');
+
+                    if ($insert->execute(array($pseudo, $trancheHoraire, $pasDeTir))) {
+
+                        $db = null;
+                        $req = null;
+                        $insert = null;
+
+                        return 0;
+                    } else {
+
+                        return 1;
+                    }
+                } else {
+
+                    $db = null;
+                    $req = null;
+
+                    return 2;
+                }
+            } else {
+
+                return 3;
+            }
+        } catch (Exception $e) {
+
+            $db = null;
+            $req = null;
+
+            return 4;
+        }
+    }
+
     public function checkReservation($date, $period)
     {
         $stmnt = $this->db->prepare('SELECT * FROM users WHERE date = ? and period = ?');
@@ -161,5 +208,18 @@ class Manager
         } else {
             return 0;
         }
+    }
+
+    /**
+     * Méthode permettant de se déconnecter
+     *
+     * @return void
+     */
+    public function logout()
+    {
+        $_SESSION = array();
+        session_destroy();
+        $myView = new View();
+        $myView->renderLogin();
     }
 }
