@@ -20,7 +20,7 @@
                 <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="<?php echo IMG ?>user.png" alt="user" width="32" height="32" class="rounded-circle">
                 </a>
-                <ul class="dropdown-menu dropdown-menu-end text-small shadow" aria-labelledby="dropdownUser2" style="">
+                <ul class="dropdown-menu dropdown-menu-end text-small shadow" aria-labelledby="dropdownUser2">
                     <li><a class="dropdown-item" href="#">Profile</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="index.php?r=logout">Se déconnecter</a></li>
