@@ -6,6 +6,12 @@
  */
 class Controller
 {
+    public Function showLogin()
+    {	
+        $myView = new View();
+        $myView->renderLogin();
+    }
+    
     /**
      * gère la page d'accueil
      * 
@@ -26,10 +32,21 @@ class Controller
         $myView->render();
     }
 
-    public Function showLogin()
-    {	
-        $myView = new View();
-        $myView->renderLogin();
+    public function showCalendar()
+    {
+        // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
+        if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true)
+        {
+            $myView = new View();
+            $myView->redirect('login');
+            exit();
+        }
+
+        //$manager = new Manager();
+        $myView = new View('calendar');
+        $myView->render();
+        
+        //include_once(VIEW . 'pages/calendar.php');
     }
 
     public function connect()
@@ -133,11 +150,6 @@ class Controller
                 $myView->redirect('home');
             }
         } 
-    }
-
-    public function showCalendar()
-    {
-        include_once(VIEW . 'pages/calendrier.php');
     }
 
     public function logout() 
