@@ -124,33 +124,6 @@ class Manager
         }
     }
 
-    public function getId()
-    {
-        $db = $this->db;
-
-        $req = $db->prepare("SELECT content from Test");
-
-        if ($req->execute()) {
-
-            while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
-
-                foreach ($row as $valeur) {
-
-                    $test = new TestEntity();
-
-                    $test->setContent($valeur);
-
-                    $tests[] = $test;
-                };
-            }
-        } else {
-
-            echo 'NOK';
-        }
-
-        return $tests;
-    }
-
     public function insertReservationToDb($pseudo, $trancheHoraire, $pasDeTir)
     {
 
