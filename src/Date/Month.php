@@ -23,21 +23,15 @@ class Month
      */
     public function __construct(?int $month = null, ?int $year = null) // les ? sont pour annuler le typage si null
     {
-        if ($month === null) {
+        if ($month === null || $month < 1 || $month > 12) {
             $month = intval(date('m'));
         }
         if ($year === null) {
             $year = intval(date('Y'));
         }
-        if ($month < 1 || $month > 12) {
-            throw new \Exception("Le mois n'est pas valide");
-        }
-        if ($year < 1970) {
-            throw new \Exception("L'année est inférieur à 1970");
-        } else {
-            $this->month = $month;
-            $this->year = $year;
-        }
+
+        $this->month = $month;
+        $this->year = $year;
     }
 
     /**
@@ -45,9 +39,9 @@ class Month
      *
      * @return \DateTime
      */
-    public function getStartingDay()
+    public function getStartingDay() : \DateTimeInterface
     {
-        return new \DateTime("{$this->year}-{$this->month}-01");
+        return new \DateTimeImmutable("{$this->year}-{$this->month}-01");
     }
 
     /**
@@ -68,22 +62,30 @@ class Month
     public function getWeeks()
     {
         $start = $this->getStartingDay();
-        $end = (clone $start)->modify('+1 month -1 day');
-        $weeks = intval($end->format('W')) - intval($start->format('W')) + 1;
+        $end = $start->modify('+1 month -1 day');
+        $startWeek = intval($start->format('W'));
+        $endWeek = intval($end->format('W'));
+
+        if ($endWeek === 1) {
+            $endWeek = intval($end->modify('-7 days')->format('W')) + 1;
+        }
+
+        $weeks = $endWeek - $startWeek + 1;
 
         if ($weeks < 0) {
             $weeks = intval($end->format('W'));
         }
+
         return $weeks;
     }
 
     /**
      * Undocumented function
      *
-     * @param \DateTime $date
+     * @param \DateTimeImmutable $date
      * @return bool
-     */
-    public function withinMonth(\DateTime $date)
+     */    
+    public function withinMonth(\DateTimeInterface $date)
     {
         return $this->getStartingDay()->format('Y-m') === $date->format('Y-m');
     }

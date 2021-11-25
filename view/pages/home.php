@@ -30,10 +30,10 @@
     </div>
 </nav>
 
-<div class="container shadow p-4 mt-4 rounded bg-light">
+<div class="container shadow p-4 mt-4 rounded bg-dark bg-gradient">
     <form class="rounded row g-3" role="form" action="<?php echo insertReservation ?>" method="post">
         <div class="mb-1">
-            <h3>Réservation pas de tir</h3>
+            <h3 class="text-white">Réservation pas de tir</h3>
         </div>
 
         <?php
@@ -49,17 +49,17 @@
         ?>
 
         <div class="col-12">
-            <label for="pseudo" class="form-label">Pseudo</label>
+            <label for="pseudo" class="form-label text-white-50">Pseudo</label>
             <input type="text" class="form-control" id="pseudo" name="reserv_pseudo" placeholder="Pseudo">
         </div>
 
         <div class="col-md-6">
-            <label for="date" class="form-label">Date de réservation</label>
+            <label for="date" class="form-label text-white-50">Date de réservation</label>
             <input type="date" class="form-control" id="date" name="reserv_date">
         </div>
 
         <div class="col-md-6">
-            <label for="horaire" class="form-label">Plage horaire</label>
+            <label for="horaire" class="form-label text-white-50">Plage horaire</label>
             <select class="form-select" id="horaire" name="reserv_time">
                 <option value="08:00:00">08:00 - 08:30</option>
                 <option value="08:30:00">08:30 - 09:00</option>
@@ -91,7 +91,7 @@
         </div>
 
         <div class="col-12">
-            <label for="pastir" class="form-label">Pas de tir</label>
+            <label for="pastir" class="form-label text-white-50">Pas de tir</label>
             <select class="form-select" id="pastir" name="reserv_pas_de_tir">
                 <option value="1">Pas de tir 1</option>
                 <!--<option value="2">Pas de tir 2</option>

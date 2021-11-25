@@ -30,7 +30,7 @@
     </div>
 </nav>
 
-<div class="container shadow p-4 mt-4 rounded bg-light" style="margin-bottom: 90px;">
+<div class="container shadow p-4 mt-4 rounded bg-dark bg-gradient" style="margin-bottom: 90px;">
     <?php
     require './src/Date/Month.php';
 
@@ -42,11 +42,12 @@
 
     $bookings[] = ['05', '08', '12', '25'];
 
-    $start = $month->getStartingDay()->modify('last monday');
+    $start = $month->getStartingDay();
+    $start = $start->format('N') === '1' ? $start : $month->getStartingDay()->modify('last monday');
     ?>
 
     <div class="d-flex flex-row align-items-center justify-content-between mx-sm-3">
-        <h1><?= $month->toString(); ?></h1>
+        <h1 class="text-white"><?= $month->toString(); ?></h1>
         <div>
             <a href="/index.php?r=calendar&month=<?= $month->previousMonth()->month; ?>&year=<?= $month->previousMonth()->year; ?>" class="btn btn-primary">&lt;</a>
 
@@ -59,13 +60,13 @@
             <tr>
                 <?php
                 foreach ($month->days as $k => $day) :
-                    $date = (clone $start)->modify("+" . ($k + $i * 7) . " days")
+                    $date = $start->modify("+" . ($k + $i * 7) . " days")
                 ?>
                     <td class="<?= $month->withinMonth($date) ? '' : 'calendar__othermonth'; ?>">
                         <?php if ($i === 0) : ?>
-                            <div class="calendar__weekday"><?= $day; ?></div>
+                            <div class="calendar__weekday text-white"><?= $day; ?></div>
                         <?php endif; ?>
-                        <div class="calendar__day"><?= $date->format('d'); ?></div>
+                        <div class="calendar__day text-white-50"><?= $date->format('d'); ?></div>
                         <?php if ($date->format('d') === '05') { ?>
                             <a class="btn btn-danger btn-xs">Booked</a>
                         <?php } else { ?>
