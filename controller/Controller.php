@@ -100,13 +100,11 @@ class Controller
     {	
         try
         {
-            if(!empty($_POST['reserv_pseudo']) && !empty($_POST['reserv_date']) && !empty($_POST['reserv_time']) && !empty($_POST['reserv_pas_de_tir']))
+            if(!empty($_POST['reserv_pseudo']) && !empty($_POST['select_datetime_value']) && !empty($_POST['reserv_pas_de_tir']))
             { 
                 $reserv_pseudo = trim($_POST['reserv_pseudo']);
-                $reserv_date = $_POST['reserv_date'];
-                $reserv_time = $_POST['reserv_time'];
                 $reserv_pas_de_tir = $_POST['reserv_pas_de_tir'];
-                $reserv_tranche_horaire = $reserv_date." ".$reserv_time;
+                $reserv_tranche_horaire = $_POST['select_datetime_value'];
                         
                 $manager = new Manager();
                     

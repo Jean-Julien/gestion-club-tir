@@ -102,53 +102,18 @@
                 'fri_':'Vendredi',
                 'sat_':'Samedi',
                 'sun_':'Dimanche',
-                'done':'Terminé'
+                'done':'ok'
             };
 
             new DateTimePickerComponent.DateTimePicker( 'select_datetime', {
-                start_date: "2030-03-22T14:30:00",
+                //first_date: new Date(),
+                start_date: new Date(),
                 last_date: new Date( 2030, 2, 29, 22, 30 ),
                 first_day_no: 1,
                 l10n: fr,
+                min_range_hours: 18
             } );
         </script>
-
-        <div class="col-md-6">
-            <label for="date" class="form-label text-white-50">Date de réservation</label>
-            <input type="date" class="form-control" id="date" name="reserv_date">
-        </div>
-
-        <div class="col-md-6">
-            <label for="horaire" class="form-label text-white-50">Plage horaire</label>
-            <select class="form-select" id="horaire" name="reserv_time">
-                <option value="08:00:00">08:00 - 08:30</option>
-                <option value="08:30:00">08:30 - 09:00</option>
-                <option value="09:00:00">09:00 - 09:30</option>
-                <option value="09:30:00">09:30 - 10:00</option>
-                <option value="10:00:00">10:00 - 10:30</option>
-                <option value="10:30:00">10:30 - 10:00</option>
-                <option value="11:00:00">11:00 - 11:30</option>
-                <option value="11:30:00">11:30 - 11:00</option>
-                <option value="12:00:00">12:00 - 12:30</option>
-                <option value="12:30:00">12:30 - 12:00</option>
-                <option value="13:00:00">13:00 - 13:30</option>
-                <option value="13:30:00">13:30 - 13:00</option>
-                <option value="14:00:00">14:00 - 14:30</option>
-                <option value="14:30:00">14:30 - 14:00</option>
-                <option value="15:00:00">15:00 - 15:30</option>
-                <option value="15:30:00">15:30 - 15:00</option>
-                <option value="16:00:00">16:00 - 16:30</option>
-                <option value="16:30:00">16:30 - 17:00</option>
-                <option value="17:00:00">17:00 - 17:30</option>
-                <option value="17:30:00">17:30 - 18:00</option>
-                <option value="18:00:00">18:00 - 18:30</option>
-                <option value="18:30:00">18:30 - 19:00</option>
-                <option value="19:00:00">19:00 - 19:30</option>
-                <option value="19:30:00">19:30 - 20:00</option>
-                <option value="20:00:00">20:00 - 20:30</option>
-                <option value="20:30:00">20:30 - 21:00</option>
-            </select> 
-        </div>
 
         <div class="col-12">
             <label for="pastir" class="form-label text-white-50">Pas de tir</label>
