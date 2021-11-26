@@ -53,6 +53,66 @@
             <input type="text" class="form-control" id="pseudo" name="reserv_pseudo" placeholder="Pseudo">
         </div>
 
+        <div class="col-12">
+            <label for="select_datetime" class="form-label text-white-50">Date et heure de réservation</label>
+            <div id="select_datetime" class="datetime-container fix-float">
+                <div class="buttons-container fix-float">
+                    <input type="hidden" name="select_datetime_value" class="date_output" value="">
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const fr = {
+                'jan':'Jan',
+                'feb':'Fev',
+                'mar':'Mar',
+                'apr':'Avr',
+                'may':'Mai',
+                'jun':'Jui',
+                'jul':'Jui',
+                'aug':'Aou',
+                'sep':'Set',
+                'oct':'Oct',
+                'nov':'Nov',
+                'dec':'Dec',
+                'jan_':'Janvier',
+                'feb_':'Février',
+                'mar_':'Mars',
+                'apr_':'Avril',
+                'may_':'Mai',
+                'jun_':'Juin',
+                'jul_':'Juillet',
+                'aug_':'Août',
+                'sep_':'Septembre',
+                'oct_':'Octobre',
+                'nov_':'Novembre',
+                'dec_':'Décembre',
+                'mon':'Lun',
+                'tue':'Mar',
+                'wed':'Mer',
+                'thu':'Jeu',
+                'fri':'Ven',
+                'sat':'Sam',
+                'sun':'Dim',
+                'mon_':'Lundi',
+                'tue_':'Mardi',
+                'wed_':'Mercredi',
+                'thu_':'Jeudi',
+                'fri_':'Vendredi',
+                'sat_':'Samedi',
+                'sun_':'Dimanche',
+                'done':'Terminé'
+            };
+
+            new DateTimePickerComponent.DateTimePicker( 'select_datetime', {
+                start_date: "2030-03-22T14:30:00",
+                last_date: new Date( 2030, 2, 29, 22, 30 ),
+                first_day_no: 1,
+                l10n: fr,
+            } );
+        </script>
+
         <div class="col-md-6">
             <label for="date" class="form-label text-white-50">Date de réservation</label>
             <input type="date" class="form-control" id="date" name="reserv_date">
