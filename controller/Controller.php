@@ -27,9 +27,10 @@ class Controller
             exit();
         }
 
-        //$manager = new Manager();
+        $manager = new Manager();
+	    $pasdetir = $manager->getPasDeTir();
         $myView = new View('home');
-        $myView->render();
+        $myView->render($pasdetir);
     }
 
     public function showCalendar()

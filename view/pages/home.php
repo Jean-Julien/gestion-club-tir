@@ -51,7 +51,7 @@
 
         <div class="col-12">
             <label for="pseudo" class="form-label text-white-50">Pseudo</label>
-            <input type="text" class="form-control" id="pseudo" name="reserv_pseudo" placeholder="Pseudo">
+            <input type="text" class="form-control" id="pseudo" name="reserv_pseudo" placeholder="Insérez votre Pseudo">
         </div>
 
         <div class="col-12">
@@ -119,26 +119,10 @@
         <div class="col-12">
             <label for="pastir" class="form-label text-white-50">Pas de tir</label>
             <select class="form-select" id="pastir" name="reserv_pas_de_tir">
-                <option value="1">Pas de tir 1</option>
-                <!--<option value="2">Pas de tir 2</option>
-                <option value="3">Pas de tir 3</option>
-                <option value="4">Pas de tir 4</option>
-                <option value="5">Pas de tir 5</option>
-                <option value="6">Pas de tir 6</option>
-                <option value="7">Pas de tir 7</option>
-                <option value="8">Pas de tir 8</option>
-                <option value="9">Pas de tir 9</option>
-                <option value="10">Pas de tir 10</option>
-                <option value="11">Pas de tir 11</option>
-                <option value="12">Pas de tir 12</option>
-                <option value="13">Pas de tir 13</option>
-                <option value="14">Pas de tir 14</option>
-                <option value="15">Pas de tir 15</option>
-                <option value="16">Pas de tir 16</option>
-                <option value="17">Pas de tir 17</option>
-                <option value="18">Pas de tir 18</option>
-                <option value="19">Pas de tir 19</option>
-                <option value="20">Pas de tir 20</option>-->
+                <option selected disabled>Selectionnez un pas de tir</option>
+                <?php foreach($params as $pasdetir) : ?>
+					<option value="<?php echo $pasdetir->idPasDeTir; ?>"><?php echo $pasdetir->nomPasDeTir; ?></option>
+				<?php endforeach; ?>
             </select>  
         </div>
 

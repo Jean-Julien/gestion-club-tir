@@ -28,6 +28,53 @@ class Manager
         }
     }
 
+    public function getPasDeTir()
+    {
+        $db = $this->db;
+        $req = $db->prepare('SELECT * FROM pas_de_tir ORDER BY CHAR_LENGTH(pas_de_tir_name), pas_de_tir_name');
+
+        try {
+
+            if ($req->execute()) {
+
+                $count = $req->rowCount();
+
+                if ($count > 0) {
+
+                    while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
+
+                        $pasdetir = new PasDeTir();
+
+                        $pasdetir->idPasDeTir = $row['pas_de_tir_id'];
+                        $pasdetir->nomPasDeTir = $row['pas_de_tir_name'];
+
+                        $pasdetirs[] = $pasdetir;
+                    }
+
+                    $db = null;
+                    $req = null;
+
+                    return $pasdetirs;
+                } else {
+
+                    $db = null;
+                    $req = null;
+
+                    return false;
+                }
+            } else {
+
+                return false;
+            }
+        } catch (Exception $e) {
+
+            $db = null;
+            $req = null;
+
+            return false;
+        }
+    }
+
     /**
      * Méthode de vérification de l'existence de l'email
      *
