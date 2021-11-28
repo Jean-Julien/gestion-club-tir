@@ -19,6 +19,7 @@
             <div class="flex-shrink-0 dropdown">
                 <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="<?php echo IMG ?>user.png" alt="user" width="32" height="32" class="rounded-circle">
+                    <?php echo $_SESSION['nom']." ". $_SESSION['prenom']; ?>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end text-small shadow" aria-labelledby="dropdownUser2">
                     <li><a class="dropdown-item" href="#">Profile</a></li>
