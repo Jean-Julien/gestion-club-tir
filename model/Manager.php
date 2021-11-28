@@ -239,7 +239,5 @@ class Manager
     {
         $_SESSION = array();
         session_destroy();
-        $myView = new View();
-        $myView->renderLogin();
     }
 }
