@@ -107,12 +107,19 @@
             };
 
             new DateTimePickerComponent.DateTimePicker( 'select_datetime', {
-                //first_date: new Date(),
-                start_date: new Date(),
-                last_date: new Date( 2030, 2, 29, 22, 30 ),
+                //first_date: "2030-01-02T16:00:00",
+                //start_date: "2030-01-05T16:00:00",
+                //first_date: new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString(),
+                start_date: new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString(),
+                last_date: new Date( 2030, 0, 29, 16 ),
                 first_day_no: 1,
-                l10n: fr,
-                min_range_hours: 18
+
+
+                //first_date: new Date(),
+                //start_date: new Date(),
+                //last_date: new Date( 2030, 2, 29, 22, 30 ),
+                //first_day_no: 1,
+                l10n: fr
             } );
         </script>
 
