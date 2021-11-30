@@ -32,11 +32,12 @@ div.datetime-container button.date,div.datetime-container button.time {
 
 div.datetime-container button.w-50 {
     float:left;
+    height:60px;
     width:50%
 }
 
 div.datetime-container button.active {
-    background-color:#fec601;
+    background-color:#016ffe;
     color:#000
 }
 
@@ -154,7 +155,7 @@ div.picker table td.start-day.end-day {
 }
 
 div.picker table td.active,div.picker table td.time-selected {
-    background-color:#fec601;
+    background-color:#09fe01;
     color:#000
 }
 
