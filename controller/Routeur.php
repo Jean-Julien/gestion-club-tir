@@ -19,7 +19,8 @@ class Routeur
         "connection"        => ["controller" => "Controller", "method" => "connect"],
         "calendar"          => ["controller" => "Controller", "method" => "showCalendar"],
         "insertReservation" => ["controller" => "Controller", "method" => "addReservationToDb"],
-        "logout"            => ["controller" => "Controller", "method" => "logout"]
+        "logout"            => ["controller" => "Controller", "method" => "logout"],
+        "404"               => ["controller" => "Controller", "method" => "show404"]
     ];
 
     /**

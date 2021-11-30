@@ -78,7 +78,8 @@ div.picker {
     box-shadow:0 1px 10px #555;
     display:none;
     padding:0 5px 10px;
-    position:absolute;
+    /*position:absolute;*/
+    position:relative;
     width:100%;
     z-index:2
 }

@@ -44,6 +44,11 @@ class View
         include_once(PAGES . 'login.php');
     }
 
+    public function render404() {
+
+        include_once(PAGES . '404.php');
+    }
+
     /**
      * construction de la page de redirection
      *

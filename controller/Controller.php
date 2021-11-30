@@ -11,12 +11,7 @@ class Controller
         $myView = new View();
         $myView->renderLogin();
     }
-    
-    /**
-     * gère la page d'accueil
-     * 
-     * @return void
-     */
+
     public function showHome() 
     {
         // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
@@ -31,6 +26,28 @@ class Controller
 	    $pasdetir = $manager->getPasDeTir();
         $myView = new View('home');
         $myView->render($pasdetir);
+    }
+    
+    /**
+     * gère la page d'accueil
+     * 
+     * @return void
+     */
+    public function show404()
+    {    
+        // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
+        /*if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true)
+        {
+            $myView = new View();
+            $myView->redirect('login');
+            exit();
+        }
+
+        $myView = new View();
+		$myView->redirect('404');*/
+
+        $myView = new View();
+		$myView->render404();
     }
 
     public function showCalendar()

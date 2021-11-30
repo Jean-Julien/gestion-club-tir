@@ -31,7 +31,7 @@
     </div>
 </nav>
 
-<div class="container shadow p-4 mt-4 rounded bg-dark bg-gradient">
+<div class="container shadow p-4 mt-4 rounded bg-dark bg-gradient" style="margin-bottom: 90px;">
     <form class="rounded row g-3" role="form" action="<?php echo insertReservation ?>" method="post">
         <div class="mb-1">
             <h3 class="text-white">Réservation pas de tir</h3>
@@ -106,13 +106,32 @@
                 'done':'ok'
             };
 
+            let date_ob = new Date();
+
+            // adjust 0 before single digit date
+            let date = ("0" + date_ob.getDate()).slice(-2);
+
+            // current month
+            let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+
+            // current year
+            let year = date_ob.getFullYear();
+
+            // current hours
+            let hours = date_ob.getHours();
+
+            // current minutes
+            let minutes = date_ob.getMinutes();
+
+            // current seconds
+            let seconds = date_ob.getSeconds();
+
             new DateTimePickerComponent.DateTimePicker( 'select_datetime', {
-                //first_date: new Date(),
-                start_date: new Date(),
-                last_date: new Date( 2030, 2, 29, 22, 30 ),
+                first_date: year + "-" + month + "-" + date + "T" + hours + ":" + minutes + ":" + seconds,
+                start_date: year + "-" + month + "-" + date + "T" + hours + ":" + minutes + ":" + seconds,
+                last_date: new Date( 2030, 0, 29, 16 ),
                 first_day_no: 1,
-                l10n: fr,
-                min_range_hours: 18
+                l10n: fr
             } );
         </script>
 
