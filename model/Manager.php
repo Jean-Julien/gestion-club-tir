@@ -150,4 +150,9 @@ class Manager
 
         return $tests;
     }
+
+    public function double($nombre)
+    {
+        return $nombre * 2;
+    }
 }
