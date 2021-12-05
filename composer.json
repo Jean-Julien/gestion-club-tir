@@ -1,0 +1,18 @@
+{
+    "name": "djkar/gestion-club-tir",
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Djkar\\GestionClubTir\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Kevin",
+            "email": "kvanconingsloo@gmail.com"
+        }
+    ],
+    "require": {}
+}
