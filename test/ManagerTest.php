@@ -25,6 +25,21 @@ class ManagerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(true, $m->validateLogin('TKT', 'RoK0'));
     }
 
+    public function testInsertReservationWith1()
+    {
+        $m = new Manager();
+
+
+        $this->assertEquals(2, $m->insertReservationToDb('1', '1', '1'));
+    }
+    public function testInsertReservationWithEmptyString()
+    {
+        $m = new Manager();
+
+
+        $this->assertEquals(1, $m->insertReservationToDb('', '', ''));
+    }
+
     public function testInvalideMail()
     {
         $m = new Manager();
