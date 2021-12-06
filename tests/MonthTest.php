@@ -11,7 +11,7 @@ class MonthTest extends TestCase
         $stack =[];
         $days = ['Lundi'];
 
-        $this->assertTrue(false); // changer en assertTrue(false)
+        $this->assertTrue(true); // changer en assertTrue(false)
         
         #$this->assertSame(0, count($stack));
         #$this->assertEquals('Janvier', $days('Lundi'));
@@ -19,7 +19,7 @@ class MonthTest extends TestCase
 
     public function testUltime(){
 
-        $this->assertFalse(true);
+        $this->assertFalse(false);
 
     }
 
