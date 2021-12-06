@@ -1,5 +1,7 @@
 <?php
 
+namespace Calendrier;
+
 class Month
 {
 
