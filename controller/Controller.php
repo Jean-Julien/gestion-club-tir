@@ -6,35 +6,34 @@
  */
 class Controller
 {
-    public Function showLogin()
-    {	
+    public function showLogin()
+    {
         $myView = new View();
         $myView->renderLogin();
     }
 
-    public function showHome() 
+    public function showHome()
     {
         // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
-        if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true)
-        {
+        if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             $myView = new View();
             $myView->redirect('login');
             exit();
         }
 
         $manager = new Manager();
-	    $pasdetir = $manager->getPasDeTir();
+        $pasdetir = $manager->getPasDeTir();
         $myView = new View('home');
         $myView->render($pasdetir);
     }
-    
+
     /**
      * gère la page d'accueil
      * 
      * @return void
      */
     public function show404()
-    {    
+    {
         // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
         /*if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true)
         {
@@ -47,14 +46,13 @@ class Controller
 		$myView->redirect('404');*/
 
         $myView = new View();
-		$myView->render404();
+        $myView->render404();
     }
 
     public function showCalendar()
     {
         // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
-        if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true)
-        {
+        if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             $myView = new View();
             $myView->redirect('login');
             exit();
@@ -63,7 +61,7 @@ class Controller
         //$manager = new Manager();
         $myView = new View('calendar');
         $myView->render();
-        
+
         //include_once(VIEW . 'pages/calendar.php');
     }
 
@@ -83,92 +81,74 @@ class Controller
                     if ($manager->validateLogin($email, $password)) {
 
                         $myView = new View();
-						$myView->redirect('home');
+                        $myView->redirect('home');
                     } else {
 
                         $_SESSION['error'] = "Mot de passe ou email incorrect";
                         //$this->showLogin();
                         $myView = new View();
-						$myView->redirect('login');
+                        $myView->redirect('login');
                     }
                 } else {
 
                     $_SESSION['error'] = "Ce compte n'existe pas";
                     //$this->showLogin();
                     $myView = new View();
-					$myView->redirect('login');
+                    $myView->redirect('login');
                 }
             } else {
 
                 $_SESSION['error'] = "Veuillez remplir les champs.";
                 //$this->showLogin();
                 $myView = new View();
-				$myView->redirect('login');
+                $myView->redirect('login');
             }
         } catch (Exception $e) { // S'il y a eu une erreur, alors...
 
             $_SESSION['error'] = "Problème de serveur " . $e->getMessage();
             //$this->showLogin();
             $myView = new View();
-			$myView->redirect('login');
+            $myView->redirect('login');
         }
     }
 
     public function addReservationToDb()
-    {	
-        try
-        {
-            if(!empty($_POST['reserv_pseudo']) && !empty($_POST['select_datetime_value']) && !empty($_POST['reserv_pas_de_tir']))
-            { 
+    {
+        try {
+            if (!empty($_POST['reserv_pseudo']) && !empty($_POST['select_datetime_value']) && !empty($_POST['reserv_pas_de_tir'])) {
                 $reserv_pseudo = trim($_POST['reserv_pseudo']);
                 $reserv_pas_de_tir = $_POST['reserv_pas_de_tir'];
                 $reserv_tranche_horaire = $_POST['select_datetime_value'];
-                        
+
                 $manager = new Manager();
-                    
-                if($manager->insertReservationToDb($reserv_pseudo, $reserv_tranche_horaire, $reserv_pas_de_tir) == 0)
-                {
+
+                if ($manager->insertReservationToDb($reserv_pseudo, $reserv_tranche_horaire, $reserv_pas_de_tir) == 0) {
                     $_SESSION['reserv_success'] = "Votre réservation a bien été prise en compte";
                     $myView = new View();
                     $myView->redirect('home');
+                } else if ($manager->insertReservationToDb($reserv_pseudo, $reserv_tranche_horaire, $reserv_pas_de_tir) == 1) {
+                    throw new Exception("Error 1");
+                } else if ($manager->insertReservationToDb($reserv_pseudo, $reserv_tranche_horaire, $reserv_pas_de_tir) == 2) {
+                    throw new Exception("Pas de tir déjà réservé ! Réitéré votre demande");
+                } else if ($manager->insertReservationToDb($reserv_pseudo, $reserv_tranche_horaire, $reserv_pas_de_tir) == 3) {
+                    throw new Exception("Error 3");
+                } else if ($manager->insertReservationToDb($reserv_pseudo, $reserv_tranche_horaire, $reserv_pas_de_tir) == 4) {
+                    throw new Exception("Error 4");
+                } else {
+                    throw new Exception("Error 5");
                 }
-                else if($manager->insertReservationToDb($reserv_pseudo, $reserv_tranche_horaire, $reserv_pas_de_tir) == 1)
-                { 
-                    throw new Exception ("Error 1");
-                }
-                else if($manager->insertReservationToDb($reserv_pseudo, $reserv_tranche_horaire, $reserv_pas_de_tir) == 2)
-                { 
-                    throw new Exception ("Pas de tir déjà réservé ! Réitéré votre demande");
-                }
-                else if($manager->insertReservationToDb($reserv_pseudo, $reserv_tranche_horaire, $reserv_pas_de_tir) == 3)
-                {
-                    throw new Exception ("Error 3");
-                }
-                else if($manager->insertReservationToDb($reserv_pseudo, $reserv_tranche_horaire, $reserv_pas_de_tir) == 4)
-                {
-                    throw new Exception ("Error 4");
-                }
-                else
-                {
-                    throw new Exception ("Error 5");
-                }
+            } else {
+                throw new Exception("Tous les champs doivent être remplis !");
             }
-            else
-            {
-                throw new Exception ("Tous les champs doivent être remplis !");
-            }
-        }
-        catch(Exception $e)
-        {
-            { 
+        } catch (Exception $e) { {
                 $_SESSION['reserv_error'] = $e->getMessage();
                 $myView = new View();
                 $myView->redirect('home');
             }
-        } 
+        }
     }
 
-    public function logout() 
+    public function logout()
     {
         $manager = new Manager;
         $manager->logout();

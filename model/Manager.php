@@ -16,10 +16,10 @@ class Manager
         try {
 
             // Pour la mise en production, commentez au dessus et décommentez ci dessous (mettez bien vos codes dans le fichier config).
-            //$this->db = new PDO(BDD_PROD, USER_BDD_PROD, PASSWORD_BDD_PROD);
+            $this->db = new PDO(BDD_PROD, USER_BDD_PROD, PASSWORD_BDD_PROD);
 
             // Pour effectuer les essais sur l'hébergeur de test avant la mise en production, commentez au dessus et décommentez ci dessous (mettez bien vos codes dans le fichier config).
-            $this->db = new PDO(BDD_TEST, USER_BDD_TEST, PASSWORD_BDD_TEST);
+            //$this->db = new PDO(BDD_TEST, USER_BDD_TEST, PASSWORD_BDD_TEST);
 
             // Pour travailler en local, commentez au dessus et décommentez ci dessous (mettez bien vos codes dans le fichier config).
             //$this->db = new PDO(BDD_LOCAL, USER_BDD_LOCAL, PASSWORD_BDD_LOCAL);
