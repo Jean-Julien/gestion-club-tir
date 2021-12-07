@@ -16,7 +16,7 @@
         - rien
         - yes pour confirmer
 3) phpunit est donc installé sur votre projet ( attention de ne pas le push sur git. Faire un .gitignore si il n est pas deja fais )
-4) pour chaque classe, on doit faire une classe test. 
+4) pour chaque classe, on doit faire une classe test qui dois porter le meme nom que la classe testée + Test. 
     classe normale :
 
     class Manager{
@@ -43,8 +43,8 @@
             // on attend 4 en retour de la fonction en envoyant 2
         }
     }
-5) dans le terminal faire un ./vendor/bin/phpunit ./test
-    et vous aurez vos retour de test 
+5) dans le terminal faire un ./vendor/bin/phpunit ./test --colors
+    et vous aurez vos retour de test en couleur svp
 
     exemple :
 

@@ -16,9 +16,13 @@ class Routeur
     private $routes = [
         "home"              => ["controller" => "Controller", "method" => "showHome"],
         "login"             => ["controller" => "Controller", "method" => "showLogin"],
-        "connect"           => ["controller" => "Controller", "method" => "connect"],
+        "connection"        => ["controller" => "Controller", "method" => "connect"],
         "calendar"          => ["controller" => "Controller", "method" => "showCalendar"],
+        "insertReservation" => ["controller" => "Controller", "method" => "addReservationToDb"],
+        "logout"            => ["controller" => "Controller", "method" => "logout"],
+        "404"               => ["controller" => "Controller", "method" => "show404"]
     ];
+
     /**
      * Undocumented function
      * Constructeur routeur
@@ -29,6 +33,7 @@ class Routeur
         $this->request = $request;
         session_start();
     }
+
     /**
      * Undocumented function
      * Ouverture du controller si ok. Si pas==> erreur 404

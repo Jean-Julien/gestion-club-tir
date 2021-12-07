@@ -15,16 +15,65 @@ class Manager
     {
         try {
 
+            // Pour la mise en production, commentez au dessus et décommentez ci dessous (mettez bien vos codes dans le fichier config).
             $this->db = new PDO(BDD_PROD, USER_BDD_PROD, PASSWORD_BDD_PROD);
+
+            // Pour effectuer les essais sur l'hébergeur de test avant la mise en production, commentez au dessus et décommentez ci dessous (mettez bien vos codes dans le fichier config).
+            //$this->db = new PDO(BDD_TEST, USER_BDD_TEST, PASSWORD_BDD_TEST);
 
             // Pour travailler en local, commentez au dessus et décommentez ci dessous (mettez bien vos codes dans le fichier config).
             //$this->db = new PDO(BDD_LOCAL, USER_BDD_LOCAL, PASSWORD_BDD_LOCAL);
         } catch (PDOException $e) {
 
-            $message = '<p>Erreur à la connexion ! : ' . $e->getMessage() . '</p>';
-            echo 'Problème de connection en DB.';
+            echo "Problème de connexion avec la base de donnée<br><br>Code d'erreur : " . $e->getMessage();
             die();
-            //die("Erreur : " . $e->getMessage());
+        }
+    }
+
+    public function getPasDeTir()
+    {
+        $db = $this->db;
+        $req = $db->prepare('SELECT * FROM pas_de_tir ORDER BY CHAR_LENGTH(pas_de_tir_name), pas_de_tir_name');
+
+        try {
+
+            if ($req->execute()) {
+
+                $count = $req->rowCount();
+
+                if ($count > 0) {
+
+                    while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
+
+                        $pasdetir = new PasDeTir();
+
+                        $pasdetir->idPasDeTir = $row['pas_de_tir_id'];
+                        $pasdetir->nomPasDeTir = $row['pas_de_tir_name'];
+
+                        $pasdetirs[] = $pasdetir;
+                    }
+
+                    $db = null;
+                    $req = null;
+
+                    return $pasdetirs;
+                } else {
+
+                    $db = null;
+                    $req = null;
+
+                    return false;
+                }
+            } else {
+
+                return false;
+            }
+        } catch (Exception $e) {
+
+            $db = null;
+            $req = null;
+
+            return false;
         }
     }
 
@@ -124,31 +173,51 @@ class Manager
         }
     }
 
-    public function getId()
+    public function insertReservationToDb($pseudo, $trancheHoraire, $pasDeTir)
     {
+
         $db = $this->db;
+        $req = $db->prepare('SELECT * FROM reservation WHERE reserv_datetime = ? AND reserv_pas_de_tir = ?');
 
-        $req = $db->prepare("SELECT content from Test");
+        try {
 
-        if ($req->execute()) {
+            if ($req->execute(array($trancheHoraire, $pasDeTir))) {
 
-            while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
+                $count = $req->rowCount();
 
-                foreach ($row as $valeur) {
+                if ($count == 0) {
 
-                    $test = new TestEntity();
+                    $insert = $db->prepare('INSERT INTO reservation(reserv_pseudo, reserv_datetime, reserv_pas_de_tir) VALUES(?, ?, ?)');
 
-                    $test->setContent($valeur);
+                    if ($insert->execute(array($pseudo, $trancheHoraire, $pasDeTir))) {
 
-                    $tests[] = $test;
-                };
+                        $db = null;
+                        $req = null;
+                        $insert = null;
+
+                        return 0;
+                    } else {
+
+                        return 1;
+                    }
+                } else {
+
+                    $db = null;
+                    $req = null;
+
+                    return 2;
+                }
+            } else {
+
+                return 3;
             }
-        } else {
+        } catch (Exception $e) {
 
-            echo 'NOK';
+            $db = null;
+            $req = null;
+
+            return 4;
         }
-
-        return $tests;
     }
 
     public function checkReservation($date, $period)
@@ -161,5 +230,16 @@ class Manager
         } else {
             return 0;
         }
+    }
+
+    /**
+     * Méthode permettant de se déconnecter
+     *
+     * @return void
+     */
+    public function logout()
+    {
+        $_SESSION = array();
+        session_destroy();
     }
 }

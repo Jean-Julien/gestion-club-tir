@@ -25,11 +25,16 @@ class MyAutoload
         define('CONTROLLER', ROOT . '/controller/');
         define('MODEL', ROOT . '/model/');
         define('VIEW', ROOT . '/view/');
+        define('PAGES', ROOT . '/view/pages/');
 
         //definir constante Bdd
         define('BDD_PROD', 'mysql:host=mysql-gestion-club-tir.alwaysdata.net;dbname=gestion-club-tir_tkt');
         define('USER_BDD_PROD', '246168');
         define('PASSWORD_BDD_PROD', 'bacinfo3');
+
+        define('BDD_TEST', 'mysql:host=mysql-gestion-club-tir-test.alwaysdata.net;dbname=gestion-club-tir-test_tkt');
+        define('USER_BDD_TEST', '250840');
+        define('PASSWORD_BDD_TEST', 'bacinfo3');
 
         define('BDD_LOCAL', ''); // mettez votre bdd local ici
         define('USER_BDD_LOCAL', ''); //mettez votre user local ici
@@ -38,9 +43,13 @@ class MyAutoload
         //definir constante pour fichier pc
         define('CSS', 'http://' . HOST . '/assets/css/');
         define('JS', 'http://' . HOST . '/assets/js/');
+        define('IMG', 'http://' . HOST . '/assets/img/');
         //define('PUBLIC', ROOT . '/public/');
 
         // constantes pour les routes
+        define('login', 'index.php?r=login');
+        define('home', 'index.php?r=home');
+        define('insertReservation', 'index.php?r=insertReservation');
     }
     /**
      * Undocumented function

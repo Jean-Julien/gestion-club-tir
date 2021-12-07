@@ -17,6 +17,7 @@ class View
     {
         $this->template = $template;
     }
+
     /**
      * Construction de la page client.
      * 
@@ -32,6 +33,22 @@ class View
         $contentPage = ob_get_clean();
         include_once(VIEW . '_gabarit.php');
     }
+    
+    /**
+     * renderLogin
+     *
+     * @return void
+     */
+    public function renderLogin()
+    {
+        include_once(PAGES . 'login.php');
+    }
+
+    public function render404() {
+
+        include_once(PAGES . '404.php');
+    }
+
     /**
      * construction de la page de redirection
      *
@@ -41,7 +58,6 @@ class View
     public function redirect($route)
     {
 
-        header("Location: " . $route);
-        exit();
+        header('location: index.php?r='.$route);
     }
 }
