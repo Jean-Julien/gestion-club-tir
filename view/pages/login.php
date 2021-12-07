@@ -31,7 +31,7 @@
                         </div>
 
                         <div class="mb-4 text-center">
-                            <a href="#" class="text-decoration-none text-error text-center">Mot de passe oublié ?</a>
+                            <a href="index.php?r=forgotpassword" class="text-decoration-none text-error text-center">Mot de passe oublié ?</a>
                         </div>
 
                         <div class="d-grid gap-2">
@@ -40,7 +40,7 @@
 
                         <hr>
 
-                        <p class="text-center mb-2 text-white-50">Si vous n'avez pas de compte, <a href="#">enregistrez-vous ici</a>.</p>
+                        <p class="text-center mb-2 text-white-50">Si vous n'avez pas de compte, <a href="index.php?r=register">enregistrez-vous ici</a>.</p>
                     </form>
                 </div>
             </div>
