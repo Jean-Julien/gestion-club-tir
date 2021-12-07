@@ -12,6 +12,49 @@ class Controller
         $myView->renderLogin();
     }
 
+    public function showRegister()
+    {
+        $myView = new View('register');
+        $myView->render();
+    }
+
+    public function showRegistered()
+    {
+        $manager = new Manager();
+
+        try {
+
+            $nom = trim($_POST['nomRegister']);
+            $prenom = trim($_POST['prenomRegister']);
+            $email = trim($_POST['emailRegister']);
+            $birthday = trim($_POST['birthdayRegister']);
+
+            if ($nom != "" && $prenom != "" && $email != "" && $birthday != "") {
+
+                if ($manager->existMail($email)) {
+
+                    $_SESSION['register_error'] = "Ce compte existe déjà";
+                    $myView = new View();
+                    $myView->redirect('register');
+                } else {
+
+                    $myView = new View('registered');
+                    $myView->render();
+                }
+            } else {
+
+                $_SESSION['register_error'] = "Veuillez remplir tous les champs";
+                $myView = new View();
+                $myView->redirect('register');
+            }
+        } catch (Exception $e) { // S'il y a eu une erreur, alors...
+
+            $_SESSION['register_error'] = "Problème de serveur " . $e->getMessage();
+            $myView = new View();
+            $myView->redirect('register');
+        }
+    }
+
     public function showHome()
     {
         // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
@@ -84,28 +127,28 @@ class Controller
                         $myView->redirect('home');
                     } else {
 
-                        $_SESSION['error'] = "Mot de passe ou email incorrect";
+                        $_SESSION['login_error'] = "Mot de passe ou email incorrect";
                         //$this->showLogin();
                         $myView = new View();
                         $myView->redirect('login');
                     }
                 } else {
 
-                    $_SESSION['error'] = "Ce compte n'existe pas";
+                    $_SESSION['login_error'] = "Ce compte n'existe pas";
                     //$this->showLogin();
                     $myView = new View();
                     $myView->redirect('login');
                 }
             } else {
 
-                $_SESSION['error'] = "Veuillez remplir les champs.";
+                $_SESSION['login_error'] = "Veuillez remplir tous les champs";
                 //$this->showLogin();
                 $myView = new View();
                 $myView->redirect('login');
             }
         } catch (Exception $e) { // S'il y a eu une erreur, alors...
 
-            $_SESSION['error'] = "Problème de serveur " . $e->getMessage();
+            $_SESSION['login_error'] = "Problème de serveur " . $e->getMessage();
             //$this->showLogin();
             $myView = new View();
             $myView->redirect('login');

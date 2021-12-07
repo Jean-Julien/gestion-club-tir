@@ -41,9 +41,7 @@
         if (!empty($_SESSION['reserv_error'])) {
             echo "<div class='alert alert-danger' role='alert'>" . $_SESSION['reserv_error'] . "</div>";
         }
-        ?>
-
-        <?php
+        
         if (!empty($_SESSION['reserv_success'])) {
             echo "<div class='alert alert-success' role='alert'>" . $_SESSION['reserv_success'] . "</div>";
         }
