@@ -182,7 +182,7 @@ class Controller
                 if ($manager->insertReservationToDb($reserv_pseudo, $reserv_tranche_horaire, $reserv_pas_de_tir) == 0) {
                     $_SESSION['reserv_success'] = "Votre réservation a bien été prise en compte";
                     $myView = new View();
-                    $myView->redirect('home');
+                    $myView->redirect('reservation');
                 } else if ($manager->insertReservationToDb($reserv_pseudo, $reserv_tranche_horaire, $reserv_pas_de_tir) == 1) {
                     throw new Exception("Error 1");
                 } else if ($manager->insertReservationToDb($reserv_pseudo, $reserv_tranche_horaire, $reserv_pas_de_tir) == 2) {
@@ -200,7 +200,7 @@ class Controller
         } catch (Exception $e) { {
                 $_SESSION['reserv_error'] = $e->getMessage();
                 $myView = new View();
-                $myView->redirect('home');
+                $myView->redirect('reservation');
             }
         }
     }
