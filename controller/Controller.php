@@ -50,6 +50,20 @@ class Controller
         $myView->render404();
     }
 
+    public function showReservation()
+    {
+        // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
+        if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+            $myView = new View();
+            $myView->redirect('login');
+            exit();
+        }
+
+        //$manager = new Manager();
+        $myView = new View('reservation');
+        $myView->render();
+    }
+
     public function showCalendar()
     {
         // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
