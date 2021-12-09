@@ -16,10 +16,10 @@ class Manager
         try {
 
             // Pour la mise en production, commentez au dessus et décommentez ci dessous (mettez bien vos codes dans le fichier config).
-            $this->db = new PDO(BDD_PROD, USER_BDD_PROD, PASSWORD_BDD_PROD);
+            //$this->db = new PDO(BDD_PROD, USER_BDD_PROD, PASSWORD_BDD_PROD);
 
             // Pour effectuer les essais sur l'hébergeur de test avant la mise en production, commentez au dessus et décommentez ci dessous (mettez bien vos codes dans le fichier config).
-            //$this->db = new PDO(BDD_TEST, USER_BDD_TEST, PASSWORD_BDD_TEST);
+            $this->db = new PDO(BDD_TEST, USER_BDD_TEST, PASSWORD_BDD_TEST);
 
             // Pour travailler en local, commentez au dessus et décommentez ci dessous (mettez bien vos codes dans le fichier config).
             //$this->db = new PDO(BDD_LOCAL, USER_BDD_LOCAL, PASSWORD_BDD_LOCAL);
@@ -29,6 +29,73 @@ class Manager
             die();
         }
     }
+
+    function encrypt_decrypt($string, $action = 'encrypt')
+    {
+        $encrypt_method = "AES-256-CBC";
+        $secret_key = 'AA74CDCC2BBRT935136HH7B63C27'; // user define private key
+        $secret_iv = '5fgf5HJ5g27'; // user define secret key
+        $key = hash('sha256', $secret_key);
+        $iv = substr(hash('sha256', $secret_iv), 0, 16); // sha256 is hash_hmac_algo
+
+        if ($action == 'encrypt') {
+
+            $output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
+            $output = base64_encode($output);
+        } else if ($action == 'decrypt') {
+
+            $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+        }
+
+        return $output;
+    }
+
+    public function generateStrongPassword($length = 9, $add_dashes = false, $available_sets = 'luds')
+	{
+		$sets = array();
+
+		if(strpos($available_sets, 'l') !== false)
+			$sets[] = 'abcdefghjkmnpqrstuvwxyz';
+		if(strpos($available_sets, 'u') !== false)
+			$sets[] = 'ABCDEFGHJKMNPQRSTUVWXYZ';
+		if(strpos($available_sets, 'd') !== false)
+			$sets[] = '23456789';
+		if(strpos($available_sets, 's') !== false)
+			$sets[] = '!@#$%&*?';
+
+		$all = '';
+		$password = '';
+
+		foreach($sets as $set)
+		{
+			$password .= $set[array_rand(str_split($set))];
+			$all .= $set;
+		}
+
+		$all = str_split($all);
+
+		for($i = 0; $i < $length - count($sets); $i++)
+			$password .= $all[array_rand($all)];
+
+		$password = str_shuffle($password);
+
+		if(!$add_dashes)
+			return $password;
+
+		$dash_len = floor(sqrt($length));
+		$dash_str = '';
+
+		while(strlen($password) > $dash_len)
+		{
+			$dash_str .= substr($password, 0, $dash_len) . '-';
+			$password = substr($password, $dash_len);
+		}
+
+		$dash_str .= $password;
+
+		return $dash_str;
+	}
+
 
     public function getPasDeTir()
     {
@@ -85,9 +152,6 @@ class Manager
      */
     public function existMail($mail)
     {
-        $mail = $mail . "@ket.com"; // A enlever quand on aura défini les mails
-
-
         $db = $this->db;
         $req = $db->prepare('SELECT * FROM users WHERE user_mail = ?');
 
@@ -97,10 +161,29 @@ class Manager
 
             if ($count == 1) {
 
-                return true;
+                return 0;
             } else {
 
-                return false;
+                return 1;
+            }
+        }
+    }
+
+    public function checkAccountIsActif($mail, $user_actif)
+    {
+        $db = $this->db;
+        $req = $db->prepare('SELECT * FROM users WHERE user_mail = ? AND user_active = ?');
+
+        if ($req->execute(array($mail, $user_actif))) {
+
+            $count = $req->rowCount();
+
+            if ($count == 1) {
+
+                return 0;
+            } else {
+
+                return 1;
             }
         }
     }
@@ -114,10 +197,6 @@ class Manager
      */
     public function validateLogin($mail, $pass)
     {
-
-        $mail = $mail . "@ket.com";  // A enlever quand on aura défini les mails
-
-
         $db = $this->db;
         $req = $db->prepare('SELECT * FROM users WHERE user_mail = ?');
 
@@ -130,10 +209,10 @@ class Manager
                 if ($count == 1) {
 
                     $row = $req->fetch(PDO::FETCH_ASSOC);
-                    //$hashed_password = $row['user_password'];
+                    $crypted_password = $row['user_password'];
+                    $decrypted_password = $this->encrypt_decrypt($crypted_password, 'decrypt');
 
-                    //if (password_verify($pass, $hashed_password)) {
-                    if ($mail == $row['user_mail'] and $pass == $row['user_password']) {
+                    if ($mail == $row['user_mail'] and $pass == $decrypted_password ) {
 
                         $_SESSION['loggedin'] = true;
                         $_SESSION['id'] = $row['user_id'];
@@ -144,32 +223,94 @@ class Manager
                         $db = null;
                         $req = null;
 
-                        return true;
+                        return 0;
                     } else {
 
                         $db = null;
                         $req = null;
 
-                        return false;
+                        return 1;
                     }
                 } else {
 
-                    //throw new Exception("Ce compte n'existe pas");
+                    $db = null;
+                    $req = null;
+
+                    return 2;
                 }
             } else {
 
-                //throw new Exception("Impossible de contacter la base de données");
+                $db = null;
+                $req = null;
+
+                return 3;
             }
         } catch (Exception $e) {
 
             $db = null;
             $req = null;
 
-            $_SESSION['login_error'] = $e->getMessage();
-            $myView = new View();
-            $myView->redirect('login');
+            return 4;
+        }
+    }
 
-            exit;
+    public function insertMemberToDb($nom, $prenom, $mail, $date_naissance)
+    {
+
+        $db = $this->db;
+        $req = $db->prepare('SELECT * FROM users WHERE user_mail = ?');
+
+        try {
+
+            if ($req->execute(array($mail))) {
+
+                $count = $req->rowCount();
+
+                if ($count == 0) {
+
+                    $insert = $db->prepare('INSERT INTO users(user_name, user_firstname, user_mail, user_password, user_birthday, user_active) VALUES(?, ?, ?, ?, ?, ?)');
+					$password = $this->generateStrongPassword(10, false, 'luds');
+                    $crypted_password = $this->encrypt_decrypt($password, 'encrypt');
+					$actif = '0';
+
+                    if ($insert->execute(array($nom, $prenom, $mail, $crypted_password, $date_naissance, $actif))) {
+
+                        $db = null;
+                        $req = null;
+                        $insert = null;
+
+                        return 0;
+                    } else {
+
+                        $db = null;
+                        $req = null;
+                        $insert = null;
+
+                        return 1;
+                    }
+                } else {
+
+                    $db = null;
+                    $req = null;
+                    $insert = null;
+
+                    return 2;
+                }
+            } else {
+
+                $db = null;
+                $req = null;
+                $insert = null;
+
+                return 3;
+            }
+        } catch (Exception $e) {
+
+            $db = null;
+            $req = null;
+            $insert = null;
+
+            return 4;
         }
     }
 
@@ -198,16 +339,25 @@ class Manager
                         return 0;
                     } else {
 
+                        $db = null;
+                        $req = null;
+                        $insert = null;
+
                         return 1;
                     }
                 } else {
 
                     $db = null;
                     $req = null;
+                    $insert = null;
 
                     return 2;
                 }
             } else {
+
+                $db = null;
+                $req = null;
+                $insert = null;
 
                 return 3;
             }
@@ -215,6 +365,7 @@ class Manager
 
             $db = null;
             $req = null;
+            $insert = null;
 
             return 4;
         }
@@ -225,9 +376,12 @@ class Manager
         $stmnt = $this->db->prepare('SELECT * FROM users WHERE date = ? and period = ?');
         $stmnt->execute([$date, $period]);
         $res = $stmnt->fetchAll(PDO::FETCH_ASSOC);
+
         if ($res) {
+
             return 1;
         } else {
+
             return 0;
         }
     }

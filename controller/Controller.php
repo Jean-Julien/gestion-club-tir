@@ -20,39 +20,8 @@ class Controller
 
     public function showRegistered()
     {
-        $manager = new Manager();
-
-        try {
-
-            $nom = trim($_POST['nomRegister']);
-            $prenom = trim($_POST['prenomRegister']);
-            $email = trim($_POST['emailRegister']);
-            $birthday = trim($_POST['birthdayRegister']);
-
-            if ($nom != "" && $prenom != "" && $email != "" && $birthday != "") {
-
-                if ($manager->existMail($email)) {
-
-                    $_SESSION['register_error'] = "Ce compte existe déjà";
-                    $myView = new View();
-                    $myView->redirect('register');
-                } else {
-
-                    $myView = new View('registered');
-                    $myView->render();
-                }
-            } else {
-
-                $_SESSION['register_error'] = "Veuillez remplir tous les champs";
-                $myView = new View();
-                $myView->redirect('register');
-            }
-        } catch (Exception $e) { // S'il y a eu une erreur, alors...
-
-            $_SESSION['register_error'] = "Problème de serveur " . $e->getMessage();
-            $myView = new View();
-            $myView->redirect('register');
-        }
+        $myView = new View('registered');
+        $myView->render();
     }
 
     public function showHome()
@@ -119,39 +88,74 @@ class Controller
 
             if ($email != "" && $password != "") {
 
-                if ($manager->existMail($email)) {
+                if ($manager->existMail($email) == 0) {
 
-                    if ($manager->validateLogin($email, $password)) {
+                    if ($manager->validateLogin($email, $password) == 0) {
 
                         $myView = new View();
                         $myView->redirect('home');
                     } else {
 
-                        $_SESSION['login_error'] = "Mot de passe ou email incorrect";
-                        //$this->showLogin();
-                        $myView = new View();
-                        $myView->redirect('login');
+                        throw new Exception("Mot de passe ou email incorrect");
                     }
                 } else {
 
-                    $_SESSION['login_error'] = "Ce compte n'existe pas";
-                    //$this->showLogin();
-                    $myView = new View();
-                    $myView->redirect('login');
+                    throw new Exception("Ce compte n'existe pas");
                 }
             } else {
 
-                $_SESSION['login_error'] = "Veuillez remplir tous les champs";
-                //$this->showLogin();
-                $myView = new View();
-                $myView->redirect('login');
+                throw new Exception("Veuillez remplir tous les champs !");
             }
         } catch (Exception $e) { // S'il y a eu une erreur, alors...
 
-            $_SESSION['login_error'] = "Problème de serveur " . $e->getMessage();
-            //$this->showLogin();
+            $_SESSION['login_error'] = $e->getMessage();
             $myView = new View();
             $myView->redirect('login');
+        }
+    }
+
+    public function addMemberToDb()
+    {
+        try {
+
+            if (!empty($_POST['nomRegister']) && !empty($_POST['prenomRegister']) && !empty($_POST['emailRegister']) && !empty($_POST['datenaissanceRegister']) ) {
+
+                $register_name = trim(ucfirst($_POST['nomRegister']));
+                $register_firstname = trim(ucfirst($_POST['prenomRegister']));
+                $register_email = trim(strtolower($_POST['emailRegister']));
+                $register_birthday = $_POST['datenaissanceRegister'];
+
+                $manager = new Manager();
+
+                if ($manager->insertMemberToDb($register_name, $register_firstname, $register_email, $register_birthday) == 0) {
+
+                    $myView = new View();
+                    $myView->redirect('registered');
+                } else if ($manager->insertMemberToDb($register_name, $register_firstname, $register_email, $register_birthday) == 1) {
+
+                    throw new Exception("Error 1");
+                } else if ($manager->insertMemberToDb($register_name, $register_firstname, $register_email, $register_birthday) == 2) {
+
+                    throw new Exception("Pas de tir déjà réservé ! Réitéré votre demande");
+                } else if ($manager->insertMemberToDb($register_name, $register_firstname, $register_email, $register_birthday) == 3) {
+
+                    throw new Exception("Error 3");
+                } else if ($manager->insertMemberToDb($register_name, $register_firstname, $register_email, $register_birthday) == 4) {
+
+                    throw new Exception("Error 4");
+                } else {
+
+                    throw new Exception("Error 5");
+                }
+            } else {
+
+                throw new Exception("Tous les champs doivent être remplis !");
+            }
+        } catch (Exception $e) {
+
+            $_SESSION['register_error'] = $e->getMessage();
+            $myView = new View();
+            $myView->redirect('register');
         }
     }
 

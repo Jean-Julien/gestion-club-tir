@@ -18,6 +18,7 @@ class Routeur
         "login"             => ["controller" => "Controller", "method" => "showLogin"],
         "connection"        => ["controller" => "Controller", "method" => "connect"],
         "register"          => ["controller" => "Controller", "method" => "showRegister"],
+        "insertMember"      => ["controller" => "Controller", "method" => "addMemberToDb"],
         "registered"        => ["controller" => "Controller", "method" => "showRegistered"],
         "calendar"          => ["controller" => "Controller", "method" => "showCalendar"],
         "insertReservation" => ["controller" => "Controller", "method" => "addReservationToDb"],
