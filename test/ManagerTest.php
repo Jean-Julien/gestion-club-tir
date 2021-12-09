@@ -11,18 +11,39 @@ class ManagerTest extends \PHPUnit\Framework\TestCase
         include_once('config/config_test.php');
     }
 
-    public function testExistMail()
-    {
-        $m = new Manager();
-
-        $this->assertEquals(true, $m->existMail('TKT'));
-    }
-
     public function testValidateLogin()
     {
         $m = new Manager();
 
-        $this->assertEquals(true, $m->validateLogin('TKT', 'RoK0'));
+        $this->assertEquals(0, $m->validateLogin('admin@tkt.com', 'Bac3info*'));
+    }
+
+    public function testInvalideLogin()
+    {
+        $m = new Manager();
+
+        $this->assertEquals(1, $m->validateLogin('admin@tkt.com', '000'));
+    }
+
+    public function testInactifAccount()
+    {
+        $m = new Manager();
+
+        $this->assertEquals(2, $m->validateLogin('test@tkt.com', '000'));
+    }
+
+    public function testInvalideAccount()
+    {
+        $m = new Manager();
+
+        $this->assertEquals(3, $m->validateLogin('ttt', '000'));
+    }
+
+    public function testIfAccountExist()
+    {
+        $m = new Manager();
+
+        $this->assertEquals(2, $m->insertMemberToDb('Abcd', 'Efgh', 'admin@tkt.com', '1980-01-01'));
     }
 
     public function testInsertReservationWith1()
@@ -38,19 +59,5 @@ class ManagerTest extends \PHPUnit\Framework\TestCase
 
 
         $this->assertEquals(1, $m->insertReservationToDb('', '', ''));
-    }
-
-    public function testInvalideMail()
-    {
-        $m = new Manager();
-
-        $this->assertEquals(false, $m->validateLogin('ttt', '000'));
-    }
-
-    public function testNotExistMail()
-    {
-        $m = new Manager();
-
-        $this->assertEquals(false, $m->existMail('KKK'));
     }
 }

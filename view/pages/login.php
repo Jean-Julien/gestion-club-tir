@@ -12,7 +12,7 @@
         <div class="container">
             <div class="row justify-content-center align-items-center" style="height:100vh">
                 <div class="col-md-5 col-sm-12 my-2">
-                    <form accept="" class="shadow p-5 bg-dark bg-gradient rounded" method="POST" action="index.php?r=connection">
+                    <form accept="" class="shadow p-4 bg-dark bg-gradient rounded" method="POST" action="index.php?r=connection">
                         <div class="mt-2 mb-5 text-center">
                             <h3 class="text-white">Connexion</h3>
                             <h6 class="text-white-50">Veuillez entrer votre email et votre mot de passe</h6>

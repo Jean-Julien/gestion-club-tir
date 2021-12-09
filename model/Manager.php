@@ -100,7 +100,7 @@ class Manager
     public function getPasDeTir()
     {
         $db = $this->db;
-        $req = $db->prepare('SELECT * FROM pas_de_tir ORDER BY CHAR_LENGTH(pas_de_tir_name), pas_de_tir_name');
+        $req = $db->prepare('SELECT * FROM tkt_pas_de_tir ORDER BY CHAR_LENGTH(p_name), p_name');
 
         try {
 
@@ -114,8 +114,8 @@ class Manager
 
                         $pasdetir = new PasDeTir();
 
-                        $pasdetir->idPasDeTir = $row['pas_de_tir_id'];
-                        $pasdetir->nomPasDeTir = $row['pas_de_tir_name'];
+                        $pasdetir->idPasDeTir = $row['p_id'];
+                        $pasdetir->nomPasDeTir = $row['p_name'];
 
                         $pasdetirs[] = $pasdetir;
                     }
@@ -145,50 +145,6 @@ class Manager
     }
 
     /**
-     * Méthode de vérification de l'existence de l'email
-     *
-     * @param string $mail
-     * @return void
-     */
-    public function existMail($mail)
-    {
-        $db = $this->db;
-        $req = $db->prepare('SELECT * FROM users WHERE user_mail = ?');
-
-        if ($req->execute(array($mail))) {
-
-            $count = $req->rowCount();
-
-            if ($count == 1) {
-
-                return 0;
-            } else {
-
-                return 1;
-            }
-        }
-    }
-
-    public function checkAccountIsActif($mail, $user_actif)
-    {
-        $db = $this->db;
-        $req = $db->prepare('SELECT * FROM users WHERE user_mail = ? AND user_active = ?');
-
-        if ($req->execute(array($mail, $user_actif))) {
-
-            $count = $req->rowCount();
-
-            if ($count == 1) {
-
-                return 0;
-            } else {
-
-                return 1;
-            }
-        }
-    }
-
-    /**
      * Méthode de validation de connexion
      *
      * @param string $mail
@@ -198,7 +154,7 @@ class Manager
     public function validateLogin($mail, $pass)
     {
         $db = $this->db;
-        $req = $db->prepare('SELECT * FROM users WHERE user_mail = ?');
+        $req = $db->prepare('SELECT * FROM tkt_user WHERE u_mail = ?');
 
         try {
 
@@ -209,48 +165,52 @@ class Manager
                 if ($count == 1) {
 
                     $row = $req->fetch(PDO::FETCH_ASSOC);
-                    $crypted_password = $row['user_password'];
+                    $crypted_password = $row['u_password'];
                     $decrypted_password = $this->encrypt_decrypt($crypted_password, 'decrypt');
 
-                    if ($mail == $row['user_mail'] and $pass == $decrypted_password ) {
+                    if ($row['u_active'] == '1') {
 
-                        $_SESSION['loggedin'] = true;
-                        $_SESSION['id'] = $row['user_id'];
-                        $_SESSION['mail'] = $row['user_mail'];
-                        $_SESSION['nom'] = $row['user_name'];
-                        $_SESSION['prenom'] = $row['user_firstname'];
+                        if ($mail == $row['u_mail'] and $pass == $decrypted_password) {
+                            $_SESSION['loggedin'] = true;
+                            $_SESSION['id'] = $row['u_id'];
+                            $_SESSION['mail'] = $row['u_mail'];
+                            $_SESSION['nom'] = $row['u_name'];
+                            $_SESSION['prenom'] = $row['u_firstname'];
 
-                        $db = null;
-                        $req = null;
+                            $db = null;
+                            $req = null;
 
-                        return 0;
+                            return 0;
+                        } else {
+                            $db = null;
+                            $req = null;
+
+                            return 1;
+                        }
                     } else {
 
-                        $db = null;
-                        $req = null;
-
-                        return 1;
+                        return 2;
                     }
                 } else {
 
                     $db = null;
                     $req = null;
 
-                    return 2;
+                    return 3;
                 }
             } else {
 
                 $db = null;
                 $req = null;
 
-                return 3;
+                return 4;
             }
         } catch (Exception $e) {
 
             $db = null;
             $req = null;
 
-            return 4;
+            return 5;
         }
     }
 
@@ -258,7 +218,7 @@ class Manager
     {
 
         $db = $this->db;
-        $req = $db->prepare('SELECT * FROM users WHERE user_mail = ?');
+        $req = $db->prepare('SELECT * FROM tkt_user WHERE u_mail = ?');
 
         try {
 
@@ -268,7 +228,7 @@ class Manager
 
                 if ($count == 0) {
 
-                    $insert = $db->prepare('INSERT INTO users(user_name, user_firstname, user_mail, user_password, user_birthday, user_active) VALUES(?, ?, ?, ?, ?, ?)');
+                    $insert = $db->prepare('INSERT INTO tkt_user(u_name, u_firstname, u_mail, u_password, u_birthday, u_active) VALUES(?, ?, ?, ?, ?, ?)');
 					$password = $this->generateStrongPassword(10, false, 'luds');
                     $crypted_password = $this->encrypt_decrypt($password, 'encrypt');
 					$actif = '0';
@@ -318,7 +278,7 @@ class Manager
     {
 
         $db = $this->db;
-        $req = $db->prepare('SELECT * FROM reservation WHERE reserv_datetime = ? AND reserv_pas_de_tir = ?');
+        $req = $db->prepare('SELECT * FROM tkt_reservation WHERE r_datetime = ? AND r_pas_de_tir = ?');
 
         try {
 
@@ -328,7 +288,7 @@ class Manager
 
                 if ($count == 0) {
 
-                    $insert = $db->prepare('INSERT INTO reservation(reserv_pseudo, reserv_datetime, reserv_pas_de_tir) VALUES(?, ?, ?)');
+                    $insert = $db->prepare('INSERT INTO tkt_reservation(r_pseudo, r_datetime, r_pas_de_tir) VALUES(?, ?, ?)');
 
                     if ($insert->execute(array($pseudo, $trancheHoraire, $pasDeTir))) {
 
@@ -368,21 +328,6 @@ class Manager
             $insert = null;
 
             return 4;
-        }
-    }
-
-    public function checkReservation($date, $period)
-    {
-        $stmnt = $this->db->prepare('SELECT * FROM users WHERE date = ? and period = ?');
-        $stmnt->execute([$date, $period]);
-        $res = $stmnt->fetchAll(PDO::FETCH_ASSOC);
-
-        if ($res) {
-
-            return 1;
-        } else {
-
-            return 0;
         }
     }
 

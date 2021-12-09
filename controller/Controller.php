@@ -14,14 +14,14 @@ class Controller
 
     public function showRegister()
     {
-        $myView = new View('register');
-        $myView->render();
+        $myView = new View();
+        $myView->renderRegister();
     }
 
     public function showRegistered()
     {
-        $myView = new View('registered');
-        $myView->render();
+        $myView = new View();
+        $myView->renderRegistered();
     }
 
     public function showHome()
@@ -46,17 +46,6 @@ class Controller
      */
     public function show404()
     {
-        // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
-        /*if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true)
-        {
-            $myView = new View();
-            $myView->redirect('login');
-            exit();
-        }
-
-        $myView = new View();
-		$myView->redirect('404');*/
-
         $myView = new View();
         $myView->render404();
     }
@@ -73,8 +62,6 @@ class Controller
         //$manager = new Manager();
         $myView = new View('calendar');
         $myView->render();
-
-        //include_once(VIEW . 'pages/calendar.php');
     }
 
     public function connect()
@@ -88,19 +75,28 @@ class Controller
 
             if ($email != "" && $password != "") {
 
-                if ($manager->existMail($email) == 0) {
+                if ($manager->validateLogin($email, $password) == 0) {
 
-                    if ($manager->validateLogin($email, $password) == 0) {
+                    $myView = new View();
+                    $myView->redirect('home');
+                } else if ($manager->validateLogin($email, $password) == 1) {
 
-                        $myView = new View();
-                        $myView->redirect('home');
-                    } else {
+                    throw new Exception("Mot de passe ou email incorrect !");
+                } else if ($manager->validateLogin($email, $password) == 2) {
 
-                        throw new Exception("Mot de passe ou email incorrect");
-                    }
+                    throw new Exception("Ce compte est inactif !");
+                } else if ($manager->validateLogin($email, $password) == 3) {
+
+                    throw new Exception("Ce compte n'existe pas !");
+                } else if ($manager->validateLogin($email, $password) == 4) {
+
+                    throw new Exception("Impossible d'exécuter cette opération !");
+                } else if ($manager->validateLogin($email, $password) == 5) {
+
+                    throw new Exception("Une erreur inconnue est survenue !");
                 } else {
 
-                    throw new Exception("Ce compte n'existe pas");
+                    throw new Exception("Une erreur inconnue est survenue !");
                 }
             } else {
 

@@ -31,8 +31,8 @@
     </div>
 </nav>
 
-<div class="container shadow p-4 mt-4 rounded bg-dark bg-gradient" style="margin-bottom: 90px;">
-    <form class="rounded row g-3" role="form" action="<?php echo insertReservation ?>" method="post">
+<div class="container p-4 mt-4" style="margin-bottom: 60px;">
+    <form class="shadow py-4 px-3 bg-dark bg-gradient rounded row g-3" role="form" action="<?php echo insertReservation ?>" method="post">
         <div class="mb-1">
             <h3 class="text-white">Réservation pas de tir</h3>
         </div>
@@ -144,7 +144,7 @@
         </div>
 
         <div class="mt-4">
-            <button type="submit" class="btn btn-primary col-2">Réserver</button>
+            <button type="submit" class="btn btn-primary px-4">Réserver</button>
         </div>
     </form>
 </div>
