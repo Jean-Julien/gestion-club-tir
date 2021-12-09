@@ -88,6 +88,7 @@ div.picker {
 div.picker table {
     border-collapse:collapse;
     margin:0 auto;
+    font-size: 13px;
     width:100%
 }
 
