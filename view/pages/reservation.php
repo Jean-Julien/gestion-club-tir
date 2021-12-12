@@ -18,11 +18,16 @@
             </ul>
             <div class="flex-shrink-0 dropdown">
                 <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                    <?php echo "Bienvenue ". $_SESSION['prenom']; ?>
+                    <?php echo "Bienvenue " . $_SESSION['prenom']; ?>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg-end dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser2">
                     <li><a class="dropdown-item" href="#">Mon profil</a></li>
-                    <li><hr class="dropdown-divider"></li>
+                    <?php if ($_SESSION['idRole'] == '1') { ?>
+                        <li><a class="dropdown-item" href="index.php?r=admin/confirmuser">Confirmation users</a></li>
+                    <?php } ?>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
                     <li><a class="dropdown-item" href="index.php?r=logout">Se déconnecter</a></li>
                 </ul>
             </div>
@@ -40,7 +45,7 @@
         if (!empty($_SESSION['reserv_error'])) {
             echo "<div class='alert alert-danger' role='alert'>" . $_SESSION['reserv_error'] . "</div>";
         }
-        
+
         if (!empty($_SESSION['reserv_success'])) {
             echo "<div class='alert alert-success' role='alert'>" . $_SESSION['reserv_success'] . "</div>";
         }
@@ -62,45 +67,45 @@
 
         <script>
             const fr = {
-                'jan':'Jan',
-                'feb':'Fev',
-                'mar':'Mar',
-                'apr':'Avr',
-                'may':'Mai',
-                'jun':'Jui',
-                'jul':'Jui',
-                'aug':'Aou',
-                'sep':'Set',
-                'oct':'Oct',
-                'nov':'Nov',
-                'dec':'Dec',
-                'jan_':'Janvier',
-                'feb_':'Février',
-                'mar_':'Mars',
-                'apr_':'Avril',
-                'may_':'Mai',
-                'jun_':'Juin',
-                'jul_':'Juillet',
-                'aug_':'Août',
-                'sep_':'Septembre',
-                'oct_':'Octobre',
-                'nov_':'Novembre',
-                'dec_':'Décembre',
-                'mon':'Lun',
-                'tue':'Mar',
-                'wed':'Mer',
-                'thu':'Jeu',
-                'fri':'Ven',
-                'sat':'Sam',
-                'sun':'Dim',
-                'mon_':'Lundi',
-                'tue_':'Mardi',
-                'wed_':'Mercredi',
-                'thu_':'Jeudi',
-                'fri_':'Vendredi',
-                'sat_':'Samedi',
-                'sun_':'Dimanche',
-                'done':'ok'
+                'jan': 'Jan',
+                'feb': 'Fev',
+                'mar': 'Mar',
+                'apr': 'Avr',
+                'may': 'Mai',
+                'jun': 'Jui',
+                'jul': 'Jui',
+                'aug': 'Aou',
+                'sep': 'Set',
+                'oct': 'Oct',
+                'nov': 'Nov',
+                'dec': 'Dec',
+                'jan_': 'Janvier',
+                'feb_': 'Février',
+                'mar_': 'Mars',
+                'apr_': 'Avril',
+                'may_': 'Mai',
+                'jun_': 'Juin',
+                'jul_': 'Juillet',
+                'aug_': 'Août',
+                'sep_': 'Septembre',
+                'oct_': 'Octobre',
+                'nov_': 'Novembre',
+                'dec_': 'Décembre',
+                'mon': 'Lun',
+                'tue': 'Mar',
+                'wed': 'Mer',
+                'thu': 'Jeu',
+                'fri': 'Ven',
+                'sat': 'Sam',
+                'sun': 'Dim',
+                'mon_': 'Lundi',
+                'tue_': 'Mardi',
+                'wed_': 'Mercredi',
+                'thu_': 'Jeudi',
+                'fri_': 'Vendredi',
+                'sat_': 'Samedi',
+                'sun_': 'Dimanche',
+                'done': 'ok'
             };
 
             let date_ob = new Date();
@@ -123,23 +128,23 @@
             // current seconds
             let seconds = date_ob.getSeconds();
 
-            new DateTimePickerComponent.DateTimePicker( 'select_datetime', {
+            new DateTimePickerComponent.DateTimePicker('select_datetime', {
                 first_date: year + "-" + month + "-" + date + "T" + hours + ":" + minutes + ":" + seconds,
                 start_date: year + "-" + month + "-" + date + "T" + hours + ":" + minutes + ":" + seconds,
-                last_date: new Date( 2030, 0, 29, 16 ),
+                last_date: new Date(2030, 0, 29, 16),
                 first_day_no: 1,
                 l10n: fr
-            } );
+            });
         </script>
 
         <div class="col-12">
             <label for="pastir" class="form-label text-white-50">Pas de tir</label>
             <select class="form-select" id="pastir" name="reserv_pas_de_tir">
                 <option selected disabled>Selectionnez un pas de tir</option>
-                <?php foreach($params as $pasdetir) : ?>
-					<option value="<?php echo $pasdetir->idPasDeTir; ?>"><?php echo $pasdetir->nomPasDeTir; ?></option>
-				<?php endforeach; ?>
-            </select>  
+                <?php foreach ($params as $pasdetir) : ?>
+                    <option value="<?php echo $pasdetir->idPasDeTir; ?>"><?php echo $pasdetir->nomPasDeTir; ?></option>
+                <?php endforeach; ?>
+            </select>
         </div>
 
         <div class="mt-4">
@@ -149,6 +154,6 @@
 </div>
 
 <?php
-    unset($_SESSION['reserv_error']);
-    unset($_SESSION['reserv_success']);
+unset($_SESSION['reserv_error']);
+unset($_SESSION['reserv_success']);
 ?>

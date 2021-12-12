@@ -9,13 +9,18 @@ class Admincontroller{
 
     public function confirmUserPage(){
 
-
         $m = new Manager();
-        $users = $m->getAllUsersNonActive();
+
+        if( !$m->hasRole($_SESSION['id'], 'admin')){
+            $myView = new View();
+            $myView->render('404');
+        }else{
+            $users = $m->getAllUsersNonActive();
 
 
-        $myView = new View("confirmUserPage");
-        $myView->render($users);
+            $myView = new View("confirmUserPage");
+            $myView->render($users);
+        }
     }
 
     public function activateUser(){

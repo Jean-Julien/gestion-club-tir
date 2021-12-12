@@ -18,11 +18,16 @@
             </ul>
             <div class="flex-shrink-0 dropdown">
                 <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                    <?php echo "Bienvenue ". $_SESSION['prenom']; ?>
+                    <?php echo "Bienvenue " . $_SESSION['prenom']; ?>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg-end dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser2">
                     <li><a class="dropdown-item" href="#">Mon profil</a></li>
-                    <li><hr class="dropdown-divider"></li>
+                    <?php if($_SESSION['idRole'] == '1') { ?>
+                    <li><a class="dropdown-item" href="index.php?r=admin/confirmuser">Confirmation users</a></li>
+                    <?php } ?>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
                     <li><a class="dropdown-item" href="index.php?r=logout">Se déconnecter</a></li>
                 </ul>
             </div>
