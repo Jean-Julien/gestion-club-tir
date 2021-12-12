@@ -115,6 +115,8 @@ class Manager
             return false;
         }
 
+        $req->closeCursor();
+        $db = null;
     }
 
     public function getAllUsersNonActive(){
@@ -148,7 +150,9 @@ class Manager
         }else{
             return false;
         }
+        
         $req->closeCursor();
+        $db = null;
     }
 
     public function getUserById($id){
@@ -166,6 +170,9 @@ class Manager
         }
         
         return $user;
+
+        $req->closeCursor();
+        $db = null;
 
     }
     
