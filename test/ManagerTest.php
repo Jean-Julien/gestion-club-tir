@@ -1,5 +1,6 @@
 <?php
 require './model/Manager.php';
+require './model/User.php';
 
 class ManagerTest extends \PHPUnit\Framework\TestCase
 {
@@ -59,5 +60,32 @@ class ManagerTest extends \PHPUnit\Framework\TestCase
 
 
         $this->assertEquals(1, $m->insertReservationToDb('', '', ''));
+    }
+
+    public function testHasRoleIsTrue(){
+        $m = new Manager();
+
+        $this->assertEquals(true, $m->hasRole('5', 'admin'));
+    }
+
+    public function testHasRoleIsFalse(){
+        $m = new Manager();
+
+        $this->assertEquals(false, $m->hasRole('5', 'client'));
+    }
+
+    public function testAllUserIsActifIsFalse(){
+        $m = new Manager();
+
+        $users = $m->getAllUsersNonActive();
+
+        $this->assertContainsOnlyInstancesOf('User', $users);
+    }
+
+    public function testGetUserById(){
+        $m = new Manager();
+
+        $user = $m->getUserById(5);
+        $this->assertInstanceOf('User', $user);
     }
 }

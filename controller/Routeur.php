@@ -24,7 +24,9 @@ class Routeur
         "calendar"          => ["controller" => "Controller", "method" => "showCalendar"],
         "insertReservation" => ["controller" => "Controller", "method" => "addReservationToDb"],
         "logout"            => ["controller" => "Controller", "method" => "logout"],
-        "404"               => ["controller" => "Controller", "method" => "show404"]
+        "404"               => ["controller" => "Controller", "method" => "show404"],
+        "admin/confirmuser" => ["controller" => "AdminController", "method" => "confirmUserPage"],
+        "admin/activateUser"=> ["controller" => "AdminController", "method" => "activateUser"],
     ];
 
     /**
