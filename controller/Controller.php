@@ -127,6 +127,7 @@ class Controller
     public function addMemberToDb()
     {
         try {
+            //coucou
 
             if (!empty($_POST['nomRegister']) && !empty($_POST['prenomRegister']) && !empty($_POST['emailRegister']) && !empty($_POST['datenaissanceRegister']) ) {
 
