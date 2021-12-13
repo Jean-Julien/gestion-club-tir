@@ -37,7 +37,7 @@
         <div class="mb-1">
             <h3 class="text-white">Liste des utilisateurs à activer</h3>
         
-            <div class="table-responsive">
+            <div class="table-responsive border-secondary">
                 <table class="table table striped border-secondary shadow">
                     <thead class="bg-primary text-light">
                         <tr>
@@ -49,7 +49,7 @@
                         </tr>
                     </thead>
                     <br>
-                    <tbody class="bg-dark text-white">
+                    <tbody class="bg-dark text-light">
                         <?php foreach ($params as $user) : ?>
                             <form action="index.php?r=admin/activateUser" method="POST">
                                 <?php if($user->getIsActive() == '0'): ?>
@@ -74,7 +74,7 @@
         <div class="mb-1">
             <h3 class="text-white">Liste des utilisateurs actifs</h3>
         
-            <div class="table-responsive">
+            <div class="table-responsive border-secondary">
                 <table class="table table striped border-secondary shadow">
                     <thead class="bg-primary text-light">
                         <tr>
@@ -86,7 +86,7 @@
                         </tr>
                     </thead>
                     <br>
-                    <tbody class="bg-dark text-white">
+                    <tbody class="bg-dark text-light">
                         <?php foreach ($params as $user) : ?>
                             <form action="" method="POST">
                                 <?php if($user->getIsActive() == '1'): ?>
