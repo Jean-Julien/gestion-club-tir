@@ -22,9 +22,6 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg-end dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser2">
                     <li><a class="dropdown-item" href="#">Mon profil</a></li>
-                    <?php if ($_SESSION['idRole'] == '1') { ?>
-                        <li><a class="dropdown-item" href="index.php?r=admin/confirmuser">Confirmation users</a></li>
-                    <?php } ?>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
@@ -154,6 +151,6 @@
 </div>
 
 <?php
-unset($_SESSION['reserv_error']);
-unset($_SESSION['reserv_success']);
+    unset($_SESSION['reserv_error']);
+    unset($_SESSION['reserv_success']);
 ?>

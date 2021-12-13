@@ -95,89 +95,7 @@ class Manager
 
 		return $dash_str;
 	}
-
-    public function hasRole($id, $role){
-
-        $idInt = intval($id);
-        $roleUp = strtoupper($role);
-
-
-        $db = $this->db;
-        $req = $db->prepare("SELECT * FROM tkt_user u join tkt_role r on u.id_role=r.id_role WHERE r.role_description=? and u.u_id=?");
-        $req->execute(array($roleUp, $idInt));
-        $count = $req->rowCount();
-
-    
-        if($count == 1){
-            return true;
-        }
-        else{
-            return false;
-        }
-
-        $req->closeCursor();
-        $db = null;
-    }
-
-    public function getAllUsersNonActive(){
-        $db = $this->db;
-        $req = $db->prepare('SELECT * FROM tkt_user WHERE u_active = 0');
-        if($req->execute()){
-            while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
-                $user = new User();
-                $user->setId($row['u_id']);
-                $user->setName($row['u_name']);
-                $user->setFirstname($row['u_firstname']);
-                $user->setMail($row['u_mail']);
-                $user->setBirthday($row['u_birthday']);
-                $user->setIsActive($row['u_active']);
-                $users[] = $user;
-            }
-            return $users;
-        }else{
-            return false;
-        }
-        $req->closeCursor();
-        $db = null;
-    }
-
-    public function activateUserDb($id){
-
-        $db = $this->db;
-        $req = $db->prepare('UPDATE tkt_user SET u_active = 1 WHERE u_id=?');
-        if($req->execute(array($id))){
-            return true;
-        }else{
-            return false;
-        }
-        
-        $req->closeCursor();
-        $db = null;
-    }
-
-    public function getUserById($id){
-        $user = new User();
-        $db = $this->db;
-        $req = $db->prepare('SELECT * FROM tkt_user WHERE id=?');
-        $req->execute(array($id));
-        while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
-            
-            $user->setId($row['u_id']);
-            $user->setName($row['u_name']);
-            $user->setFirstname($row['u_firstname']);
-            $user->setMail($row['u_mail']);
-            $user->setPassword($row['u_password']);
-        }
-        
-        return $user;
-
-        $req->closeCursor();
-        $db = null;
-
-    }
-    
-
-
+  
     public function getPasDeTir()
     {
         $db = $this->db;
@@ -257,9 +175,7 @@ class Manager
                             $_SESSION['mail'] = $row['u_mail'];
                             $_SESSION['nom'] = $row['u_name'];
                             $_SESSION['prenom'] = $row['u_firstname'];
-                            $_SESSION['idRole'] = $row['id_role'];
-                            
-
+  
                             $db = null;
                             $req = null;
 
