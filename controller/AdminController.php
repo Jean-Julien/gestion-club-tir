@@ -42,7 +42,7 @@ class Admincontroller
             $email_msg .= "Password: " . $mdp . "\n";
 
 
-            $dest = "kvanconignsloo@gmail.com";
+            $dest = "kvanconingsloo@gmail.com";
             $sujet = "Confirmation de compte";
 
             $headers = 'From: TKT@hotmail.com' . "\r\n" .
