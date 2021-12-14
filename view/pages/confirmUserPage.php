@@ -35,7 +35,7 @@
     </div>
 </nav>
 
-<div class="container p-4 mt-4" style="margin-bottom: 60px;">
+<div class="container p-4 mt-3" style="margin-bottom: 60px;">
     <div class="shadow py-3 px-3 mb-5 bg-dark bg-gradient rounded row g-3">
         <div class="mb-1">
             <h3 class="text-white">Liste des utilisateurs à activer</h3>
@@ -48,7 +48,8 @@
                             <th scope="col">Nom</th>
                             <th scope="col">Prénom</th>
                             <th scope="col">Email</th>
-                            <th scope="col" class="col-3"></th>
+                            <th scope="col" class="col-1"></th>
+                            <th scope="col" class="col-1"></th>
                         </tr>
                     </thead>
                     <br>
@@ -61,7 +62,7 @@
                                         <td><?php echo $user->getName(); ?></td>
                                         <td><?php echo $user->getFirstName(); ?></td>
                                         <td><?php echo $user->getMail(); ?></td>
-                                        <input type="hidden" name="idUser" value="<?php echo $user->getId(); ?> "></input>
+                                        <td class="text-end"><input type="hidden" name="idUser" value="<?php echo $user->getId(); ?> "></input></td>
                                         <td class="text-end"><input type="submit" class="btn btn-success" value="Activer"></input></td>
                                     </tr>
                                 <?php endif ?>
@@ -85,7 +86,10 @@
                             <th scope="col">Nom</th>
                             <th scope="col">Prénom</th>
                             <th scope="col">Email</th>
-                            <th scope="col" class="col-3"></th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col" class="col-1"></th>
+                            <th scope="col" class="col-1"></th>
                         </tr>
                     </thead>
                     <br>
@@ -97,11 +101,15 @@
                                         <td><?php echo $user->getId(); ?></td>
                                         <td><?php echo $user->getName(); ?></td>
                                         <td><?php echo $user->getFirstName(); ?></td>
-                                        <td class="text-right"><?php echo $user->getMail(); ?></td>
-                                        <input type="hidden" name="idUser" value="<?php echo $user->getId(); ?> "></input>
+                                        <td><?php echo $user->getMail(); ?></td>
+                                        <td><input type="hidden" name="idUser" value="<?php echo $user->getId(); ?> "></input></td>
                                         <td class="text-end">
                                             <input type="submit" class="btn btn-primary" value="Voir"></input>
+                                        </td>
+                                        <td class="text-end">
                                             <input type="submit" class="btn btn-success" value="Modifier"></input>
+                                        </td>
+                                        <td class="text-end">
                                             <input type="submit" class="btn btn-danger" value="Supprimer"></input>
                                         </td>
                                     </tr>

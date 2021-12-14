@@ -35,7 +35,7 @@
     </div>
 </nav>
 
-<div class="container p-4 mt-4" style="margin-bottom: 60px;">
+<div class="container p-4 mt-3" style="margin-bottom: 60px;">
     <form class="shadow py-4 px-3 bg-dark bg-gradient rounded row g-3" role="form" action="<?php echo insertReservation ?>" method="post">
         <div class="mb-1">
             <h3 class="text-white">Réservation pas de tir</h3>
