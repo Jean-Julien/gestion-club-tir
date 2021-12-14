@@ -1,35 +1,35 @@
 <?php
 
-
 /**
  * Controller admin
  */
-class Admincontroller{
-
-
-    public function confirmUserPage(){
-
+class Admincontroller
+{
+    public function confirmUserPage()
+    {
         $m = new Manager();
 
-        if( !$m->hasRole($_SESSION['id'], 'admin')){
+        if( !$m->hasRole($_SESSION['id'], 'admin')) {
+
             $myView = new View();
             $myView->render('404');
-        }else{
-            $users = $m->getAllUsersNonActive();
+        } else {
 
+            $users = $m->getAllUsers();
 
             $myView = new View("confirmUserPage");
             $myView->render($users);
         }
     }
 
-    public function activateUser(){
+    public function activateUser()
+    {
         $id = intval($_POST['idUser']);
 
-
-        
         $m = new Manager();
-        if($m->activateUserDb($id)){
+
+        if($m->activateUserDb($id)) {
+
             $user = $m->getUserById($id);
 
             
@@ -49,16 +49,14 @@ class Admincontroller{
 
             mb_send_mail($dest, $sujet, $email_msg, $headers);   */
                
-            $users = $m->getAllUsersNonActive();
+            $users = $m->getAllUsers();
 
             $myView = new View("confirmUserPage");
             $myView->render($users);
-        }else{
+        } else {
+
             var_dump("probleme");die();
         }
-
     }
 }
-
-
 ?>
