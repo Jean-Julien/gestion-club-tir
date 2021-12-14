@@ -11,6 +11,9 @@ class User{
     private $password;
     private $birthday;
     private $isActive;
+    private $created_at;
+    private $modified_at;
+    private $role_id;
 
     /**
      * Get the value of id
@@ -148,6 +151,66 @@ class User{
     public function setIsActive($isActive)
     {
         $this->isActive = $isActive;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of created_at
+     */ 
+    public function getCreated_at()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Set the value of created_at
+     *
+     * @return  self
+     */ 
+    public function setCreated_at($created_at)
+    {
+        $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of modified_at
+     */ 
+    public function getModified_at()
+    {
+        return $this->modified_at;
+    }
+
+    /**
+     * Set the value of modified_at
+     *
+     * @return  self
+     */ 
+    public function setModified_at($modified_at)
+    {
+        $this->modified_at = $modified_at;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of role_id
+     */ 
+    public function getRole_id()
+    {
+        return $this->role_id;
+    }
+
+    /**
+     * Set the value of role_id
+     *
+     * @return  self
+     */ 
+    public function setRole_id($role_id)
+    {
+        $this->role_id = $role_id;
 
         return $this;
     }
