@@ -96,8 +96,7 @@ class Manager
 		return $dash_str;
 	}
 
-    public function hasRole($id, $role)
-    {
+    public function hasRole($id, $role){
 
         $idInt = intval($id);
         $roleUp = strtoupper($role);
@@ -120,15 +119,11 @@ class Manager
         $db = null;
     }
 
-    public function getAllUsers()
-    {
+    public function getAllUsersNonActive(){
         $db = $this->db;
-        $req = $db->prepare('SELECT * FROM tkt_user');
-
-        if($req->execute()) {
-
+        $req = $db->prepare('SELECT * FROM tkt_user WHERE u_active = 0');
+        if($req->execute()){
             while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
-
                 $user = new User();
                 $user->setId($row['u_id']);
                 $user->setName($row['u_name']);
@@ -138,27 +133,21 @@ class Manager
                 $user->setIsActive($row['u_active']);
                 $users[] = $user;
             }
-
             return $users;
-        } else {
-
+        }else{
             return false;
         }
-
         $req->closeCursor();
         $db = null;
     }
 
-    public function activateUserDb($id)
-    {
+    public function activateUserDb($id){
+
         $db = $this->db;
-        $req = $db->prepare('UPDATE tkt_user SET u_active = 1 WHERE u_id = ?');
-
-        if($req->execute(array($id))) {
-
+        $req = $db->prepare('UPDATE tkt_user SET u_active = 1 WHERE u_id=?');
+        if($req->execute(array($id))){
             return true;
-        } else {
-
+        }else{
             return false;
         }
         
@@ -166,13 +155,11 @@ class Manager
         $db = null;
     }
 
-    public function getUserById($id)
-    {
+    public function getUserById($id){
         $user = new User();
         $db = $this->db;
-        $req = $db->prepare('SELECT * FROM tkt_user WHERE id = ?');
+        $req = $db->prepare('SELECT * FROM tkt_user WHERE id=?');
         $req->execute(array($id));
-
         while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
             
             $user->setId($row['u_id']);
@@ -186,8 +173,11 @@ class Manager
 
         $req->closeCursor();
         $db = null;
+
     }
     
+
+
     public function getPasDeTir()
     {
         $db = $this->db;
