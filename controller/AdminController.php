@@ -30,14 +30,16 @@ class Admincontroller
 
         if($m->activateUserDb($id)) {
 
+
             $user = $m->getUserById($id);
 
-            
-         /*   $email_msg = "Votre compte est bien activé ! \n\n";
+            $mdp = $m->encrypt_decrypt($user->getPassword(), "decrypt");
+
+            $email_msg = "Votre compte est bien activé ! \n\n";
             $email_msg .= "Nom : " . $user->getName() . "\n";
             $email_msg .= "Prénom : " . $user->getFirstname() . "\n";
             $email_msg .= "Email: " . $user->getMail() . "\n";
-            $email_msg .= "Password: " . $user->getPassword() . "\n";
+            $email_msg .= "Password: " . $mdp . "\n";
 
 
             $dest = "kvanconignsloo@gmail.com";
@@ -47,7 +49,7 @@ class Admincontroller
                 'Reply-To: kvanconingsloo@gmail.com "\r\n"' .
                 'X-Mailer: PHP/' . phpversion();
 
-            mb_send_mail($dest, $sujet, $email_msg, $headers);   */
+            mb_send_mail($dest, $sujet, $email_msg, $headers);   
                
             $users = $m->getAllUsers();
 

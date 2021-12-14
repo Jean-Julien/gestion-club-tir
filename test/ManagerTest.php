@@ -12,6 +12,27 @@ class ManagerTest extends \PHPUnit\Framework\TestCase
         include_once('config/config_test.php');
     }
 
+    public function testEncrypt(){
+        $m = new Manager();
+
+        $password = $m->generateStrongPassword();
+
+        $this->assertIsString($m->encrypt_decrypt($password));
+    }
+
+    public function testDecrypt()
+    {
+        $m = new Manager();
+        $pass = $m->encrypt_decrypt($password = $m->generateStrongPassword());
+        $this->assertIsString($m->encrypt_decrypt($pass, "decrypt"));
+    }
+
+    public function testGenerateStrongPassword(){
+        $m = new Manager();
+
+        $this->assertIsString($m->generateStrongPassword());
+    }
+
     public function testValidateLogin()
     {
         $m = new Manager();

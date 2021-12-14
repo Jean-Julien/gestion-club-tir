@@ -168,18 +168,20 @@ class Manager
 
     public function getUserById($id)
     {
+        
         $user = new User();
         $db = $this->db;
-        $req = $db->prepare('SELECT * FROM tkt_user WHERE id = ?');
-        $req->execute(array($id));
+        $req = $db->prepare('SELECT * FROM tkt_user WHERE u_id = ?');
+        if($req->execute(array($id))){
 
-        while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
+        while($row = $req->fetch(PDO::FETCH_ASSOC)) {
             
-            $user->setId($row['u_id']);
-            $user->setName($row['u_name']);
-            $user->setFirstname($row['u_firstname']);
-            $user->setMail($row['u_mail']);
-            $user->setPassword($row['u_password']);
+                $user->setId($row['u_id']);
+                $user->setName($row['u_name']);
+                $user->setFirstname($row['u_firstname']);
+                $user->setMail($row['u_mail']);
+                $user->setPassword($row['u_password']);
+            }
         }
         
         return $user;
