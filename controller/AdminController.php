@@ -42,11 +42,11 @@ class Admincontroller
             $email_msg .= "Password: " . $mdp . "\n";
 
 
-            $dest = "kvanconingsloo@gmail.com";
+            $dest = $user->getMail();
             $sujet = "Confirmation de compte";
 
             $headers = 'From: TKT@hotmail.com' . "\r\n" .
-                'Reply-To: kvanconingsloo@gmail.com "\r\n"' .
+                'Reply-To: '. $user->getMail(). ' "\r\n"' .
                 'X-Mailer: PHP/' . phpversion();
 
             mb_send_mail($dest, $sujet, $email_msg, $headers);   

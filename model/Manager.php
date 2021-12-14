@@ -323,12 +323,13 @@ class Manager
 
                 if ($count == 0) {
 
-                    $insert = $db->prepare('INSERT INTO tkt_user(u_name, u_firstname, u_mail, u_password, u_birthday, u_active) VALUES(?, ?, ?, ?, ?, ?)');
+                    $insert = $db->prepare('INSERT INTO tkt_user(u_name, u_firstname, u_mail, u_password, u_birthday, u_active, id_role) VALUES(?, ?, ?, ?, ?, ?, ?)');
 					$password = $this->generateStrongPassword(10, false, 'luds');
                     $crypted_password = $this->encrypt_decrypt($password, 'encrypt');
 					$actif = '0';
+                    $idRole = 2;
 
-                    if ($insert->execute(array($nom, $prenom, $mail, $crypted_password, $date_naissance, $actif))) {
+                    if ($insert->execute(array($nom, $prenom, $mail, $crypted_password, $date_naissance, $actif, $idRole))) {
 
                         $db = null;
                         $req = null;
