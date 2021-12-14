@@ -77,7 +77,7 @@ class ManagerTest extends \PHPUnit\Framework\TestCase
     public function testAllUserIsActifIsFalse(){
         $m = new Manager();
 
-        $users = $m->getAllUsersNonActive();
+        $users = $m->getAllUsers();
 
         $this->assertContainsOnlyInstancesOf('User', $users);
     }
