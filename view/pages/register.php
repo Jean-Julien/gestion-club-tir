@@ -39,12 +39,10 @@
                             <input type="text" class="form-control" id="exampleInputEmail1" name="emailRegister" aria-describedby="emailHelp" placeholder="Email">
                         </div>
 
-                        <div class="mb-3">
+                        <div class="mb-4">
                             <label for="exampleInputBirthday1" class="form-label text-black">Date de naissance</label>
                             <input type="date" class="form-control" id="exampleInputBirthday1" name="datenaissanceRegister">
                         </div>
-
-                        <hr>
 
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-primary">S'enregistrer</button>
