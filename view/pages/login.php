@@ -8,14 +8,14 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     </head>
 
-    <body class="bg-secondary">
+    <body style="background-image:url('<?php echo IMG ?>bg.jpg'); background-repeat:no-repeat; background-size:cover;">
         <div class="container">
             <div class="row justify-content-center align-items-center" style="height:100vh">
                 <div class="col-md-5 col-sm-12 my-2">
-                    <form accept="" class="shadow p-4 bg-dark bg-gradient rounded" method="POST" action="index.php?r=connection">
+                    <form accept="" class="shadow p-4 bg-white rounded" method="POST" action="index.php?r=connection">
                         <div class="mt-2 mb-5 text-center">
-                            <h3 class="text-white">Connexion</h3>
-                            <h6 class="text-white-50">Veuillez entrer votre email et votre mot de passe</h6>
+                            <h3 class="text-black">Connexion</h3>
+                            <h6 class="text-black-50">Veuillez entrer votre email et votre mot de passe</h6>
                         </div>
 
                         <?php
@@ -25,12 +25,12 @@
                         ?>
 
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label text-white-50">Adresse email</label>
+                            <label for="exampleInputEmail1" class="form-label text-black">Adresse email</label>
                             <input type="text" class="form-control" id="exampleInputEmail1" name="emailLogin" aria-describedby="emailHelp" placeholder="Email">
                         </div>
 
                         <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label text-white-50">Mot de passe</label>
+                            <label for="exampleInputPassword1" class="form-label text-black">Mot de passe</label>
                             <input type="password" class="form-control" id="exampleInputPassword1" name="passwordLogin" placeholder="Password">
                         </div>
 
@@ -44,7 +44,7 @@
 
                         <hr>
 
-                        <p class="text-center mb-2 text-white-50">Si vous n'avez pas de compte, <a href="index.php?r=register">enregistrez-vous ici</a>.</p>
+                        <p class="text-center mb-2 text-black">Si vous n'avez pas de compte, <a href="index.php?r=register">enregistrez-vous ici</a>.</p>
                     </form>
                 </div>
             </div>

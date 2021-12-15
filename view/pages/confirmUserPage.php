@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <img src="<?php echo IMG ?>logo.png" alt="logo" width="32" height="32">
@@ -10,7 +10,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="index.php?r=home">Accueil</a>
+                    <a class="nav-link" href="index.php?r=home">Accueil</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?r=reservation">Réservation</a>
@@ -20,7 +20,7 @@
                 <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
                     <?php echo "Bienvenue " . $_SESSION['prenom']; ?>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-lg-end dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser2">
+                <ul class="dropdown-menu dropdown-menu-lg-end text-small shadow" aria-labelledby="dropdownUser2">
                     <li><a class="dropdown-item" href="#">Mon profil</a></li>
                     <?php if($_SESSION['idRole'] == '1') { ?>
                     <li><a class="dropdown-item" href="index.php?r=admin/confirmuser">Confirmation users</a></li>
@@ -36,12 +36,12 @@
 </nav>
 
 <div class="container p-4 mt-3" style="margin-bottom: 60px;">
-    <div class="shadow py-3 px-3 mb-5 bg-dark bg-gradient rounded row g-3">
+    <div class="shadow py-2 px-3 mb-5 bg-white rounded row g-3">
         <div class="mb-1">
-            <h3 class="text-white">Liste des utilisateurs à activer</h3>
+            <h3 class="text-black">Liste des utilisateurs à activer</h3>
         
             <div class="table-responsive border-secondary">
-                <table class="table table striped border-secondary shadow">
+                <table class="table">
                     <thead class="bg-primary text-light">
                         <tr>
                             <th scope="col">ID</th>
@@ -52,8 +52,7 @@
                             <th scope="col" class="col-1"></th>
                         </tr>
                     </thead>
-                    <br>
-                    <tbody class="bg-dark text-light">
+                    <tbody class="bg-light text-black">
                         <?php foreach ($params as $user) : ?>
                             <form action="index.php?r=admin/activateUser" method="POST">
                                 <?php if($user->getIsActive() == '0'): ?>
@@ -74,12 +73,12 @@
         </div>
     </div>
 
-    <div class="shadow py-3 px-3 bg-dark bg-gradient rounded row g-3">
+    <div class="shadow py-2 px-3 bg-white rounded row g-3">
         <div class="mb-1">
-            <h3 class="text-white">Liste des utilisateurs actifs</h3>
+            <h3 class="text-black">Liste des utilisateurs actifs</h3>
         
             <div class="table-responsive border-secondary">
-                <table class="table table striped border-secondary shadow">
+                <table class="table">
                     <thead class="bg-primary text-light">
                         <tr>
                             <th scope="col">ID</th>
@@ -92,8 +91,7 @@
                             <th scope="col" class="col-1"></th>
                         </tr>
                     </thead>
-                    <br>
-                    <tbody class="bg-dark text-light">
+                    <tbody class="bg-light text-black">
                         <?php foreach ($params as $user) : ?>
                             <form action="" method="POST">
                                 <?php if($user->getIsActive() == '1'): ?>

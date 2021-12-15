@@ -14,14 +14,14 @@
         <link href="<?php echo CSS ?>style.css" rel="stylesheet">
     </head>
 
-    <body class="bg-secondary">
+    <body class="bg-light">
         <!-- ma page -->
         <?php
             echo $contentPage;
         ?>
 
         <div class="footer fixed-bottom sticky-bottom">
-            <div class="text-center p-3 bg-primary text-white">
+            <div class="text-center p-3 bg-dark text-white">
                 © 2021 Copyright:
                 <a class="text-reset fw-bold">TKT</a>
             </div>

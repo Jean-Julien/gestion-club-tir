@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <img src="<?php echo IMG ?>logo.png" alt="logo" width="32" height="32">
@@ -20,7 +20,7 @@
                 <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
                     <?php echo "Bienvenue " . $_SESSION['prenom']; ?>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-lg-end dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser2">
+                <ul class="dropdown-menu dropdown-menu-lg-end text-small shadow" aria-labelledby="dropdownUser2">
                     <li><a class="dropdown-item" href="#">Mon profil</a></li>
                     <?php if ($_SESSION['idRole'] == '1') { ?>
                         <li><a class="dropdown-item" href="index.php?r=admin/confirmuser">Confirmation users</a></li>
@@ -36,9 +36,9 @@
 </nav>
 
 <div class="container p-4 mt-3" style="margin-bottom: 60px;">
-    <form class="shadow py-4 px-3 bg-dark bg-gradient rounded row g-3" role="form" action="<?php echo insertReservation ?>" method="post">
+    <form class="shadow pt-2 pb-4 px-3 bg-white rounded row g-3" role="form" action="<?php echo insertReservation ?>" method="post">
         <div class="mb-1">
-            <h3 class="text-white">Réservation pas de tir</h3>
+            <h3 class="text-black">Réservation pas de tir</h3>
         </div>
 
         <?php
@@ -52,12 +52,12 @@
         ?>
 
         <div class="col-12">
-            <label for="pseudo" class="form-label text-white-50">Pseudo</label>
+            <label for="pseudo" class="form-label text-black">Pseudo</label>
             <input type="text" class="form-control" id="pseudo" name="reserv_pseudo" placeholder="Insérez votre Pseudo">
         </div>
 
         <div class="col-12">
-            <label for="select_datetime" class="form-label text-white-50">Date et heure de réservation</label>
+            <label for="select_datetime" class="form-label text-black">Date et heure de réservation</label>
             <div id="select_datetime" class="datetime-container fix-float">
                 <div class="buttons-container fix-float">
                     <input type="hidden" name="select_datetime_value" class="date_output" value="">
@@ -138,7 +138,7 @@
         </script>
 
         <div class="col-12">
-            <label for="pastir" class="form-label text-white-50">Pas de tir</label>
+            <label for="pastir" class="form-label text-black">Pas de tir</label>
             <select class="form-select" id="pastir" name="reserv_pas_de_tir">
                 <option selected disabled>Selectionnez un pas de tir</option>
                 <?php foreach ($params as $pasdetir) : ?>
@@ -154,6 +154,6 @@
 </div>
 
 <?php
-unset($_SESSION['reserv_error']);
-unset($_SESSION['reserv_success']);
+    unset($_SESSION['reserv_error']);
+    unset($_SESSION['reserv_success']);
 ?>

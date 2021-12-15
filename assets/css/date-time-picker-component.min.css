@@ -10,7 +10,8 @@ div.datetime-container,div.datetime-container * {
 }
 
 div.datetime-container {
-    background-color:#f4f4f4;
+    background-color:#ffffff;
+	border:1px solid #ced4da;
     border-radius:5px;
     margin:5px 0;
     position:relative;
@@ -20,7 +21,7 @@ div.datetime-container {
 
 div.datetime-container button.date,div.datetime-container button.time {
     -webkit-appearance:none;
-    background-color:#f4f4f4;
+    background-color:#ffffff;
     border:0;
     border-radius:5px;
     cursor:pointer;
@@ -38,6 +39,10 @@ div.datetime-container button.w-50 {
 
 div.datetime-container button.active {
     background-color:#016ffe;
+	position:relative;
+	box-shadow:0 0 0 5px rgba(0, 123, 255, .3);
+	z-index:10;
+	transition-duration:.2s;
     color:#000
 }
 

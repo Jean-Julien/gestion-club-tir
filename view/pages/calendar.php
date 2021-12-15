@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="index.php?r=home">
             <img src="<?php echo IMG ?>logo.png" alt="logo" width="32" height="32">
@@ -30,7 +30,7 @@
     </div>
 </nav>
 
-<div class="container shadow p-4 mt-4 rounded bg-dark bg-gradient" style="margin-bottom: 90px;">
+<div class="container shadow p-4 mt-4 rounded bg-white" style="margin-bottom: 90px;">
     <?php
     require './src/Date/Month.php';
 
@@ -64,9 +64,9 @@
                 ?>
                     <td class="<?= $month->withinMonth($date) ? '' : 'calendar__othermonth'; ?>">
                         <?php if ($i === 0) : ?>
-                            <div class="calendar__weekday text-white"><?= $day; ?></div>
+                            <div class="calendar__weekday text-black"><?= $day; ?></div>
                         <?php endif; ?>
-                        <div class="calendar__day text-white-50"><?= $date->format('d'); ?></div>
+                        <div class="calendar__day text-black-50"><?= $date->format('d'); ?></div>
                         <?php if ($date->format('d') === '05') { ?>
                             <a class="btn btn-danger btn-xs">Booked</a>
                         <?php } else { ?>

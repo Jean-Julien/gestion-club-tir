@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <img src="<?php echo IMG ?>logo.png" alt="logo" width="32" height="32">
@@ -20,7 +20,7 @@
                 <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
                     <?php echo "Bienvenue " . $_SESSION['prenom']; ?>
                 </a>
-                <ul class="dropdown-menu dropdown-menu-lg-end dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser2">
+                <ul class="dropdown-menu dropdown-menu-lg-end text-small shadow" aria-labelledby="dropdownUser2">
                     <li><a class="dropdown-item" href="#">Mon profil</a></li>
                     <?php if($_SESSION['idRole'] == '1') { ?>
                     <li><a class="dropdown-item" href="index.php?r=admin/confirmuser">Confirmation users</a></li>
@@ -35,10 +35,10 @@
     </div>
 </nav>
 
-<div class="container p-4 mt-4" style="margin-bottom: 60px;">
-    <div class="shadow py-4 px-3 bg-dark bg-gradient rounded row g-3">
+<div class="container p-4 mt-3" style="margin-bottom: 60px;">
+    <div class="shadow py-2 px-3 bg-white rounded row g-3">
         <div class="mb-1">
-            <h3 class="text-white">Page en construction</h3>
+            <h3 class="text-black">Page en construction</h3>
         </div>
     </div>
 </div>
