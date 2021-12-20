@@ -237,6 +237,55 @@ class Manager
         }
     }
 
+
+    public function getReservationById($id)
+    {
+        $db = $this->db;
+        $req = $db->prepare('SELECT * FROM tkt_reservation WHERE user_id=?');
+        $idInt= 
+
+        try {
+
+            if ($req->execute()) {
+
+                $count = $req->rowCount();
+
+                if ($count > 0) {
+
+                    while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
+
+                        $pasdetir = new PasDeTir();
+
+                        $pasdetir->idPasDeTir = $row['p_id'];
+                        $pasdetir->nomPasDeTir = $row['p_name'];
+
+                        $pasdetirs[] = $pasdetir;
+                    }
+
+                    $db = null;
+                    $req = null;
+
+                    return $pasdetirs;
+                } else {
+
+                    $db = null;
+                    $req = null;
+
+                    return false;
+                }
+            } else {
+
+                return false;
+            }
+        } catch (Exception $e) {
+
+            $db = null;
+            $req = null;
+
+            return false;
+        }
+    }
+
     /**
      * Méthode de validation de connexion
      *

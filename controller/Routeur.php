@@ -27,6 +27,7 @@ class Routeur
         "404"               => ["controller" => "Controller", "method" => "show404"],
         "admin/confirmuser" => ["controller" => "AdminController", "method" => "confirmUserPage"],
         "admin/activateUser"=> ["controller" => "AdminController", "method" => "activateUser"],
+        "profil"            =>["controller" => "Controller", 'method' =>"showProfil"],
     ];
 
     /**
