@@ -33,8 +33,10 @@ class Controller
             exit();
         }
 
+        $manager = new Manager();
+        $pasdetir = $manager->getPasDeTir();
         $myView = new View('home');
-        $myView->render();
+        $myView->render($pasdetir);
     }
 
     /**
@@ -57,10 +59,9 @@ class Controller
             exit();
         }
 
-        $manager = new Manager();
-        $pasdetir = $manager->getPasDeTir();
+        //$manager = new Manager();
         $myView = new View('reservation');
-        $myView->render($pasdetir);
+        $myView->render();
     }
 
     public function showCalendar()
@@ -126,7 +127,7 @@ class Controller
     public function addMemberToDb()
     {
         try {
-            //coucou
+            
 
             if (!empty($_POST['nomRegister']) && !empty($_POST['prenomRegister']) && !empty($_POST['emailRegister']) && !empty($_POST['datenaissanceRegister']) ) {
 
