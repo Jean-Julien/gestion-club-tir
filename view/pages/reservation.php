@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="index.php?r=home">
             <img src="<?php echo IMG ?>logo.png" alt="logo" width="32" height="32">
             Projet TKT
         </a>
