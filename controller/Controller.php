@@ -78,6 +78,23 @@ class Controller
         $myView->render();
     }
 
+    public function showProfil()
+    {
+        // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
+        if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+            $myView = new View();
+            $myView->redirect('login');
+            exit();
+        }
+
+        $manager = new Manager();
+
+        $reservations = $manager->getReservationById($_SESSION['id']);
+
+        $myView = new View('profil');
+        $myView->render($reservations);
+    }
+
     public function connect()
     {
         $manager = new Manager();

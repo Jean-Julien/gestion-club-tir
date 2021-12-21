@@ -189,6 +189,54 @@ class Manager
         $req->closeCursor();
         $db = null;
     }
+
+    public function getReservationById($id)
+    {
+        $db = $this->db;
+        $req = $db->prepare('SELECT * FROM tkt_reservation WHERE user_id=?');
+        intval($id);
+
+        try {
+
+            if ($req->execute(array($id))) {
+
+                $count = $req->rowCount();
+
+                if ($count > 0) {
+
+                    while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
+                        $reservation = new Reservation();
+
+                        $reservation->setPasTir_id($row['r_pas_de_tir']);
+                        //var_dump($reservation->getPasTir_id());
+                        //die;
+                        $reservation->setDatetime($row['r_datetime']);
+                        $reservations[] = $reservation;
+                    }
+
+                    $db = null;
+                    $req = null;
+
+                    return $reservations;
+                } else {
+
+                    $db = null;
+                    $req = null;
+
+                    return false;
+                }
+            } else {
+
+                return false;
+            }
+        } catch (Exception $e) {
+
+            $db = null;
+            $req = null;
+
+            return false;
+        }
+    }
     
     public function getPasDeTir()
     {
