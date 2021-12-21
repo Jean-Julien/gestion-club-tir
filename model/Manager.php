@@ -242,42 +242,55 @@ class Manager
     {
         $db = $this->db;
         $req = $db->prepare('SELECT * FROM tkt_reservation WHERE user_id=?');
-        $idInt= 
+        intval($id);
 
-        try {
+        try 
+        {
 
-            if ($req->execute()) {
+            if ($req->execute(array($id))) 
+            {
 
                 $count = $req->rowCount();
 
-                if ($count > 0) {
+                if ($count > 0) 
+                {
 
-                    while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
+                    while ($row = $req->fetch(PDO::FETCH_ASSOC)) 
+                    {
+                        $reservation= new Reservation ();
 
-                        $pasdetir = new PasDeTir();
-
-                        $pasdetir->idPasDeTir = $row['p_id'];
-                        $pasdetir->nomPasDeTir = $row['p_name'];
-
-                        $pasdetirs[] = $pasdetir;
+                        $reservation->setPasTir_id($row['r_pas_de_tir']);
+                        //var_dump($reservation->getPasTir_id());
+                        //die;
+                        $reservation ->setDatetime($row['r_datetime']);
+                        $reservations[] = $reservation;
                     }
 
                     $db = null;
                     $req = null;
 
-                    return $pasdetirs;
-                } else {
+                    return $reservations;
+                } 
+                
+                else 
+                {
 
                     $db = null;
                     $req = null;
 
                     return false;
                 }
-            } else {
+            } 
+            
+            else 
+            {
 
                 return false;
             }
-        } catch (Exception $e) {
+        }
+
+        catch (Exception $e) 
+        {
 
             $db = null;
             $req = null;

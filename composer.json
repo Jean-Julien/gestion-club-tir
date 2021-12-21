@@ -1,0 +1,18 @@
+{
+    "name": "moulardn/gestion-club-tir",
+    "require-dev": {
+        "phpunit/phpunit": "9.5.10"
+    },
+    "autoload": {
+        "psr-4": {
+            "Moulardn\\GestionClubTir\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Mounath",
+            "email": "93152813+Mounath@users.noreply.github.com"
+        }
+    ],
+    "require": {}
+}

@@ -89,8 +89,11 @@ class Controller
         }
 
         $manager = new Manager();
+
+        $reservations=$manager->getReservationById($_SESSION['id']);
+
         $myView = new View('profil');
-        $myView->render();
+        $myView->render($reservations);
     }
 
     public function connect()
