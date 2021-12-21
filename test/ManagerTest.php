@@ -1,6 +1,7 @@
 <?php
 require './model/Manager.php';
 require './model/User.php';
+require './model/Reservation.php';
 
 class ManagerTest extends \PHPUnit\Framework\TestCase
 {
@@ -54,6 +55,23 @@ class ManagerTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(2, $m->validateLogin('test@tkt.com', '000'));
     }
 
+    public function testGetReservationByIdWithWrongId(){
+
+        $m = new Manager();
+
+        $this->assertEquals(false, $m->getReservationById(0));
+
+    }
+
+    public function testGetReservationById(){
+        
+        $m = new Manager();
+        
+        $reservations = $m->getReservationById(5);
+
+        $this->assertContainsOnlyInstancesOf('Reservation', $reservations);
+    }
+
     public function testInvalideAccount()
     {
         $m = new Manager();
@@ -82,6 +100,7 @@ class ManagerTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals(1, $m->insertReservationToDb('', '', ''));
     }
+
 
     public function testHasRoleIsTrue(){
         $m = new Manager();
