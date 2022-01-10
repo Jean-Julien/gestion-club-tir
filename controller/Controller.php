@@ -33,10 +33,8 @@ class Controller
             exit();
         }
 
-        $manager = new Manager();
-        $pasdetir = $manager->getPasDeTir();
         $myView = new View('home');
-        $myView->render($pasdetir);
+        $myView->render();
     }
 
     /**
@@ -59,9 +57,10 @@ class Controller
             exit();
         }
 
-        //$manager = new Manager();
+        $manager = new Manager();
+        $pasdetir = $manager->getPasDeTir();
         $myView = new View('reservation');
-        $myView->render();
+        $myView->render($pasdetir);
     }
 
     public function showCalendar()
