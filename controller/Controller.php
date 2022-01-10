@@ -230,4 +230,12 @@ class Controller
         $myView = new View();
         $myView->redirect('home');
     }
+
+    public function showChangePsw() {
+
+    }
+
+    public function changePswBdd()
+    {
+    }
 }

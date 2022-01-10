@@ -28,6 +28,8 @@ class Routeur
         "admin/confirmuser" => ["controller" => "AdminController", "method" => "confirmUserPage"],
         "admin/activateUser"=> ["controller" => "AdminController", "method" => "activateUser"],
         "profil"            => ["controller" => "Controller", 'method' => "showProfil"],
+        "changePsw"         => ["controller" => "Controller", 'method' => "showChangePsw"],
+        "changePswBdd"      => ["controller" => "Controller", 'method' => "changePswBdd"],
     ];
 
     /**
