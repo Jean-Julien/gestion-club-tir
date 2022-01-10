@@ -23,8 +23,8 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label text-white-50">Confirmation nouveau password</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" name="confirmPassword" placeholder="confirmPassword">
+                    <label for="exampleInputEmail1" class="form-label text-white-50">Confirmer votre nouveau password</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" name="confirmPassword" placeholder="Confirmer Password">
                 </div>
 
                 <hr>
