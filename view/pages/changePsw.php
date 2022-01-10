@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row justify-content-center align-items-center" style="height:100vh">
         <div class="col-md-5 col-sm-12 my-2">
-            <form accept="" class="shadow p-4 bg-dark bg-gradient rounded" method="POST" action="<?php echo insertMember ?>">
+            <form accept="" class="shadow p-4 bg-dark bg-gradient rounded" method="POST" action="<?php echo changePswBdd ?>">
                 <div class="mt-2 mb-5 text-center">
                     <h3 class="text-white">Formulaire de changement de password</h3>
                 </div>
@@ -10,11 +10,16 @@
                 if (!empty($_SESSION['register_error'])) {
                     echo "<div class='alert alert-danger' role='alert'>" . $_SESSION['register_error'] . "</div>";
                 }
+
+                if (!empty($_SESSION['succes'])) {
+                    echo "<div class='alert alert-success' role='alert'>" . $_SESSION['succes'] . "</div>";
+                }
+                
                 ?>
 
                 <div class="mb-3">
                     <label for="exampleInputNom1" class="form-label text-white-50">Ancien password</label>
-                    <input type="text" class="form-control" id="exampleInputNom1" name="nomRegister" placeholder="Ancien password">
+                    <input type="text" class="form-control" id="exampleInputNom1" name="oldPassword" placeholder="Ancien password">
                 </div>
 
                 <div class="mb-3">
@@ -37,3 +42,14 @@
         </div>
     </div>
 </div>
+
+<?php
+if (!empty($_SESSION['register_error'])) {
+    unset($_SESSION['register_error']);
+}
+
+if (!empty($_SESSION['succes'])) {
+    unset($_SESSION['succes']);;
+}
+
+?>

@@ -238,5 +238,42 @@ class Controller
 
     public function changePswBdd()
     {
+        $m = new Manager;
+        $user = $m->getUserById($_SESSION['id']);
+
+        try{
+            if (!empty($_POST['oldPassword']) && !empty($_POST['newPassword']) && !empty($_POST['confirmPasswor'])) {
+
+                $oldPassword = trim($_POST['oldPasswordr']);
+                $newPassword = trim($_POST['prenomRegister']);
+                $confirmPassword = trim($_POST['emailRegister']);
+
+                if ($newPassword === $confirmPassword){
+                    if ( $m->encrypt_decrypt($oldPassword) === $user->getPassword()){
+                        $newPasswordEncrypted = $m->encrypt_decrypt($newPassword);
+
+                        if($m->insertChangePassword($newPasswordEncrypted)){
+                            $myView = new View;
+                            $_SESSION['succes'] = "Votre mot de passe à bien été mis à jour";
+                            $myView->redirect('changePsw');
+
+                        }else{
+                            throw new Exception ("Un probleme est survenu lors de l'update en db !");
+                        }
+
+                    }else{
+                        throw new Exception("L'ancien mot de passe ne correspond pas ! ");
+                    }
+                }else{
+                    throw new Exception("Le nouveau password doit être identique au confirm password !");
+                }
+            }else{
+                throw new Exception("Tous les champs doivent être remplis !");
+            }
+        }catch (Exception $e){
+            $_SESSION['reserv_error'] = $e->getMessage();
+            $myView = new View();
+            $myView->redirect('changePsw');
+        }
     }
 }

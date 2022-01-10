@@ -475,6 +475,17 @@ class Manager
         }
     }
 
+    public function insertChangePassword ($password){
+        $db = $this->db;
+
+        $insert = $db->prepare( 'UPDATE tkt_user SET u_password=? WHERE id=?' );
+        if($insert->execute(array($password, $_SESSION['id']))){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     /**
      * Méthode permettant de se déconnecter
      *

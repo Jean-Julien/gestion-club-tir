@@ -51,6 +51,8 @@ class MyAutoload
         define('home', 'index.php?r=home');
         define('insertReservation', 'index.php?r=insertReservation');
         define('insertMember', 'index.php?r=insertMember');
+        define('changePsw', 'index.php?r=changePsw');
+        define('changePswBdd', 'index.php?r=changePswBdd');
     }
     /**
      * Undocumented function
