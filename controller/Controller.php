@@ -242,11 +242,11 @@ class Controller
         $user = $m->getUserById($_SESSION['id']);
 
         try{
-            if (!empty($_POST['oldPassword']) && !empty($_POST['newPassword']) && !empty($_POST['confirmPasswor'])) {
+            if (!empty($_POST['oldPassword']) && !empty($_POST['newPassword']) && !empty($_POST['confirmPassword'])) {
 
-                $oldPassword = trim($_POST['oldPasswordr']);
-                $newPassword = trim($_POST['prenomRegister']);
-                $confirmPassword = trim($_POST['emailRegister']);
+                $oldPassword = trim($_POST['oldPassword']);
+                $newPassword = trim($_POST['newPassword']);
+                $confirmPassword = trim($_POST['confirmPassword']);
 
                 if ($newPassword === $confirmPassword){
                     if ( $m->encrypt_decrypt($oldPassword) === $user->getPassword()){
@@ -254,6 +254,9 @@ class Controller
 
                         if($m->insertChangePassword($newPasswordEncrypted)){
                             $myView = new View;
+                            if (!empty($_SESSION['reserv_error'])) {
+                                unset($_SESSION['reserv_error']);
+                            }
                             $_SESSION['succes'] = "Votre mot de passe à bien été mis à jour";
                             $myView->redirect('changePsw');
 

@@ -7,8 +7,8 @@
                 </div>
 
                 <?php
-                if (!empty($_SESSION['register_error'])) {
-                    echo "<div class='alert alert-danger' role='alert'>" . $_SESSION['register_error'] . "</div>";
+                if (!empty($_SESSION['reserv_error'])) {
+                    echo "<div class='alert alert-danger' role='alert'>" . $_SESSION['reserv_error'] . "</div>";
                 }
 
                 if (!empty($_SESSION['succes'])) {
@@ -44,8 +44,8 @@
 </div>
 
 <?php
-if (!empty($_SESSION['register_error'])) {
-    unset($_SESSION['register_error']);
+if (!empty($_SESSION['reserv_error'])) {
+    unset($_SESSION['reserv_error']);
 }
 
 if (!empty($_SESSION['succes'])) {

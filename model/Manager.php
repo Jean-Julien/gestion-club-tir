@@ -477,9 +477,10 @@ class Manager
 
     public function insertChangePassword ($password){
         $db = $this->db;
+        $id = intval($_SESSION['id']);
 
-        $insert = $db->prepare( 'UPDATE tkt_user SET u_password=? WHERE id=?' );
-        if($insert->execute(array($password, $_SESSION['id']))){
+        $insert = $db->prepare( "UPDATE tkt_user SET u_password=:newPassword WHERE u_id=:id" );
+        if($insert->execute(array('newPassword' => $password, 'id' => $id))){
             return true;
         }else{
             return false;
