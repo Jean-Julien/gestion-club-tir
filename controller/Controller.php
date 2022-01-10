@@ -232,7 +232,8 @@ class Controller
     }
 
     public function showChangePsw() {
-
+        $myView = new View('changePsw');
+        $myView->render();
     }
 
     public function changePswBdd()
