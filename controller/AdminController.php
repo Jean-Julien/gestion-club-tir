@@ -4,7 +4,7 @@
  * Controller admin
  */
 class Admincontroller
-{// 
+{
     public function confirmUserPage()
     {
         /*$m = new Manager();
