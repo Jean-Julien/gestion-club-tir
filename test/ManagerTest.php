@@ -128,4 +128,12 @@ class ManagerTest extends \PHPUnit\Framework\TestCase
         $user = $m->getUserById(5);
         $this->assertInstanceOf('User', $user);
     }
+
+    public function testInsertChangePassword(){
+        $m = new Manager();
+
+        $password = $m->encrypt_decrypt("Bac3info*");
+
+        $this->assertEquals(true, $m->insertChangePassword($password));
+    }
 }
