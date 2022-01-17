@@ -148,7 +148,7 @@
         </div>
 
         <div class="col-12">
-        <label for="select_datetime" class="form-label text-white-50">Type de pas de tir</label>
+        <label class="form-label text-white-50">Type de pas de tir</label>
         <br>
         <select name="pets" id="pet-select">
             <option value="">Choix de la distance</option>
