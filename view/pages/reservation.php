@@ -4,7 +4,6 @@
             <img src="<?php echo IMG ?>logo.png" alt="logo" width="32" height="32">
             Projet TKT
         </a>
-        <!-- test -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -146,6 +145,16 @@
                     <option value="<?php echo $pasdetir->idPasDeTir; ?>"><?php echo $pasdetir->nomPasDeTir; ?></option>
                 <?php endforeach; ?>
             </select>
+        </div>
+
+        <div class="col-12">
+        <label for="select_datetime" class="form-label text-white-50">Type de pas de tir</label>
+        <br>
+        <select name="pets" id="pet-select">
+            <option value="">Choix de la distance</option>
+            <option value="dog">Longue distance</option>
+            <option value="cat">Courte distance</option>
+        </select>
         </div>
 
         <div class="mt-4">
