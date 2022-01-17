@@ -418,7 +418,7 @@ class Manager
         }
     }
 
-    public function insertReservationToDb($pseudo, $trancheHoraire, $pasDeTir)
+    public function insertReservationToDb($userId, $trancheHoraire, $pasDeTir)
     {
 
         $db = $this->db;
@@ -432,9 +432,9 @@ class Manager
 
                 if ($count == 0) {
 
-                    $insert = $db->prepare('INSERT INTO tkt_reservation(r_pseudo, r_datetime, r_pas_de_tir) VALUES(?, ?, ?)');
+                    $insert = $db->prepare('INSERT INTO tkt_reservation(r_datetime, r_pas_de_tir, user_id) VALUES(?, ?, ?)');
 
-                    if ($insert->execute(array($pseudo, $trancheHoraire, $pasDeTir))) {
+                    if ($insert->execute(array($trancheHoraire, $pasDeTir, $userId))) {
 
                         $db = null;
                         $req = null;

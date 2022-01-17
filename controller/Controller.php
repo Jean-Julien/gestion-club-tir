@@ -190,24 +190,24 @@ class Controller
     public function addReservationToDb()
     {
         try {
-            if (!empty($_POST['reserv_pseudo']) && !empty($_POST['select_datetime_value']) && !empty($_POST['reserv_pas_de_tir'])) {
-                $reserv_pseudo = trim($_POST['reserv_pseudo']);
+            if (!empty($_POST['user_id']) && !empty($_POST['select_datetime_value']) && !empty($_POST['reserv_pas_de_tir'])) {
+                $userId = trim($_POST['user_id']);
                 $reserv_pas_de_tir = $_POST['reserv_pas_de_tir'];
                 $reserv_tranche_horaire = $_POST['select_datetime_value'];
 
                 $manager = new Manager();
 
-                if ($manager->insertReservationToDb($reserv_pseudo, $reserv_tranche_horaire, $reserv_pas_de_tir) == 0) {
+                if ($manager->insertReservationToDb($userId, $reserv_tranche_horaire, $reserv_pas_de_tir) == 0) {
                     $_SESSION['reserv_success'] = "Votre réservation a bien été prise en compte";
                     $myView = new View();
                     $myView->redirect('reservation');
-                } else if ($manager->insertReservationToDb($reserv_pseudo, $reserv_tranche_horaire, $reserv_pas_de_tir) == 1) {
+                } else if ($manager->insertReservationToDb($userId, $reserv_tranche_horaire, $reserv_pas_de_tir) == 1) {
                     throw new Exception("Error 1");
-                } else if ($manager->insertReservationToDb($reserv_pseudo, $reserv_tranche_horaire, $reserv_pas_de_tir) == 2) {
+                } else if ($manager->insertReservationToDb($userId, $reserv_tranche_horaire, $reserv_pas_de_tir) == 2) {
                     throw new Exception("Pas de tir déjà réservé ! Réitéré votre demande");
-                } else if ($manager->insertReservationToDb($reserv_pseudo, $reserv_tranche_horaire, $reserv_pas_de_tir) == 3) {
+                } else if ($manager->insertReservationToDb($userId, $reserv_tranche_horaire, $reserv_pas_de_tir) == 3) {
                     throw new Exception("Error 3");
-                } else if ($manager->insertReservationToDb($reserv_pseudo, $reserv_tranche_horaire, $reserv_pas_de_tir) == 4) {
+                } else if ($manager->insertReservationToDb($userId, $reserv_tranche_horaire, $reserv_pas_de_tir) == 4) {
                     throw new Exception("Error 4");
                 } else {
                     throw new Exception("Error 5");

@@ -51,10 +51,12 @@
         }
         ?>
 
-        <div class="col-12">
+        <!--<div class="col-12">
             <label for="pseudo" class="form-label text-white-50">Pseudo</label>
             <input type="text" class="form-control" id="pseudo" name="reserv_pseudo" placeholder="Insérez votre Pseudo">
-        </div>
+        </div>-->
+
+        <input type="hidden" name="user_id" value="<?php echo $_SESSION['id'] ?>">
 
         <div class="col-12">
             <label for="select_datetime" class="form-label text-white-50">Date et heure de réservation</label>
@@ -144,6 +146,7 @@
                 <?php foreach ($params as $pasdetir) : ?>
                     <option value="<?php echo $pasdetir->idPasDeTir; ?>"><?php echo $pasdetir->nomPasDeTir; ?></option>
                 <?php endforeach; ?>
+                <option value="1">iuiui</option>
             </select>
         </div>
 
