@@ -1,0 +1,75 @@
+1) installer composer sur vore machine
+2) dans votre projet, ouvrir le terminal et faire :
+        - composer init 
+        - Package name : rien
+        - Description  : rien 
+        - Author : rien 
+        - rien 
+        - rien 
+        - rien
+        - define your dependencies : NO 
+        - define your dev dependency : YES
+        - serach for a Package: phpunit 
+        - enter package : 0
+        - version : rien ( comme cela vous avez la derniere automatiquement )
+        - rien
+        - rien
+        - yes pour confirmer
+3) phpunit est donc installé sur votre projet ( attention de ne pas le push sur git. Faire un .gitignore si il n est pas deja fais )
+4) pour chaque classe, on doit faire une classe test qui dois porter le meme nom que la classe testée + Test. 
+    classe normale :
+
+    class Manager{
+
+        public function double ($nombre){
+            return $nombre * 2;
+        }
+    }
+
+    
+    dans un dossier "tests"
+
+    classe test :
+
+    class ManagerTest extends \PHPUnit\Framework\TestCase
+    {
+
+        public function testDouble()
+        {
+
+            $manager = new Manager();
+
+            $this->assertEquals(4, $manager->double(2));
+            // on attend 4 en retour de la fonction en envoyant 2
+        }
+    }
+5) dans le terminal faire un ./vendor/bin/phpunit ./test --colors
+    et vous aurez vos retour de test en couleur svp
+
+    exemple :
+
+    PHPUnit 9.5.10 by Sebastian Bergmann and contributors.
+
+    .                                                                   1 / 1 (100%)
+
+    Time: 00:00.193, Memory: 4.00 MB
+
+    OK (1 test, 1 assertion)
+
+    ou quand ca plante 
+
+
+    F                                                                   1 / 1 (100%)
+
+    Time: 00:00.093, Memory: 4.00 MB
+
+    There was 1 failure:
+
+    1) ManagerTest::testDouble
+    Failed asserting that 4 matches expected 2.
+
+    C:\Users\djkar\OneDrive\Bureau\BAC INFO\3 ème\Projet analyse\gestion-club-tir\test\ManagerTest.php:13
+
+    FAILURES!
+
+Je suis disponible si vous le souhaitez. ;-)
