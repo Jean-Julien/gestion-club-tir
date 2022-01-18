@@ -42,6 +42,23 @@ class Admincontroller
         }
     }
 
+    public function platformManager(){
+
+        if(isset($_POST)){
+             //insert 
+        }
+        if(isset($_GET['D'])){
+            //delete 
+        }
+        if(isset($_GET['m'])){
+            $m = new Manager();
+            $myView = new View();
+            $data = $m->getPasDeTir();
+            $myView->redirect('login',$data);
+        }
+
+    }
+
     public function activateUser()
     {
         $id = intval($_POST['idUser']);
