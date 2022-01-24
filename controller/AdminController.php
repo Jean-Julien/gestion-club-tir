@@ -31,7 +31,7 @@ class Admincontroller
         $m = new Manager();
 
         if( !$m->hasRole($_SESSION['id'], 'admin')) {
-
+            $_SESSION['admin']=true;
             $myView = new View();
             $myView->render('404');
         } else {
@@ -44,17 +44,14 @@ class Admincontroller
 
     public function platformManager(){
 
-        if(isset($_POST)){
-             //insert 
+        $model = new Manager();
+        if ($_SESSION['admin']) {
+            # code...
         }
-        if(isset($_GET['D'])){
-            //delete 
-        }
-        if(isset($_GET['m'])){
-            $m = new Manager();
+        else {
             $myView = new View();
-            $data = $m->getPasDeTir();
-            $myView->redirect('login',$data);
+            $myView->redirect('login');
+            exit();
         }
 
     }
