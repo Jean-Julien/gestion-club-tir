@@ -63,6 +63,41 @@ class Controller
         $myView->render($pasdetir);
     }
 
+    public function showContact()
+    {
+        // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
+        if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+            $myView = new View();
+            $myView->redirect('login');
+            exit();
+        }
+
+        //$manager = new Manager();
+        $myView = new View('contact');
+        $myView->render();
+    }
+
+    public function sendContact()
+    {
+        $mail = $_POST['mail'];
+        $message = $_POST['message'];
+        $dest = 'TKT@hotmail.com';
+        $sujet = 'nouveau message de' . $mail;
+
+        $headers = 'Reply-To: ' . $mail . ' "\r\n"' .
+        'X-Mailer: PHP/' . phpversion();
+
+        if (mb_send_mail($dest, $sujet, $message, $headers)) {
+            $_SESSION['contact_success'] = "Votre message a été envoyé";
+            $myView = new View();
+            $myView->redirect("contact");
+        } else {
+            $_SESSION['contact_error'] = "Votre message n'a pas pu être envoyé ; merci de réessayer plus tard";
+            die();
+        }
+    }
+
+
     public function showCalendar()
     {
         // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion

@@ -29,6 +29,8 @@ class Routeur
         "admin/activateUser"=> ["controller" => "AdminController", "method" => "activateUser"],
         "profil"            => ["controller" => "Controller", 'method' => "showProfil"],
         "changePsw"         => ["controller" => "Controller", 'method' => "showChangePsw"],
+        "contact"           => ["controller" => "Controller", "method" => "showContact"],
+        "sendContact"       => ["controller" => "Controller", "method" => "sendContact"],
         "changePswBdd"      => ["controller" => "Controller", 'method' => "changePswBdd"],
     ];
 
