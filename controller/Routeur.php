@@ -22,6 +22,8 @@ class Routeur
         "registered"        => ["controller" => "Controller", "method" => "showRegistered"],
         "reservation"       => ["controller" => "Controller", "method" => "showReservation"],
         "calendar"          => ["controller" => "Controller", "method" => "showCalendar"],
+        "contact"           => ["controller" => "Controller", "method" => "showContact"],
+        "sendContact"       => ["controller" => "Controller", "method" => "sendContact"],
         "insertReservation" => ["controller" => "Controller", "method" => "addReservationToDb"],
         "logout"            => ["controller" => "Controller", "method" => "logout"],
         "404"               => ["controller" => "Controller", "method" => "show404"],
