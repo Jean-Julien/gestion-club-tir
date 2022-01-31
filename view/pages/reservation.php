@@ -107,8 +107,8 @@
             </select>
         </div>
         <div class="col-12">
-            <label for="longueur" class="form-label text-white-50">Pas de tir</label>
-            <select class="form-select" id="pastir" name="reserv_pas_de_tir">Selectionnez longueur pas de tir
+            <label for="longueur" class="form-label text-white-50">Longueur Pas de tir</label>
+            <select class="form-select" id="pastir" name="reserv_pas_de_tir">
                 <option value="1">Long</option>
                 <option value="2">Court</option>
             </select>
