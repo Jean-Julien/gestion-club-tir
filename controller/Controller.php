@@ -58,9 +58,21 @@ class Controller
         }
 
         $manager = new Manager();
-        $pasdetir = $manager->getPasDeTir();
-        $myView = new View('reservation');
-        $myView->render($pasdetir);
+
+        if(isset($_POST['taille_pas_de_tir']) && $_POST['taille_pas_de_tir'] != "all"){
+            $_SESSION['taillePdt'] = $_POST['taille_pas_de_tir'];
+            $pasdetir = $manager->getPasDeTirByTaille(intval($_SESSION['taillePdt']));
+            $taillePasdetir = $manager->getLongueurPdt();
+            $myView = new View('reservation');
+            $myView->render2($taillePasdetir, $pasdetir);
+        }else{
+            $taillePasdetir = $manager->getLongueurPdt();
+            $pasDeTir = $manager->getPasDeTir();
+            $myView = new View('reservation');
+            $myView->render2($taillePasdetir, $pasDeTir);
+
+        }
+        
     }
 
     public function showContact()

@@ -1,4 +1,24 @@
 <div class="container p-4 mt-3" style="margin-bottom: 60px;">
+    <form class="shadow py-4 px-3 bg-dark bg-gradient rounded row g-3" role="form" action="index.php?r=reservation" method="post">
+        <div class="mb-1">
+            <h3 class="text-white">Longueur pas de tir</h3>
+        </div>
+        <div class="col-12">
+            <label for="pastir" class="form-label text-white-50">Pas de tir</label>
+            <select class="form-select" id="pastir" name="taille_pas_de_tir">
+                <option selected disabled>Selectionnez une longueur de pas de tir </option>
+                <?php foreach ($params1 as $taillepasdetir) : ?>
+                    <option value="<?php echo $taillepasdetir->getIdTaillePdt(); ?>"><?php echo $taillepasdetir->getDescription(); ?></option>
+                <?php endforeach; ?>
+                <option value="all">tous</option>
+            </select>
+        </div>
+        <div class="mt-4">
+            <button type="submit" class="btn btn-primary px-4">Choisir longueur</button>
+        </div>
+
+    </form>
+
     <form class="shadow py-4 px-3 bg-dark bg-gradient rounded row g-3" role="form" action="<?php echo insertReservation ?>" method="post">
         <div class="mb-1">
             <h3 class="text-white">Réservation pas de tir</h3>
@@ -101,26 +121,21 @@
             <label for="pastir" class="form-label text-white-50">Pas de tir</label>
             <select class="form-select" id="pastir" name="reserv_pas_de_tir">
                 <option selected disabled>Selectionnez un pas de tir</option>
-                <?php foreach ($params as $pasdetir) : ?>
-                    <option value="<?php echo $pasdetir->idPasDeTir; ?>"><?php echo $pasdetir->nomPasDeTir; ?></option>
+                <?php foreach ($params2 as $pasdetir) : ?>
+                    <option value="<?php echo $pasdetir->idPasDeTir; ?>"><?php echo $pasdetir->nomPasDeTir; ?> <?php echo $pasdetir->getDescriptionPdt(); ?> </option>
                 <?php endforeach; ?>
             </select>
         </div>
-        <div class="col-12">
-            <label for="longueur" class="form-label text-white-50">Longueur Pas de tir</label>
-            <select class="form-select" id="pastir" name="reserv_pas_de_tir">
-                <option value="1">Long</option>
-                <option value="2">Court</option>
-            </select>
-        </div>
-
         <div class="mt-4">
             <button type="submit" class="btn btn-primary px-4">Réserver</button>
         </div>
+
     </form>
+
 </div>
 
 <?php
 unset($_SESSION['reserv_error']);
 unset($_SESSION['reserv_success']);
+unset($_SESSION['taillePdt']);
 ?>

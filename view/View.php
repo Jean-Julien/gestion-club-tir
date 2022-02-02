@@ -33,6 +33,16 @@ class View
         $contentPage = ob_get_clean();
         include_once(VIEW . '_gabarit.php');
     }
+
+    public function render2($params1, $params2)
+    {
+        $template = $this->template;
+
+        ob_start();
+        include(VIEW . 'pages/' . $template . '.php');
+        $contentPage = ob_get_clean();
+        include_once(VIEW . '_gabarit.php');
+    }
     
     /**
      * renderLogin

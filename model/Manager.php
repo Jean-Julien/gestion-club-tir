@@ -241,7 +241,7 @@ class Manager
     public function getPasDeTir()
     {
         $db = $this->db;
-        $req = $db->prepare('SELECT * FROM tkt_pas_de_tir ORDER BY CHAR_LENGTH(p_name), p_name');
+        $req = $db->prepare('SELECT * FROM tkt_pas_de_tir a JOIN tkt_taille_pdt b ON a.id_taille = b.id_taille_pdt  ORDER BY CHAR_LENGTH(p_name), p_name');
 
         try {
 
@@ -257,6 +257,8 @@ class Manager
 
                         $pasdetir->idPasDeTir = $row['p_id'];
                         $pasdetir->nomPasDeTir = $row['p_name'];
+                        $pasdetir->setIdTaille($row['id_taille']);
+                        $pasdetir->setDescriptionPdt($row['description']);
 
                         $pasdetirs[] = $pasdetir;
                     }
@@ -283,6 +285,52 @@ class Manager
 
             return false;
         }
+    }
+
+    public function getLongueurPdt() {
+        
+        $db = $this->db;
+        $req = $db->prepare('SELECT * FROM tkt_taille_pdt');
+        if ($req->execute()) {
+
+            while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
+                $taillePdt = new TaillePdt();
+
+                $taillePdt->setIdTaillePdt($row['id_taille_pdt']);
+                $taillePdt->setDescription($row['description']);
+                $taillePdts[] = $taillePdt;
+            }
+        }
+
+        return $taillePdts;
+
+        $req->closeCursor();
+        $db = null;
+    }
+
+    public function getPasDeTirByTaille($idTaille)
+    {
+        
+        $db = $this->db;
+        $req = $db->prepare('SELECT * FROM tkt_pas_de_tir a JOIN tkt_taille_pdt b ON a.id_taille = b.id_taille_pdt where id_taille=?');
+        if ($req->execute(array($idTaille))) {
+
+            while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
+                $pasdetir = new PasDeTir();
+                $pasdetir->idPasDeTir = $row['p_id'];
+                $pasdetir->nomPasDeTir = $row['p_name'];
+                $pasdetir->setIdTaille($row['id_taille']);
+                $pasdetir->setDescriptionPdt($row['description']);
+
+                $pasdetirs[] = $pasdetir;
+                
+            }
+        }
+        
+        return $pasdetirs;
+
+        $req->closeCursor();
+        $db = null;
     }
 
     /**
