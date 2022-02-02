@@ -18,10 +18,11 @@
         </div>
 
     </form>
+    <br>
 
     <form class="shadow py-4 px-3 bg-dark bg-gradient rounded row g-3" role="form" action="<?php echo insertReservation ?>" method="post">
         <div class="mb-1">
-            <h3 class="text-white">Réservation pas de tir</h3>
+            <h3 class="text-white">Réservation pas de tir </h3>
         </div>
 
         <?php
