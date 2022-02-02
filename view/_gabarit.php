@@ -60,7 +60,7 @@
     ?>
 
     <div class="footer fixed-bottom sticky-bottom">
-        <div class="text-center p-3 bg-primary text-white">
+        <div class="text-center p-3 bg-dark text-white">
             © 2021 Copyright:
             <a class="text-reset fw-bold">TKT</a>
             <a class="text-reset fw-bold" padding=90px href="index.php?r=contact">Donnez-nous votre avis</a>
