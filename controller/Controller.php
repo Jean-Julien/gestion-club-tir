@@ -94,13 +94,16 @@ class Controller
         $mail = $_POST['mail'];
         $message = $_POST['message'];
         $dest = 'kvanconingsloo@gmail.com';
-        $sujet = 'nouveau message de' . $mail;
+        $sujet = 'nouveau message de ' . $mail;
 
         $headers =
         'From: TKT@hotmail.com' . "\r\n" .
         'Reply-To: ' . $mail . ' "\r\n"' .
             'X-Mailer: PHP/' . phpversion();
 
+        mb_send_mail($dest, $sujet, $message, $headers); 
+        
+        $dest = 'jeromedeschampsjd@gmail.com';
         if (mb_send_mail($dest, $sujet, $message, $headers)) {
             $_SESSION['contact_success'] = "Votre message a été envoyé";
             $myView = new View();
