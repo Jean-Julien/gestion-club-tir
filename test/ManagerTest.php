@@ -128,4 +128,9 @@ class ManagerTest extends \PHPUnit\Framework\TestCase
         $user = $m->getUserById(5);
         $this->assertInstanceOf('User', $user);
     }
+
+    public function testInsetPlatform(){
+        $model = new Manager();
+        $this->assertEquals(true, $model->insetPlatform('pas de tir 22',3));
+    }
 }

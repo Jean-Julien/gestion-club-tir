@@ -29,6 +29,95 @@ class Manager
             die();
         }
     }
+    
+    public function getPlatforms(){
+        $db = $this->db;
+        $req = $db->prepare("SELECT * FROM tkt_taille_pdt as p join tkt_pas_de_tir as t on t.id_taille = p.id_taille_pdt ");
+        try {
+            if ($req->execute()) {
+                $data= $req->fetchAll(PDO::FETCH_ASSOC);
+                $db=null;
+                return $data;
+            }
+        } catch (\Throwable $th) {
+            die($th->getMessage());
+        }
+    } 
+
+    public function existingPlatforms($p_name){
+        $db = $this->db;
+        $req = $db->prepare("SELECT * FROM  tkt_pas_de_tir where p_name=?");
+        try {
+            if ($req->execute([$p_name])) {
+                $data= $req->fetchAll(PDO::FETCH_ASSOC);
+                $db=null;
+                return $data;
+            }
+        } catch (\Throwable $th) {
+            die($th->getMessage());
+        }
+    } 
+
+    public function getTaille(){
+        $db = $this->db;
+        $req = $db->prepare('SELECT * FROM tkt_taille_pdt');
+        try {
+            if ($req->execute()) {
+                $data= $req->fetchAll(PDO::FETCH_ASSOC);
+                $db=null;
+                return $data;
+            }
+        } catch (\Throwable $th) {
+            die($th->getMessage());
+        }
+    }
+
+
+    public function insetPlatform($p_name, $id_taille){
+        $db = $this->db;
+        $req = $db->prepare('INSERT INTO tkt_pas_de_tir (p_id, p_name, id_taille) VALUES(Null,?,?)');
+        try {
+            if ($req->execute([$p_name, $id_taille])) {
+                
+                $db=null;
+                return true;
+            }
+        } catch (\Throwable $th) {
+            die($th->getMessage());
+        }
+
+    }
+
+    public function updatePlatform($p_name, $id_taille, $p_id){
+        $db = $this->db;
+            
+            $req = $db->prepare("UPDATE `tkt_pas_de_tir` SET `p_name` = ?, `id_taille` = ? WHERE `tkt_pas_de_tir`.`p_id` = ?");
+        try {
+            if ($req->execute([$p_name, $id_taille, $p_id])) {       
+                $db=null;
+                return true;
+            }
+        } catch (exception $e)  {
+            die($e->getMessage());
+        }
+
+    }
+
+    public function deletePlatform($id){
+        $db = $this->db;
+        $req = $db->prepare('DELETE FROM tkt_pas_de_tir WHERE p_id = ?');
+        try {
+            if ($req->execute([$id])) {
+                
+                $db=null;
+                return true;
+            }
+        } catch (\Throwable $th) {
+            die($th->getMessage());
+        }
+
+    }
+
 
     function encrypt_decrypt($string, $action = 'encrypt')
     {
@@ -189,6 +278,9 @@ class Manager
         $req->closeCursor();
         $db = null;
     }
+
+    
+
 
     public function getReservationById($id)
     {
