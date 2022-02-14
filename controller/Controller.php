@@ -330,4 +330,10 @@ class Controller
             $myView->redirect('changePsw');
         }
     }
+
+    public function showContact()
+    {
+        $myView = new View('contact');
+        $myView->render();
+    }
 }
