@@ -150,12 +150,11 @@ class Admincontroller
         }
     }
 
-<<<<<<< HEAD
     public function showFeedback()
     {
 
     }
-=======
+
                    /**
                     * Get the value of p_name
                     */ 
@@ -175,7 +174,5 @@ class Admincontroller
 
                                       return $this;
                    }
-                   
->>>>>>> Abu
-}
+  }
 ?>
