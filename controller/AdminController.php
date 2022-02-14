@@ -83,5 +83,10 @@ class Admincontroller
             var_dump("probleme");die();
         }
     }
+
+    public function showFeedback()
+    {
+
+    }
 }
 ?>

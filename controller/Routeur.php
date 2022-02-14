@@ -32,6 +32,7 @@ class Routeur
         "contact"           => ["controller" => "Controller", "method" => "showContact"],
         "sendContact"       => ["controller" => "Controller", "method" => "sendContact"],
         "changePswBdd"      => ["controller" => "Controller", 'method' => "changePswBdd"],
+        "admin/showFeedback"      => ["controller" => "AdminController", 'method' => "showFeedback"],
     ];
 
     /**
