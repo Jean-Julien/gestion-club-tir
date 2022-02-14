@@ -7,6 +7,11 @@
         private $isRead;
         private $id_user_read;
 
+    function __construct()
+    {
+        $this->id_user_read = 0;
+    }
+
         /**
          * Get the value of idFeedbcak
          */ 
