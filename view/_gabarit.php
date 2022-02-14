@@ -33,6 +33,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="index.php?r=reservation">Réservation</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php?r=contact">contact</a>
+                    </li>
                 </ul>
                 <div class="flex-shrink-0 dropdown">
                     <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
