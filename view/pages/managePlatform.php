@@ -57,7 +57,7 @@
 <div class="shadow py-3 px-3 bg-dark bg-gradient rounded row g-3" style="margin: .5em;">
         <div class="mb-1">
                 <h4 class="text-white" style="text-align:center; margin-top:20px;">management board </h4>
-
+                 <h5 style="color:red; text-align:center;"><?=$_SESSION['delete'] ?></h5>
                 <div class="table-responsive border-secondary">
                         <table class="table table striped border-secondary shadow">
                                 <thead class="bg-primary text-light">

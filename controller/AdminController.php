@@ -7,6 +7,7 @@ class Admincontroller
 {
     public function confirmUserPage()
     {
+
         /*$m = new Manager();
 
         if( !$m->hasRole($_SESSION['id'], 'admin')) {
@@ -43,8 +44,10 @@ class Admincontroller
     }
     
     public function platformManager(){
-        
-
+        // if ($_SESSION['delete']) {
+            
+        // }
+        $_SESSION['delete']="";
         if ($_SESSION['admin']) {
          
             $model = new Manager();
@@ -81,9 +84,10 @@ class Admincontroller
                    
                 } else {
                     if (isset($_GET['d'])) {
+                        
                         $id_taille_pdt = $_GET['d'];
                         $model->deletePlatform($id_taille_pdt); 
-                      
+                        
                     }
                 }
             }

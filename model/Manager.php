@@ -13,7 +13,9 @@ class Manager
      */
     public function __construct()
     {
+        
         try {
+            
 
             // Pour la mise en production, commentez au dessus et décommentez ci dessous (mettez bien vos codes dans le fichier config).
             //$this->db = new PDO(BDD_PROD, USER_BDD_PROD, PASSWORD_BDD_PROD);
@@ -110,10 +112,12 @@ class Manager
             if ($req->execute([$id])) {
                 
                 $db=null;
+                
                 return true;
             }
-        } catch (\Throwable $th) {
-            die($th->getMessage());
+        } catch (exception $e) {
+            $_SESSION['delete']="this platform is in use and cannot be deleted";
+            
         }
 
     }
