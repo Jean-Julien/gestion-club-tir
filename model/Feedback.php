@@ -4,6 +4,7 @@
         private $idFeedbcak;
         private $feedback;
         private $created_at;
+        private $isRead;
 
         /**
          * Get the value of idFeedbcak
@@ -61,6 +62,26 @@
         public function setCreated_at($created_at)
         {
                 $this->created_at = $created_at;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of isRead
+         */ 
+        public function getIsRead()
+        {
+                return $this->isRead;
+        }
+
+        /**
+         * Set the value of isRead
+         *
+         * @return  self
+         */ 
+        public function setIsRead($isRead)
+        {
+                $this->isRead = $isRead;
 
                 return $this;
         }
