@@ -5,6 +5,7 @@
         private $feedback;
         private $created_at;
         private $isRead;
+        private $id_user_read;
 
         /**
          * Get the value of idFeedbcak
@@ -82,6 +83,26 @@
         public function setIsRead($isRead)
         {
                 $this->isRead = $isRead;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of id_user_read
+         */ 
+        public function getId_user_read()
+        {
+                return $this->id_user_read;
+        }
+
+        /**
+         * Set the value of id_user_read
+         *
+         * @return  self
+         */ 
+        public function setId_user_read($id_user_read)
+        {
+                $this->id_user_read = $id_user_read;
 
                 return $this;
         }
