@@ -15,7 +15,7 @@
 					class="d-inline-block align-text-top" style="text-align: center;">
 			</p>
 			<h2 style="text-align: center;">
-				<a id="lien" href="tel:069/69.69.69">069/69.69.69</a>
+				<a id="lien" href="tel:071/53.17.56">071/53.17.56</a>
 			</h2>
 		</div>
 
@@ -27,7 +27,7 @@
 					class="d-inline-block align-text-top" style="text-align: center;">
 			</p>
 			<h2 style="text-align: center;">
-				<a id="lien" href="mailto:fournil@gmail.be">fournil@gmail.be</a>
+				<a id="lien" href="mailto:tkt@gmail.be">tkt@gmail.be</a>
 			</h2>
 		</div>
 
@@ -38,8 +38,8 @@
 					alt="téléphone" width="40" height="40"
 					class="d-inline-block align-text-top" style="text-align: center;">
 			</p>
-			<h2 style="text-align: center;">Rue des gonceries 75</h2>
-			<h2 style="text-align: center;">6032 Mont-sur-Marchienne</h2>
+			<h2 style="text-align: center;">Sq. Jules Hiérnaux 2</h2>
+			<h2 style="text-align: center;">6000 Charleroi</h2>
 		</div>
 
 
