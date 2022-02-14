@@ -34,7 +34,7 @@
                         <a class="nav-link" href="index.php?r=reservation">Réservation</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?r=contact">contact</a>
+                        <a class="nav-link" href="index.php?r=contact">Contact</a>
                     </li>
                 </ul>
                 <div class="flex-shrink-0 dropdown">
