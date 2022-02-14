@@ -75,7 +75,7 @@ class Controller
         
     }
 
-    public function showContact()
+    public function showFeedbackForm()
     {
         // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
         if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
@@ -85,7 +85,7 @@ class Controller
         }
 
         //$manager = new Manager();
-        $myView = new View('contact');
+        $myView = new View('feedback');
         $myView->render();
     }
 

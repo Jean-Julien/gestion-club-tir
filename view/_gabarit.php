@@ -63,7 +63,7 @@
         <div class="text-center p-3 bg-dark text-white">
             © 2021 Copyright:
             <a class="text-reset fw-bold">TKT</a>
-            <a class="text-reset fw-bold" padding=90px href="index.php?r=contact">Donnez-nous votre avis</a>
+            <a class="text-reset fw-bold" padding=90px href="index.php?r=feedback">Donnez-nous votre avis</a>
         </div>
     </div>
 </body>
