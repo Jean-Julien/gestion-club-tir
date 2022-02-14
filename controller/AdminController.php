@@ -7,6 +7,7 @@ class Admincontroller
 {
     public function confirmUserPage()
     {
+
         /*$m = new Manager();
 
         if( !$m->hasRole($_SESSION['id'], 'admin')) {
@@ -31,16 +32,81 @@ class Admincontroller
         $m = new Manager();
 
         if( !$m->hasRole($_SESSION['id'], 'admin')) {
-
+            
             $myView = new View();
             $myView->render('404');
         } else {
-
+            $_SESSION['admin']=true;
             $users = $m->getAllUsers();
             $myView = new View('confirmUserPage');
             $myView->render($users);
         }
     }
+    
+    public function platformManager(){
+        // if ($_SESSION['delete']) {
+            
+        // }
+        $_SESSION['delete']="";
+        if ($_SESSION['admin']) {
+         
+            $model = new Manager();
+            $ptd = $model->getPlatforms(1);
+            $taille=$model->getTaille();
+            $data=array($ptd,$taille);
+            
+           $_SESSION['error_add_pt']="";
+
+            if (isset($_POST['add']) and !empty($_POST['id_taille'])) {
+                
+                $id_taille=$_POST['id_taille'];
+                $p_name=$_POST['p_name'];
+               
+               
+                if ($model->existingPlatforms($p_name)) {
+                    $_SESSION['error_add_pt']="platform already exists choose another name";
+                }
+                else {
+                    $model->insetPlatform($p_name, $id_taille);
+                }
+               
+                
+            } else {
+                
+                if (isset($_POST['modify'])) {
+                   
+                   $id_taille=$_POST['id_taille'];
+                   $p_name=$_POST['p_name'];
+                   $id =$_POST['modify'];
+                   
+                   $model->updatePlatform($p_name, $id_taille, $id);
+                  
+                   
+                } else {
+                    if (isset($_GET['d'])) {
+                        
+                        $id_taille_pdt = $_GET['d'];
+                        $model->deletePlatform($id_taille_pdt); 
+                        
+                    }
+                }
+            }
+            
+            
+            $myView = new View('managePlatform');
+            $myView->render($data);
+       }
+        else {
+            $myView = new View();
+            $myView->redirect('login');
+            exit();
+        }
+        
+
+        
+       
+    }
+    
 
     public function activateUser()
     {
@@ -84,9 +150,32 @@ class Admincontroller
         }
     }
 
+<<<<<<< HEAD
     public function showFeedback()
     {
 
     }
+=======
+                   /**
+                    * Get the value of p_name
+                    */ 
+                   public function getP_name()
+                   {
+                                      return $this->p_name;
+                   }
+
+                   /**
+                    * Set the value of p_name
+                    *
+                    * @return  self
+                    */ 
+                   public function setP_name($p_name)
+                   {
+                                      $this->p_name = $p_name;
+
+                                      return $this;
+                   }
+                   
+>>>>>>> Abu
 }
 ?>
