@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <?php
 
 /**
@@ -35,6 +35,7 @@ class Routeur
         "changePswBdd"      => ["controller" => "Controller", 'method' => "changePswBdd"],
         "admin/showFeedback" => ["controller" => "AdminController", 'method' => "showFeedback"],
         "feedback"           => ["controller" => "Controller", "method" => "showFeedbackForm"],
+        "admin/managePlatform" => ["controller" => "AdminController", "method" => "platformManager"],
     ];
 
     /**
