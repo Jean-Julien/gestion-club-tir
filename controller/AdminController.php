@@ -80,7 +80,7 @@ class Admincontroller
                    $id =$_POST['modify'];
                    
                    $model->updatePlatform($p_name, $id_taille, $id);
-                  
+                    
                    
                 } else {
                     if (isset($_GET['d'])) {
