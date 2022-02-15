@@ -45,12 +45,12 @@ class Admincontroller
     
     public function platformManager(){
         // if ($_SESSION['delete']) {
-            
+        $model = new Manager();
         // }
         $_SESSION['delete']="";
-        if ($_SESSION['admin']) {
+        if ($model->hasRole($_SESSION['id'], 'admin')) {
          
-            $model = new Manager();
+            
             $ptd = $model->getPlatforms(1);
             $taille=$model->getTaille();
             $data=array($ptd,$taille);
