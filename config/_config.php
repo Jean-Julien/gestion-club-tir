@@ -50,6 +50,7 @@ class MyAutoload
         define('login', 'index.php?r=login');
         define('home', 'index.php?r=home');
         define('insertReservation', 'index.php?r=insertReservation');
+        define('insertMember', 'index.php?r=insertMember');
     }
     /**
      * Undocumented function

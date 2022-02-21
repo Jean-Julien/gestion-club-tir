@@ -17,10 +17,19 @@ class Routeur
         "home"              => ["controller" => "Controller", "method" => "showHome"],
         "login"             => ["controller" => "Controller", "method" => "showLogin"],
         "connection"        => ["controller" => "Controller", "method" => "connect"],
+        "register"          => ["controller" => "Controller", "method" => "showRegister"],
+        "insertMember"      => ["controller" => "Controller", "method" => "addMemberToDb"],
+        "registered"        => ["controller" => "Controller", "method" => "showRegistered"],
+        "reservation"       => ["controller" => "Controller", "method" => "showReservation"],
         "calendar"          => ["controller" => "Controller", "method" => "showCalendar"],
         "insertReservation" => ["controller" => "Controller", "method" => "addReservationToDb"],
         "logout"            => ["controller" => "Controller", "method" => "logout"],
-        "404"               => ["controller" => "Controller", "method" => "show404"]
+        "404"               => ["controller" => "Controller", "method" => "show404"],
+        "admin/confirmuser" => ["controller" => "AdminController", "method" => "confirmUserPage"],
+        "admin/activateUser"=> ["controller" => "AdminController", "method" => "activateUser"],
+        "profil"            => ["controller" => "Controller", 'method' => "showProfil"],
+        "admin/managePlatform" => ["controller" => "AdminController", "method" => "platformManager"],
+        
     ];
 
     /**

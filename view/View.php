@@ -44,6 +44,16 @@ class View
         include_once(PAGES . 'login.php');
     }
 
+    public function renderRegister()
+    {
+        include_once(PAGES . 'register.php');
+    }
+
+    public function renderRegistered()
+    {
+        include_once(PAGES . 'registered.php');
+    }
+
     public function render404() {
 
         include_once(PAGES . '404.php');

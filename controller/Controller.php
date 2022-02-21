@@ -12,7 +12,43 @@ class Controller
         $myView->renderLogin();
     }
 
+    public function showRegister()
+    {
+        $myView = new View();
+        $myView->renderRegister();
+    }
+
+    public function showRegistered()
+    {
+        $myView = new View();
+        $myView->renderRegistered();
+    }
+
     public function showHome()
+    {
+        // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
+        if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+            $myView = new View();
+            $myView->redirect('login');
+            exit();
+        }
+
+        $myView = new View('home');
+        $myView->render();
+    }
+
+    /**
+     * gère la page d'accueil
+     * 
+     * @return void
+     */
+    public function show404()
+    {
+        $myView = new View();
+        $myView->render404();
+    }
+
+    public function showReservation()
     {
         // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
         if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
@@ -23,30 +59,8 @@ class Controller
 
         $manager = new Manager();
         $pasdetir = $manager->getPasDeTir();
-        $myView = new View('home');
+        $myView = new View('reservation');
         $myView->render($pasdetir);
-    }
-
-    /**
-     * gère la page d'accueil
-     * 
-     * @return void
-     */
-    public function show404()
-    {
-        // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
-        /*if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true)
-        {
-            $myView = new View();
-            $myView->redirect('login');
-            exit();
-        }
-
-        $myView = new View();
-		$myView->redirect('404');*/
-
-        $myView = new View();
-        $myView->render404();
     }
 
     public function showCalendar()
@@ -61,8 +75,23 @@ class Controller
         //$manager = new Manager();
         $myView = new View('calendar');
         $myView->render();
+    }
 
-        //include_once(VIEW . 'pages/calendar.php');
+    public function showProfil()
+    {
+        // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
+        if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+            $myView = new View();
+            $myView->redirect('login');
+            exit();
+        }
+
+        $manager = new Manager();
+
+        $reservations = $manager->getReservationById($_SESSION['id']);
+
+        $myView = new View('profil');
+        $myView->render($reservations);
     }
 
     public function connect()
@@ -76,39 +105,84 @@ class Controller
 
             if ($email != "" && $password != "") {
 
-                if ($manager->existMail($email)) {
+                if ($manager->validateLogin($email, $password) == 0) {
 
-                    if ($manager->validateLogin($email, $password)) {
+                    $myView = new View();
+                    $myView->redirect('home');
+                } else if ($manager->validateLogin($email, $password) == 1) {
 
-                        $myView = new View();
-                        $myView->redirect('home');
-                    } else {
+                    throw new Exception("Mot de passe ou email incorrect !");
+                } else if ($manager->validateLogin($email, $password) == 2) {
 
-                        $_SESSION['error'] = "Mot de passe ou email incorrect";
-                        //$this->showLogin();
-                        $myView = new View();
-                        $myView->redirect('login');
-                    }
+                    throw new Exception("Ce compte est inactif !");
+                } else if ($manager->validateLogin($email, $password) == 3) {
+
+                    throw new Exception("Ce compte n'existe pas !");
+                } else if ($manager->validateLogin($email, $password) == 4) {
+
+                    throw new Exception("Impossible d'exécuter cette opération !");
+                } else if ($manager->validateLogin($email, $password) == 5) {
+
+                    throw new Exception("Une erreur inconnue est survenue !");
                 } else {
 
-                    $_SESSION['error'] = "Ce compte n'existe pas";
-                    //$this->showLogin();
-                    $myView = new View();
-                    $myView->redirect('login');
+                    throw new Exception("Une erreur inconnue est survenue !");
                 }
             } else {
 
-                $_SESSION['error'] = "Veuillez remplir les champs.";
-                //$this->showLogin();
-                $myView = new View();
-                $myView->redirect('login');
+                throw new Exception("Veuillez remplir tous les champs !");
             }
         } catch (Exception $e) { // S'il y a eu une erreur, alors...
 
-            $_SESSION['error'] = "Problème de serveur " . $e->getMessage();
-            //$this->showLogin();
+            $_SESSION['login_error'] = $e->getMessage();
             $myView = new View();
             $myView->redirect('login');
+        }
+    }
+
+    public function addMemberToDb()
+    {
+        try {
+            
+
+            if (!empty($_POST['nomRegister']) && !empty($_POST['prenomRegister']) && !empty($_POST['emailRegister']) && !empty($_POST['datenaissanceRegister']) ) {
+
+                $register_name = trim(ucfirst($_POST['nomRegister']));
+                $register_firstname = trim(ucfirst($_POST['prenomRegister']));
+                $register_email = trim(strtolower($_POST['emailRegister']));
+                $register_birthday = $_POST['datenaissanceRegister'];
+
+                $manager = new Manager();
+
+                if ($manager->insertMemberToDb($register_name, $register_firstname, $register_email, $register_birthday) == 0) {
+
+                    $myView = new View();
+                    $myView->redirect('registered');
+                } else if ($manager->insertMemberToDb($register_name, $register_firstname, $register_email, $register_birthday) == 1) {
+
+                    throw new Exception("Error 1");
+                } else if ($manager->insertMemberToDb($register_name, $register_firstname, $register_email, $register_birthday) == 2) {
+
+                    throw new Exception("Pas de tir déjà réservé ! Réitéré votre demande");
+                } else if ($manager->insertMemberToDb($register_name, $register_firstname, $register_email, $register_birthday) == 3) {
+
+                    throw new Exception("Error 3");
+                } else if ($manager->insertMemberToDb($register_name, $register_firstname, $register_email, $register_birthday) == 4) {
+
+                    throw new Exception("Error 4");
+                } else {
+
+                    throw new Exception("Error 5");
+                }
+            } else {
+
+                throw new Exception("Tous les champs doivent être remplis !");
+            }
+        } catch (Exception $e) {
+
+            $_SESSION['register_error'] = $e->getMessage();
+            $myView = new View();
+            $myView->redirect('register');
         }
     }
 
@@ -125,7 +199,7 @@ class Controller
                 if ($manager->insertReservationToDb($reserv_pseudo, $reserv_tranche_horaire, $reserv_pas_de_tir) == 0) {
                     $_SESSION['reserv_success'] = "Votre réservation a bien été prise en compte";
                     $myView = new View();
-                    $myView->redirect('home');
+                    $myView->redirect('reservation');
                 } else if ($manager->insertReservationToDb($reserv_pseudo, $reserv_tranche_horaire, $reserv_pas_de_tir) == 1) {
                     throw new Exception("Error 1");
                 } else if ($manager->insertReservationToDb($reserv_pseudo, $reserv_tranche_horaire, $reserv_pas_de_tir) == 2) {
@@ -143,7 +217,7 @@ class Controller
         } catch (Exception $e) { {
                 $_SESSION['reserv_error'] = $e->getMessage();
                 $myView = new View();
-                $myView->redirect('home');
+                $myView->redirect('reservation');
             }
         }
     }
