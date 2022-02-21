@@ -90,7 +90,7 @@ class Controller
         $myView->render();
     }
 
-    public function sendContact()
+    public function sendFeedback()
     {
         try
         {
@@ -101,11 +101,13 @@ class Controller
 
                     $manager = new Manager();
 
+                   // var_dump('coucou  '); die();
+
                     if ($manager->insertFeedbackToDb($feedback) == 0) 
                     {
                         $_SESSION['contact_success'] = "Votre message a été envoyé";
                         $myView = new View();
-                        $myView->redirect("contact");
+                        $myView->redirect("feedback");
 
                     } 
                     
@@ -120,6 +122,7 @@ class Controller
         catch (Exception $e)
         {
             $myView = new View();
+            var_dump('test ' . $e); die();
             $myView->redirect('404');
         }
     

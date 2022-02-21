@@ -528,9 +528,9 @@ class Manager
     {
         $db = $this->db;
 
-        $insert = $db->prepare("INSERT INTO tkt_feedback (feedback) VALUES(?)')" );
+        $insert = $db->prepare("INSERT INTO tkt_feedback (feedback) VALUES(?)" );
         
-        if($insert->execute(array('feedback' => $feedback)))
+        if($insert->execute(array($feedback)))
 
         {
             return true;
@@ -542,6 +542,26 @@ class Manager
         }
 
 
+    }
+
+    public function getAllFeedbacks()
+    {
+        $db=$this->db;
+        $requet=$db->prepare('select * from tkt_feedback');
+        $requet->execute;
+        if ($requet->execute()) {
+
+            while ($row = $requet->fetch(PDO::FETCH_ASSOC)) {
+                $feedback = new Feedback();
+                $feedback->feedback = $row['p_id'];
+                $pasdetir->nomPasDeTir = $row['p_name'];
+                $pasdetir->setIdTaille($row['id_taille']);
+                $pasdetir->setDescriptionPdt($row['description']);
+
+                $pasdetirs[] = $pasdetir;
+                
+            }
+        }
     }
 
     public function insertChangePassword ($password){

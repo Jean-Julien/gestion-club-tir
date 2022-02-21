@@ -1,5 +1,5 @@
 <div class="container shadow p-4 mt-4 rounded bg-dark bg-gradient" style="margin-bottom: 90px;">
-    <form class="rounded row g-3" action="index.php?r=sendContact" method="post">
+    <form class="rounded row g-3" action="index.php?r=sendFeedback" method="post">
 
         <div class="mb-1">
             <h3 class="text-white">Formulaire de contact</h3>

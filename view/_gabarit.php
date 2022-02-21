@@ -45,6 +45,7 @@
                         <?php if ($_SESSION['idRole'] == '1') { ?>
                             <li><a class="dropdown-item" href="index.php?r=admin/confirmuser">Confirmation users</a></li>
                             <li><a class="dropdown-item" href="index.php?r=admin/managePlatform">Gestion de pas de tir</a></li>
+                            <li><a class="dropdown-item" href="index.php?r=admin/showFeedback">Voir les feedback</a></li>
                         <?php } ?>
                         <li>
                             <hr class="dropdown-divider">

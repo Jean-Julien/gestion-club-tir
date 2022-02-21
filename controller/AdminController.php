@@ -152,27 +152,11 @@ class Admincontroller
 
     public function showFeedback()
     {
+        $m = new Manager;
 
+
+        $feedback = $m->
     }
 
-                   /**
-                    * Get the value of p_name
-                    */ 
-                   public function getFeedback()
-                   {
-                                      return $this->feedback;
-                   }
-
-                   /**
-                    * Set the value of p_name
-                    *
-                    * @return  self
-                    */ 
-                   public function setP_name($p_name)
-                   {
-                                      $this->p_name = $p_name;
-
-                                      return $this;
-                   }
   }
 ?>

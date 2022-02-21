@@ -1,7 +1,7 @@
 <?php
     class Feedback
     {
-        private $idFeedbcak;
+        private $idFeedback;
         private $feedback;
         private $created_at;
         private $isRead;
