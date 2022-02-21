@@ -32,6 +32,7 @@ class Controller
             $myView->redirect('login');
             exit();
         }
+        
 
         $myView = new View('home');
         $myView->render();
