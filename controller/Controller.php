@@ -91,30 +91,35 @@ class Controller
 
     public function sendContact()
     {
-        $mail = $_POST['mail'];
-        $message = $_POST['message'];
-        $dest = 'kvanconingsloo@gmail.com';
-        $sujet = 'nouveau message de ' . $mail;
+        try
+        {
+            if (!empty($_POST['feedback']))
 
-        $headers =
-        'From: TKT@hotmail.com' . "\r\n" .
-        'Reply-To: ' . $mail . ' "\r\n"' .
-            'X-Mailer: PHP/' . phpversion();
+                {
+                    $feedback = trim(ucfirst($_POST['feedback']));
 
-        mb_send_mail($dest, $sujet, $message, $headers); 
-        
-        $dest = 'jeromedeschampsjd@gmail.com';
-        try{
-            if (mb_send_mail($dest, $sujet, $message, $headers)) {
-                $_SESSION['contact_success'] = "Votre message a été envoyé";
-                $myView = new View();
-                $myView->redirect("contact");
-            } else {
-                $_SESSION['contact_error'] = "Votre message n'a pas pu être envoyé ; merci de réessayer plus tard";
-                die();
-            }
-        }catch (Exception $e){
-            $this->show404;
+                    $manager = new Manager();
+
+                    if ($manager->insertFeedbackToDb($feedback) == 0) 
+                    {
+                        $_SESSION['contact_success'] = "Votre message a été envoyé";
+                        $myView = new View();
+                        $myView->redirect("contact");
+
+                    } 
+                    
+                    else 
+                    {
+                        $_SESSION['contact_error'] = "Votre message n'a pas pu être envoyé ; merci de réessayer plus tard";
+                        die();
+                    }
+                }
+        }
+
+        catch (Exception $e)
+        {
+            $myView = new View();
+            $myView->redirect('404');
         }
     
 }

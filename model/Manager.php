@@ -524,6 +524,26 @@ class Manager
         }
     }
 
+    public function insertFeedbackToDb($feedback)
+    {
+        $db = $this->db;
+
+        $insert = $db->prepare("INSERT INTO tkt_feedback (feedback) VALUES(?)')" );
+        
+        if($insert->execute(array('feedback' => $feedback)))
+
+        {
+            return true;
+        }
+
+        else
+        {
+            return false;
+        }
+
+
+    }
+
     public function insertChangePassword ($password){
         $db = $this->db;
         $id = intval($_SESSION['id']);

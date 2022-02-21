@@ -15,9 +15,9 @@
         /**
          * Get the value of idFeedbcak
          */ 
-        public function getIdFeedbcak()
+        public function getIdFeedback()
         {
-                return $this->idFeedbcak;
+                return $this->idFeedback;
         }
 
         /**
@@ -25,9 +25,9 @@
          *
          * @return  self
          */ 
-        public function setIdFeedbcak($idFeedbcak)
+        public function setIdFeedback($idFeedback)
         {
-                $this->idFeedbcak = $idFeedbcak;
+                $this->idFeedback = $idFeedback;
 
                 return $this;
         }

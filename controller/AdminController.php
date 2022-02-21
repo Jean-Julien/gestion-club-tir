@@ -158,9 +158,9 @@ class Admincontroller
                    /**
                     * Get the value of p_name
                     */ 
-                   public function getP_name()
+                   public function getFeedback()
                    {
-                                      return $this->p_name;
+                                      return $this->feedback;
                    }
 
                    /**
