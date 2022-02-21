@@ -36,8 +36,9 @@
     </div>
 </nav>
 
-<h2 style="color: white; text-align:center;">platform management</h2>
-<h5 style="color: white; text-align:center;">add new platform</h5>
+
+<h2 style="color: white; text-align:center;">Gestion de plateforme</h2>
+<h5 style="color: blue; text-align:center;">ajouter une nouvelle pas de tir</h5>
 <form action="index.php?r=admin/managePlatform" method="POST" style=" text-align:center;">
         <input type="text" name="p_name" id="a" style="margin:0.5em;" placeholder="p_name">
         <select name="id_taille" id="">
@@ -47,8 +48,8 @@
         </select>
         <p><?php echo $_SESSION['error_add_pt']?></p>
         <p style="margin:1em;"><button type="submit" name="add" value="addPlatform"
-                        style="background-color:green">addPlatform</button>
-                <button type="reset" style="background-color:red">reset</button>
+                        style="background-color:green">ajouter</button>
+                <button type="reset" style="background-color:red">Annuler</button>
         </p>
 
 </form>
@@ -56,7 +57,7 @@
 
 <div class="shadow py-3 px-3 bg-dark bg-gradient rounded row g-3" style="margin: .5em;">
         <div class="mb-1">
-                <h4 class="text-white" style="text-align:center; margin-top:20px;">management board </h4>
+                <h4 class="text-white" style="text-align:center; margin-top:20px;">Dashboard</h4> </h4>
                  <h5 style="color:red; text-align:center;"><?=$_SESSION['delete'] ?></h5>
                 <div class="table-responsive border-secondary">
                         <table class="table table striped border-secondary shadow">
@@ -90,11 +91,10 @@
                                                                         <?php } ?>
                                                                 </select></td>
 
-                                                        <td><button><a
-                                                                                href="index.php?r=admin/managePlatform">cancel</a></button>
+                                                        <td><button><a href="index.php?r=admin/managePlatform" style='text-decoration:none;'>Annuler</a></button>
                                                         </td>
-                                                        <td><button type="submit" name="modify"
-                                                                        value="<?php echo $items['p_id']?>">modify</button>
+                                                        <td><button type="submit" name="modify" style="background-color:green; color:white;"
+                                                                        value="<?php echo $items['p_id']?>">modifier</button>
                                                         </td>
                                                 </form>
                                         </tr>
@@ -104,12 +104,12 @@
                                         <tr>
                                                 <td> <?php echo $items['p_name'] ?></td>
                                                 <td><?php echo $items['description'] ?></td>
-                                                <td><button style="background-color:red; color:white;"><a
-                                                                        href="index.php?r=admin/managePlatform&d=<?php echo $items['p_id']; ?>">delete</a></button>
+                                                <td><button style="background-color:red; color:white;text-decoration:none;"><a
+                                                                        href="index.php?r=admin/managePlatform&d=<?php echo $items['p_id']; ?>">supprimée</a></button>
                                                 </td>
                                                 <td><button style="background-color:green; color:white;"><a
                                                                         href="index.php?r=admin/managePlatform&e=<?php echo $items['p_id']; ?>"
-                                                                        style="text-decoration:none; color:white;">edit</a></button>
+                                                                        style="text-decoration:none; color:white;">Éditer</a></button>
                                                 </td>
 
                                         </tr>

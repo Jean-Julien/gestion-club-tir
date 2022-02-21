@@ -116,7 +116,7 @@ class Manager
                 return true;
             }
         } catch (exception $e) {
-            $_SESSION['delete']="this platform is in use and cannot be deleted";
+            $_SESSION['delete']="cette plate-forme est en cours d'utilisation et ne peut pas être supprimée";
             
         }
 

@@ -24,6 +24,7 @@
                     <li><a class="dropdown-item" href="#">Mon profil</a></li>
                     <?php if ($_SESSION['idRole'] == '1') { ?>
                         <li><a class="dropdown-item" href="index.php?r=admin/confirmuser">Confirmation users</a></li>
+                        <li><a class="dropdown-item" href="index.php?r=admin/managePlatform">manage Platform</a></li>
                     <?php } ?>
                     <li>
                         <hr class="dropdown-divider">
