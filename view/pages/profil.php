@@ -12,9 +12,18 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="index.php?r=home">Accueil</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php?r=reservation">Réservation</a>
-                </li>
+               
+                    <?php if (isset($_SESSION['loggedin'])) { ?>
+                        <li class="nav-item">
+                             <a class="nav-link" href="index.php?r=reservation">Réservation</a>
+                        </li>
+                        <?php }else{ ?>
+                        <li class="nav-item">
+                             <a class="nav-link" href="index.php?r=login">login</a>
+                        </li>
+                        <?php } ?>
+                    
+                
             </ul>
             <div class="flex-shrink-0 dropdown">
                 <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">

@@ -36,7 +36,7 @@ class Admincontroller
             $myView = new View();
             $myView->render('404');
         } else {
-            $_SESSION['admin']=true;
+            
             $users = $m->getAllUsers();
             $myView = new View('confirmUserPage');
             $myView->render($users);
@@ -45,7 +45,7 @@ class Admincontroller
     
     public function platformManager(){
         // if ($_SESSION['delete']) {
-            
+            $_SESSION['admin']=true;   
         // }
         $_SESSION['delete']="";
         if ($_SESSION['admin']) {

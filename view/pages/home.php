@@ -12,13 +12,22 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="index.php?r=home">Accueil</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php?r=reservation">Réservation</a>
-                </li>
+                <?php if (isset($_SESSION['loggedin'])) { ?>
+                        <li class="nav-item">
+                             <a class="nav-link" href="index.php?r=reservation">Réservation</a>
+                        </li>
+                        <?php }else{ ?>
+                        <li class="nav-item">
+                             <a class="nav-link" href="index.php?r=login">login</a>
+                        </li>
+                        <?php } ?>
             </ul>
+            <?php if (isset($_SESSION['loggedin'])) {?>
+                # code...
+                
             <div class="flex-shrink-0 dropdown">
                 <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                    <?php echo "Bienvenue " . $_SESSION['prenom']; ?>
+                   <?php if(isset($_SESSION['prenom'])){echo "Bienvenue " . $_SESSION['prenom'];} ?>  
                 </a>
                 <ul class="dropdown-menu dropdown-menu-lg-end dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser2">
                     <li><a class="dropdown-item" href="index.php?r=profil">Mon profil</a></li>
@@ -31,7 +40,7 @@
                     </li>
                     <li><a class="dropdown-item" href="index.php?r=logout">Se déconnecter</a></li>
                 </ul>
-            </div>
+            </div><?php }?>
         </div>
     </div>
 </nav>
