@@ -567,6 +567,38 @@ class Manager
         }
     }
 
+    public function getfeedback($id)
+    {
+        $db = $this->db;
+        $requet = $db->prepare('select * from tkt_feedback where id_feedback=?');
+
+        if ($requet->execute(array($id))) {
+
+            while ($row = $requet->fetch(PDO::FETCH_ASSOC)) {
+                $feedback = new Feedback();
+                $feedback->setIdFeedback($row['id_feedback']);
+                $feedback->setFeedback($row['feedback']);
+                $feedback->setIsRead($row['isRead']);
+                $feedback->setCreated_at($row['created_at']);
+
+            }
+
+            return $feedback;
+        }
+    }
+
+    public function isReadFeedback($id)
+    {
+        $db = $this->db;
+        $req = $db->prepare('UPDATE tkt_feedback set isRead = 1 WHERE id_feedback=?');
+        if ($req->execute(array($id))){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     public function insertChangePassword ($password){
         $db = $this->db;
         $id = intval($_SESSION['id']);

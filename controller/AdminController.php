@@ -163,5 +163,21 @@ class Admincontroller
         
     }
 
+    public function isReadFeedback()
+    {
+        $m = new Manager();
+
+        $feedback = $m->getfeedback(intval($_POST['idFeedback']));
+
+        if($m->isReadFeedback($feedback->getIdFeedback())){
+            $this->showFeedback();
+        }
+        else{
+            var_dump('foutu'); die();
+        }
+
+
+    }
+
   }
 ?>
