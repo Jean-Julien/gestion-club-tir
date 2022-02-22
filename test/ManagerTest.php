@@ -123,4 +123,13 @@ class ManagerTest extends \PHPUnit\Framework\TestCase
         $f = $m->getAllFeedbacks();
         $this->assertContainsOnlyInstancesOf('Feedback', $f);
     }
+
+    public function testGetFeedback()
+    {
+        $m = new Manager();
+
+        $f = $m->getfeedback(2);
+
+        $this->assertInstanceOf('Feedback', $f);
+    }
 }
