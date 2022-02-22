@@ -7,11 +7,11 @@
                 <table class="table table striped border-secondary shadow">
                     <thead class="bg-primary text-light">
                         <tr>
-                            <th scope="col">FeedBack</th>
-                            <th scope="col">Date de création</th>
+                            <th scope="col" class="col-4">FeedBack</th>
+                            <th scope="col" class="col-2">Date de création</th>
 
-                            <th scope="col" class="col-1"></th>
-                            <th scope="col" class="col-1"></th>
+                            <th scope="col" class="col-2"></th>
+                            <th scope="col" class="col-2"></th>
                         </tr>
                     </thead>
                     <br>
@@ -43,9 +43,10 @@
                 <table class="table table striped border-secondary shadow">
                     <thead class="bg-primary text-light">
                         <tr>
-                            <th scope="col">FeedBack</th>
-                            <th scope="col">Date de création</th>
-                            <th scope="col">ID du lecteur</th>
+                            <th scope="col" class="col-4">FeedBack</th>
+                            <th scope="col" class="col-2">Date de création</th>
+                            <th scope="col" class="col-2">Date de lecture</th>
+                            <th scope="col" class="col-2">Lecteur</th>
                         </tr>
                     </thead>
                     <br>
@@ -56,7 +57,8 @@
                                     <tr>
                                         <td><?php echo $feedback->getFeedback(); ?></td>
                                         <td><?php echo $feedback->getCreated_at(); ?></td>
-                                        <td><?php echo $feedback->getId_user_read(); ?></td>
+                                        <td><?php echo $feedback->getReadAt(); ?></td>
+                                        <td><?php echo $feedback->getNomUserRead(); ?></td>
                                     </tr>
                                 <?php endif ?>
                             </form>

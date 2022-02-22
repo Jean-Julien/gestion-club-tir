@@ -103,7 +103,7 @@ class Controller
 
                    // var_dump('coucou  '); die();
 
-                    if ($manager->insertFeedbackToDb($feedback) == 0) 
+                    if ($manager->insertFeedbackToDb($feedback)) 
                     {
                         $_SESSION['contact_success'] = "Votre message a été envoyé";
                         $myView = new View();
