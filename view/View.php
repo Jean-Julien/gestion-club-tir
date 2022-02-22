@@ -1,3 +1,4 @@
+
 <?php
 
 /**
@@ -80,4 +81,5 @@ class View
 
         header('location: index.php?r='.$route);
     }
+
 }

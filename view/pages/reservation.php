@@ -1,3 +1,4 @@
+
 <div class="container p-4 mt-3" style="margin-bottom: 60px;">
     <form class="shadow py-4 px-3 bg-dark bg-gradient rounded row g-3" role="form" action="index.php?r=reservation" method="post">
         <div class="mb-1">
@@ -15,6 +16,7 @@
         </div>
         <div class="mt-4">
             <button type="submit" class="btn btn-primary px-4">Choisir longueur</button>
+
         </div>
 
     </form>

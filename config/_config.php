@@ -1,3 +1,4 @@
+
 <?php
 
 //config pour toute l appli à inclure
