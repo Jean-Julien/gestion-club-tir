@@ -158,7 +158,7 @@ class Admincontroller
 
         
         // dans le new View tu mets le nom de ta page :-)
-        $myView = new View();
+        $myView = new View('showFeedback');
         $myView->render($feedbacks);
         
     }

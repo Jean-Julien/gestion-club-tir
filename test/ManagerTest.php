@@ -4,6 +4,7 @@ require './model/User.php';
 require './model/PasDeTir.php';
 require './model/TaillePdt.php';
 require './model/Reservation.php';
+require './model/Feedback.php';
 
 class ManagerTest extends \PHPUnit\Framework\TestCase
 {
@@ -15,6 +16,7 @@ class ManagerTest extends \PHPUnit\Framework\TestCase
         include_once('config/config_test.php');
     }
 
+    
     public function testEncrypt()
     {
         $m = new Manager();
@@ -107,39 +109,18 @@ class ManagerTest extends \PHPUnit\Framework\TestCase
         $this->assertContainsOnlyInstancesOf('User', $users);
     }
 
-    public function testGetUserById(){
+    public function testGetUserById()
+    {
         $m = new Manager();
         $user = $m->getUserById(5);
         $this->assertInstanceOf('User', $user);
     }
 
-<<<<<<< HEAD
-    public function testGetLongueurPdt() {
+    public function testGetAllFeedbacks()
+    {
         $m = new Manager();
-        $taille = $m->getLongueurPdt();
-        $this->assertContainsOnlyInstancesOf('TaillePdt', $taille);
-    }
 
-    public function testGetPasDeTirByTaille() {
-        $m = new Manager();
-        $pdt = $m->getPasDeTirByTaille(2);
-        $this->assertContainsOnlyInstancesOf('PasDeTir', $pdt);
-    }
-
-    public function testGetPasDeTir(){
-        $m = new Manager();
-        $pdt = $m->getPasDeTir();
-        $this->assertContainsOnlyInstancesOf('PasDeTir', $pdt);
-    }
-
-    public function testInsertChangePassword(){
-        $m = new Manager();
-        $password = $m->encrypt_decrypt("Bac3info*");
-        $this->assertEquals(true, $m->insertChangePassword($password));
-=======
-    public function testInsetPlatform(){
-        $model = new Manager();
-        $this->assertEquals(true, $model->insetPlatform('pas de tir 22',3));
->>>>>>> Abu
+        $f = $m->getAllFeedbacks();
+        $this->assertContainsOnlyInstancesOf('Feedback', $f);
     }
 }
