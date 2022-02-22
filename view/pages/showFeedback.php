@@ -37,7 +37,7 @@
     </div>
     <div class="shadow py-3 px-3 mb-5 bg-dark bg-gradient rounded row g-3">
         <div class="mb-1">
-            <h3 class="text-white">Liste des feedbacks lu</h3>
+            <h3 class="text-white">Liste des feedbacks lus</h3>
 
             <div class="table-responsive border-secondary">
                 <table class="table table striped border-secondary shadow">
