@@ -154,8 +154,13 @@ class Admincontroller
     {
         $m = new Manager;
 
+        $feedbacks = $m->getAllFeedbacks();
 
-        $feedback = $m->
+        
+        // dans le new View tu mets le nom de ta page :-)
+        $myView = new View();
+        $myView->render($feedbacks);
+        
     }
 
   }

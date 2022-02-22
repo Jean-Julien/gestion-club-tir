@@ -548,19 +548,22 @@ class Manager
     {
         $db=$this->db;
         $requet=$db->prepare('select * from tkt_feedback');
-        $requet->execute;
+        
         if ($requet->execute()) {
 
             while ($row = $requet->fetch(PDO::FETCH_ASSOC)) {
                 $feedback = new Feedback();
-                $feedback->feedback = $row['p_id'];
-                $pasdetir->nomPasDeTir = $row['p_name'];
-                $pasdetir->setIdTaille($row['id_taille']);
-                $pasdetir->setDescriptionPdt($row['description']);
+                $feedback->setIdFeedback($row['id_feedback']);
+                $feedback->setFeedback($row['feedback']);
+                $feedback->setIsRead($row['isRead']);
+                $feedback->setCreated_at($row['created_at']);
 
-                $pasdetirs[] = $pasdetir;
+                $feedbacks[] = $feedback;
+
                 
             }
+
+            return $feedbacks;
         }
     }
 
