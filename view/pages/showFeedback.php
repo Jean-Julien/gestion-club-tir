@@ -9,7 +9,7 @@
                         <tr>
                             <th scope="col">FeedBack</th>
                             <th scope="col">Date de création</th>
-                            
+
                             <th scope="col" class="col-1"></th>
                             <th scope="col" class="col-1"></th>
                         </tr>
@@ -22,7 +22,7 @@
                                     <tr>
                                         <td><?php echo $feedback->getFeedback(); ?></td>
                                         <td><?php echo $feedback->getCreated_at(); ?></td>
-                                        
+
                                         <td class="text-end"><input type="hidden" name="idFeedback" value="<?php echo $feedback->getIdFeedback(); ?> "></input></td>
                                         <td class="text-end"><input type="submit" class="btn btn-success" value="Marquer comme lu"></input></td>
                                     </tr>
@@ -45,6 +45,7 @@
                         <tr>
                             <th scope="col">FeedBack</th>
                             <th scope="col">Date de création</th>
+                            <th scope="col">ID du lecteur</th>
                         </tr>
                     </thead>
                     <br>
@@ -55,7 +56,7 @@
                                     <tr>
                                         <td><?php echo $feedback->getFeedback(); ?></td>
                                         <td><?php echo $feedback->getCreated_at(); ?></td>
-                                        
+                                        <td><?php echo $feedback->getId_user_read(); ?></td>
                                     </tr>
                                 <?php endif ?>
                             </form>

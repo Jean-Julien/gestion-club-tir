@@ -557,6 +557,7 @@ class Manager
                 $feedback->setFeedback($row['feedback']);
                 $feedback->setIsRead($row['isRead']);
                 $feedback->setCreated_at($row['created_at']);
+                $feedback->setId_user_read($row['id_user_read']);
 
                 $feedbacks[] = $feedback;
 
@@ -587,11 +588,11 @@ class Manager
         }
     }
 
-    public function isReadFeedback($id)
+    public function isReadFeedback($id, $user)
     {
         $db = $this->db;
-        $req = $db->prepare('UPDATE tkt_feedback set isRead = 1 WHERE id_feedback=?');
-        if ($req->execute(array($id))){
+        $req = $db->prepare('UPDATE tkt_feedback set isRead = 1, id_user_read=? WHERE id_feedback=?');
+        if ($req->execute(array($user, $id))){
             return true;
         }
         else{

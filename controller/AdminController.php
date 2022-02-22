@@ -169,13 +169,12 @@ class Admincontroller
 
         $feedback = $m->getfeedback(intval($_POST['idFeedback']));
 
-        if($m->isReadFeedback($feedback->getIdFeedback())){
+        if($m->isReadFeedback($feedback->getIdFeedback(), intval($_SESSION['id']))){
             $this->showFeedback();
         }
         else{
             var_dump('foutu'); die();
         }
-
 
     }
 
