@@ -57,7 +57,7 @@ class Admincontroller
 
 
         $_SESSION['delete']="";
-        if ($_SESSION['admin']) {
+        if ($model->hasRole($_SESSION['id'], 'admin')) {
          
             
             $ptd = $model->getPlatforms(1);
@@ -163,7 +163,6 @@ class Admincontroller
             var_dump("probleme");die();
         }
     }
-
 
     public function showFeedback()
     {

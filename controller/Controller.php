@@ -1,4 +1,3 @@
-
 <?php
 
 /**
@@ -105,15 +104,20 @@ class Controller
         mb_send_mail($dest, $sujet, $message, $headers); 
         
         $dest = 'jeromedeschampsjd@gmail.com';
-        if (mb_send_mail($dest, $sujet, $message, $headers)) {
-            $_SESSION['contact_success'] = "Votre message a été envoyé";
-            $myView = new View();
-            $myView->redirect("contact");
-        } else {
-            $_SESSION['contact_error'] = "Votre message n'a pas pu être envoyé ; merci de réessayer plus tard";
-            die();
+        try{
+            if (mb_send_mail($dest, $sujet, $message, $headers)) {
+                $_SESSION['contact_success'] = "Votre message a été envoyé";
+                $myView = new View();
+                $myView->redirect("contact");
+            } else {
+                $_SESSION['contact_error'] = "Votre message n'a pas pu être envoyé ; merci de réessayer plus tard";
+                die();
+            }
+        }catch (Exception $e){
+            $this->show404;
         }
-    }
+    
+}
 
 
     public function showCalendar()
