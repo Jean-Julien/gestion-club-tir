@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -16,46 +17,54 @@
 </head>
 
 <body class="bg-secondary">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="<?php echo IMG ?>logo.png" alt="logo" width="32" height="32">
-                Projet TKT
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php?r=home">Accueil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php?r=reservation">Réservation</a>
-                    </li>
-                    <li class="nav-item">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="<?php echo IMG ?>logo.png" alt="logo" width="32" height="32">
+            Projet TKT
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="index.php?r=home">Accueil</a>
+                </li>
+                <li class="nav-item">
                         <a class="nav-link" href="index.php?r=contact">Contact</a>
                     </li>
-                </ul>
-                <div class="flex-shrink-0 dropdown">
-                    <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                        <?php echo "Bienvenue " . $_SESSION['prenom']; ?>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-lg-end dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser2">
-                        <li><a class="dropdown-item" href="index.php?r=profil">Mon profil</a></li>
-                        <li><a class="dropdown-item" href="index.php?r=changePsw">Changer mon mot de passe</a></li>
-                        <?php if ($_SESSION['idRole'] == '1') { ?>
-                            <li><a class="dropdown-item" href="index.php?r=admin/confirmuser">Confirmation users</a></li>
-                        <?php } ?>
-                        <li>
-                            <hr class="dropdown-divider">
+                <?php if (isset($_SESSION['loggedin'])) { ?>
+                        <li class="nav-item">
+                             <a class="nav-link" href="index.php?r=reservation">Réservation</a>
+                        <?php }else{ ?>
+                        <li class="nav-item">
+                             <a class="nav-link" href="index.php?r=login">login</a>
                         </li>
-                        <li><a class="dropdown-item" href="index.php?r=logout">Se déconnecter</a></li>
-                    </ul>
-                </div>
-            </div>
+                        <?php } ?>
+            </ul>
+            <?php if (isset($_SESSION['loggedin'])) {?>
+                
+                
+            <div class="flex-shrink-0 dropdown">
+                <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                   <?php if(isset($_SESSION['prenom'])){echo "Bienvenue " . $_SESSION['prenom'];} ?>  
+                </a>
+                <ul class="dropdown-menu dropdown-menu-lg-end dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser2">
+                    <li><a class="dropdown-item" href="index.php?r=profil">Mon profil</a></li>
+                    <?php if ($_SESSION['idRole'] == '1') { ?>
+                        <li><a class="dropdown-item" href="index.php?r=admin/confirmuser">Confirmation users</a></li>
+                        <li><a class="dropdown-item" href="index.php?r=admin/managePlatform">gestion pas de tir</a></li>
+                    <?php } ?>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="index.php?r=logout">Se déconnecter</a></li>
+                </ul>
+            </div><?php }?>
         </div>
-    </nav>
+    </div>
+</nav>
 
     <!-- ma page -->
     <?php
@@ -71,4 +80,6 @@
     </div>
 </body>
 
+
 </html>
+

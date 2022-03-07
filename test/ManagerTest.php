@@ -113,6 +113,7 @@ class ManagerTest extends \PHPUnit\Framework\TestCase
         $this->assertInstanceOf('User', $user);
     }
 
+<<<<<<< HEAD
     public function testGetLongueurPdt() {
         $m = new Manager();
         $taille = $m->getLongueurPdt();
@@ -135,5 +136,10 @@ class ManagerTest extends \PHPUnit\Framework\TestCase
         $m = new Manager();
         $password = $m->encrypt_decrypt("Bac3info*");
         $this->assertEquals(true, $m->insertChangePassword($password));
+=======
+    public function testInsetPlatform(){
+        $model = new Manager();
+        $this->assertEquals(true, $model->insetPlatform('pas de tir 22',3));
+>>>>>>> Abu1
     }
 }

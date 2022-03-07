@@ -1,3 +1,4 @@
+
 <?php
 
 /**
@@ -27,11 +28,11 @@ class Controller
     public function showHome()
     {
         // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
-        if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+        /*if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             $myView = new View();
             $myView->redirect('login');
             exit();
-        }
+        }*/
 
         $myView = new View('home');
         $myView->render();
