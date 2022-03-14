@@ -524,6 +524,82 @@ class Manager
         }
     }
 
+    public function insertFeedbackToDb($feedback)
+    {
+        $db = $this->db;
+
+        $insert = $db->prepare("INSERT INTO tkt_feedback (feedback) VALUES(?)" );
+        
+        if($insert->execute(array($feedback)))
+
+        {
+            return true;
+        }
+
+        else
+        {
+            return false;
+        }
+
+
+    }
+
+    public function getAllFeedbacks()
+    {
+        $db=$this->db;
+        $requet=$db->prepare('select * from tkt_feedback');
+        
+        if ($requet->execute()) {
+
+            while ($row = $requet->fetch(PDO::FETCH_ASSOC)) {
+                $feedback = new Feedback();
+                $feedback->setIdFeedback($row['id_feedback']);
+                $feedback->setFeedback($row['feedback']);
+                $feedback->setIsRead($row['isRead']);
+                $feedback->setCreated_at($row['created_at']);
+                $feedback->setId_user_read($row['id_user_read']);
+                $feedback->setReadAt($row['read_at']);
+               
+                $feedbacks[] = $feedback; 
+            }
+
+            return $feedbacks;
+        }
+    }
+
+    public function getfeedback($id)
+    {
+        $db = $this->db;
+        $requet = $db->prepare('select * from tkt_feedback where id_feedback=?');
+
+        if ($requet->execute(array($id))) {
+
+            while ($row = $requet->fetch(PDO::FETCH_ASSOC)) {
+                $feedback = new Feedback();
+                $feedback->setIdFeedback($row['id_feedback']);
+                $feedback->setFeedback($row['feedback']);
+                $feedback->setIsRead($row['isRead']);
+                $feedback->setCreated_at($row['created_at']);
+                $feedback->setReadAt($row['read_at']);
+
+            }
+
+            return $feedback;
+        }
+    }
+
+    public function isReadFeedback($id, $user)
+    {
+        $db = $this->db;
+        $req = $db->prepare('UPDATE tkt_feedback set isRead = 1, read_at= CURRENT_TIMESTAMP, id_user_read=? WHERE id_feedback=?');
+        if ($req->execute(array($user, $id))){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     public function insertChangePassword ($password){
         $db = $this->db;
         $id = intval($_SESSION['id']);

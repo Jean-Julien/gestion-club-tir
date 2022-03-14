@@ -30,12 +30,13 @@ class Routeur
         "admin/activateUser"=> ["controller" => "AdminController", "method" => "activateUser"],
         "profil"            => ["controller" => "Controller", 'method' => "showProfil"],
         "changePsw"         => ["controller" => "Controller", 'method' => "showChangePsw"],
-        "contact"           => ["controller" => "Controller", "method" => "showContact"],
-        "sendContact"       => ["controller" => "Controller", "method" => "sendContact"],
+        "feedback"           => ["controller" => "Controller", "method" => "showFeedback"],
+        "sendFeedback"       => ["controller" => "Controller", "method" => "sendFeedback"],
         "changePswBdd"      => ["controller" => "Controller", 'method' => "changePswBdd"],
         "admin/showFeedback" => ["controller" => "AdminController", 'method' => "showFeedback"],
         "feedback"           => ["controller" => "Controller", "method" => "showFeedbackForm"],
         "admin/managePlatform" => ["controller" => "AdminController", "method" => "platformManager"],
+        "admin/isReadFeedback" => ["controller" => "AdminController", "method" => "isReadFeedback"],
     ];
 
     /**

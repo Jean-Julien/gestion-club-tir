@@ -1,11 +1,13 @@
 <?php
     class Feedback
     {
-        private $idFeedbcak;
+        private $idFeedback;
         private $feedback;
         private $created_at;
+        private $readAt;
         private $isRead;
         private $id_user_read;
+        private $nomUserRead;
 
     function __construct()
     {
@@ -15,9 +17,9 @@
         /**
          * Get the value of idFeedbcak
          */ 
-        public function getIdFeedbcak()
+        public function getIdFeedback()
         {
-                return $this->idFeedbcak;
+                return $this->idFeedback;
         }
 
         /**
@@ -25,9 +27,9 @@
          *
          * @return  self
          */ 
-        public function setIdFeedbcak($idFeedbcak)
+        public function setIdFeedback($idFeedback)
         {
-                $this->idFeedbcak = $idFeedbcak;
+                $this->idFeedback = $idFeedback;
 
                 return $this;
         }
@@ -107,7 +109,41 @@
          */ 
         public function setId_user_read($id_user_read)
         {
+                
                 $this->id_user_read = $id_user_read;
+                if ($this->id_user_read == 5){
+                        $this->nomUserRead = 'Admin';
+                }else{
+                        $this->nomUserRead = $this->id_user_read;
+                }
+
+                return $this->id_user_read;
+        }
+
+        /**
+         * Get the value of nomUserRead
+         */ 
+        public function getNomUserRead()
+        {
+                return $this->nomUserRead;
+        }
+
+        /**
+         * Get the value of readAt
+         */ 
+        public function getReadAt()
+        {
+                return $this->readAt;
+        }
+
+        /**
+         * Set the value of readAt
+         *
+         * @return  self
+         */ 
+        public function setReadAt($readAt)
+        {
+                $this->readAt = $readAt;
 
                 return $this;
         }

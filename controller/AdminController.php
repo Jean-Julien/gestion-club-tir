@@ -166,8 +166,29 @@ class Admincontroller
 
     public function showFeedback()
     {
+        $m = new Manager;
 
+        $feedbacks = $m->getAllFeedbacks();
+
+        
+        // dans le new View tu mets le nom de ta page :-)
+        $myView = new View('showFeedback');
+        $myView->render($feedbacks);
+        
     }
 
-}
-?>
+    public function isReadFeedback()
+    {
+        $m = new Manager();
+
+        $feedback = $m->getfeedback(intval($_POST['idFeedback']));
+
+        if($m->isReadFeedback($feedback->getIdFeedback(), intval($_SESSION['id']))){
+            $myView = new View();
+            $myView->redirect('admin/showFeedback');
+        }
+        else{
+            var_dump('foutu'); die();
+        }
+
+    }

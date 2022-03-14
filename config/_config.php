@@ -37,8 +37,8 @@ class MyAutoload
         define('USER_BDD_TEST', '250840');
         define('PASSWORD_BDD_TEST', 'bacinfo3');
 
-        define('BDD_LOCAL', ''); // mettez votre bdd local ici
-        define('USER_BDD_LOCAL', ''); //mettez votre user local ici
+        define('BDD_LOCAL', 'mysql:host=localhost;dbname=gestion-club-tir-test_tkt' ); // mettez votre bdd local ici
+        define('USER_BDD_LOCAL', 'root'); //mettez votre user local ici
         define('PASSWORD_BDD_LOCAL', ''); // mettez votre password local ici
 
         //definir constante pour fichier pc
