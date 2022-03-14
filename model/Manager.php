@@ -31,6 +31,21 @@ class Manager
         }
     }
 
+    public function getblog() {
+        $db = $this->db;
+        $req = $db->prepare("SELECT * FROM Blog");
+        
+        try {
+            if ($req->execute()) {
+                $data= $req->fetchAll(PDO::FETCH_ASSOC);
+                $db=null;
+                return $data;
+            }
+        } catch (\Throwable $th) {
+            die($th->getMessage());
+        }
+    }
+
     function encrypt_decrypt($string, $action = 'encrypt')
     {
         $encrypt_method = "AES-256-CBC";
