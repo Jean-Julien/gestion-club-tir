@@ -33,34 +33,19 @@
                 </li>
                 <li class="nav-item">
                         <a class="nav-link" href="index.php?r=contact">Contact</a>
-                    </li>
+                </li>
                 <?php if (isset($_SESSION['loggedin'])) { ?>
-                        <li class="nav-item">
-                             <a class="nav-link" href="index.php?r=reservation">Réservation</a>
-                        <?php }else{ ?>
+                    <li class="nav-item">
+                    <a class="nav-link" href="index.php?r=reservation">Réservation</a>
+                <?php }else{ ?>
                         <li class="nav-item">
                              <a class="nav-link" href="index.php?r=login">login</a>
                         </li>
-                        <?php } ?>
+                <?php } ?>
             </ul>
-            <?php if (isset($_SESSION['loggedin'])) ?>
+            <?php if (isset($_SESSION['loggedin'])){?>
                 
                 
-            <div class="flex-shrink-0 dropdown">
-                <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                   <?php if(isset($_SESSION['prenom'])){echo "Bienvenue " . $_SESSION['prenom'];} ?>  
-                </a>
-                <ul class="dropdown-menu dropdown-menu-lg-end dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser2">
-                    <li><a class="dropdown-item" href="index.php?r=profil">Mon profil</a></li>
-                    <?php if ($_SESSION['idRole'] == '1') { ?>
-                        <li><a class="dropdown-item" href="index.php?r=admin/confirmuser">Confirmation users</a></li>
-                        <li><a class="dropdown-item" href="index.php?r=admin/managePlatform">Gestion de pas de tir</a></li>
-                    <?php } ?>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="index.php?r=logout">Se déconnecter</a></li>
-                </ul>
                 <div class="flex-shrink-0 dropdown">
                     <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
                         <?php echo "Bienvenue " . $_SESSION['prenom']; ?>
@@ -79,6 +64,7 @@
                         <li><a class="dropdown-item" href="index.php?r=logout">Se déconnecter</a></li>
                     </ul>
                 </div>
+                <?php } ?>
             </div>
         </div>
     </div>
