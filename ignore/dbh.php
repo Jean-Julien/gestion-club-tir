@@ -10,11 +10,11 @@ Abstract class Dbh
 
         public function connect()
         {
-                $this->severName = "localhost";
-                $this->DbName = "tkteam";
-                $this->user = "root";
+                $this->severName = "mysql-gestion-club-tir-test.alwaysdata.net";
+                $this->DbName = "gestion-club-tir-test_tkt";
+                $this->user = "250840";
                 $this->charset = "utf8mb4";
-                $this->password = "";
+                $this->password = "Bac_info3";
 
                 //pdo connection
                 try {
