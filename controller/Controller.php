@@ -59,20 +59,48 @@ class Controller
 
         $manager = new Manager();
 
-        if(isset($_POST['taille_pas_de_tir']) && $_POST['taille_pas_de_tir'] != "all"){
+        if(isset($_POST['taille_pas_de_tir']) && $_POST['taille_pas_de_tir'] != "all") {
+
             $_SESSION['taillePdt'] = $_POST['taille_pas_de_tir'];
             $pasdetir = $manager->getPasDeTirByTaille(intval($_SESSION['taillePdt']));
             $taillePasdetir = $manager->getLongueurPdt();
             $myView = new View('reservation');
             $myView->render2($taillePasdetir, $pasdetir);
-        }else{
+        } else {
+
             $taillePasdetir = $manager->getLongueurPdt();
+            $pasDeTir = null;
+            $myView = new View('reservation');
+            $myView->render2($taillePasdetir, $pasDeTir);
+        }   
+    }
+
+    public function addPasDeTirByTaille()
+    {
+        // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
+        if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+            $myView = new View();
+            $myView->redirect('login');
+            exit();
+        }
+
+        $manager = new Manager();
+
+        if(isset($_POST['taille_pas_de_tir']) && $_POST['taille_pas_de_tir'] != "all") {
+
+            $taillePasdetir = $manager->getLongueurPdt();
+            $_SESSION['taillePdt'] = $_POST['taille_pas_de_tir'];
+            $pasdetir = $manager->getPasDeTirByTaille(intval($_SESSION['taillePdt']));
+            $myView = new View('reservation');
+            $myView->render2($taillePasdetir, $pasdetir);
+        } else {
+            
+            $taillePasdetir = $manager->getLongueurPdt();
+            $_SESSION['taillePdt'] = "all";
             $pasDeTir = $manager->getPasDeTir();
             $myView = new View('reservation');
             $myView->render2($taillePasdetir, $pasDeTir);
-
-        }
-        
+        }  
     }
 
     public function showFeedbackForm()
@@ -156,6 +184,23 @@ class Controller
         $reservations = $manager->getReservationById($_SESSION['id']);
 
         $myView = new View('profil');
+        $myView->render($reservations);
+    }
+
+    public function showMyReservation()
+    {
+        // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
+        if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+            $myView = new View();
+            $myView->redirect('login');
+            exit();
+        }
+
+        $manager = new Manager();
+
+        $reservations = $manager->getReservationById($_SESSION['id']);
+
+        $myView = new View('myReservation');
         $myView->render($reservations);
     }
 
@@ -286,7 +331,7 @@ class Controller
             }
         }
     }
-
+    
     public function logout()
     {
         $manager = new Manager;

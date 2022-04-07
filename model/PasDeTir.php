@@ -23,7 +23,7 @@
          */ 
         public function getIdTaille()
         {
-                return $this->idTaille;
+            return $this->idTaille;
         }
 
         /**
@@ -33,9 +33,9 @@
          */ 
         public function setIdTaille($idTaille)
         {
-                $this->idTaille = $idTaille;
+            $this->idTaille = $idTaille;
 
-                return $this;
+            return $this;
         }
 
 
@@ -44,7 +44,7 @@
          */ 
         public function getDescriptionPdt()
         {
-                return $this->descriptionPdt;
+            return $this->descriptionPdt;
         }
 
         /**
@@ -54,9 +54,9 @@
          */ 
         public function setDescriptionPdt($descriptionPdt)
         {
-                $this->descriptionPdt = $descriptionPdt;
+            $this->descriptionPdt = $descriptionPdt;
 
-                return $this;
+            return $this;
         }
     }
 ?>

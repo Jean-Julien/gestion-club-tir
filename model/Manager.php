@@ -167,6 +167,23 @@ class Manager
         $db = null;
     }
 
+    public function desactivateUserDb($id)
+    {
+        $db = $this->db;
+        $req = $db->prepare('UPDATE tkt_user SET u_active = 0 WHERE u_id = ?');
+
+        if($req->execute(array($id))) {
+
+            return true;
+        } else {
+
+            return false;
+        }
+        
+        $req->closeCursor();
+        $db = null;
+    }
+
     public function getUserById($id)
     {
         
@@ -194,7 +211,7 @@ class Manager
     public function getReservationById($id)
     {
         $db = $this->db;
-        $req = $db->prepare('SELECT * FROM tkt_reservation WHERE user_id=?');
+        $req = $db->prepare('SELECT * FROM tkt_reservation r JOIN tkt_pas_de_tir a ON r.r_pas_de_tir = a.p_id JOIN tkt_taille_pdt b ON a.id_taille = b.id_taille_pdt WHERE r.user_id = ?');
         intval($id);
 
         try {
@@ -208,10 +225,12 @@ class Manager
                     while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
                         $reservation = new Reservation();
 
+                        $reservation->setId($row['r_id']);
                         $reservation->setPasTir_id($row['r_pas_de_tir']);
-                        //var_dump($reservation->getPasTir_id());
-                        //die;
                         $reservation->setDatetime($row['r_datetime']);
+                        $reservation->setPasTir_name($row['p_name']);
+                        $reservation->setTaillePdt_description($row['description']);
+
                         $reservations[] = $reservation;
                     }
 
@@ -242,11 +261,60 @@ class Manager
     public function getPasDeTir()
     {
         $db = $this->db;
-        $req = $db->prepare('SELECT * FROM tkt_pas_de_tir a JOIN tkt_taille_pdt b ON a.id_taille = b.id_taille_pdt  ORDER BY CHAR_LENGTH(p_name), p_name');
+        $req = $db->prepare('SELECT * FROM tkt_pas_de_tir a JOIN tkt_taille_pdt b ON a.id_taille = b.id_taille_pdt ORDER BY CHAR_LENGTH(p_name), p_name');
 
         try {
 
             if ($req->execute()) {
+
+                $count = $req->rowCount();
+
+                if ($count > 0) {
+
+                    while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
+
+                        $pasdetir = new PasDeTir();
+
+                        $pasdetir->idPasDeTir = $row['p_id'];
+                        $pasdetir->nomPasDeTir = $row['p_name'];
+                        $pasdetir->setIdTaille($row['id_taille']);
+                        $pasdetir->setDescriptionPdt($row['description']);
+
+                        $pasdetirs[] = $pasdetir;
+                    }
+
+                    $db = null;
+                    $req = null;
+
+                    return $pasdetirs;
+                } else {
+
+                    $db = null;
+                    $req = null;
+
+                    return false;
+                }
+            } else {
+
+                return false;
+            }
+        } catch (Exception $e) {
+
+            $db = null;
+            $req = null;
+
+            return false;
+        }
+    }
+
+    public function getPasDeTirById($id)
+    {
+        $db = $this->db;
+        $req = $db->prepare('SELECT * FROM tkt_reservation r JOIN tkt_pas_de_tir a ON r.r_pas_de_tir = a.p_id JOIN tkt_taille_pdt b ON a.id_taille = b.id_taille_pdt WHERE r.r_id = ?');
+
+        try {
+
+            if ($req->execute(array($id))) {
 
                 $count = $req->rowCount();
 

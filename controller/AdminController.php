@@ -164,6 +164,39 @@ class Admincontroller
         }
     }
 
+    public function desactivateUser()
+    {
+        $id = intval($_POST['idUser']);
+
+        $m = new Manager();
+
+        if($m->desactivateUserDb($id)) 
+        {
+            $user = $m->getUserById($id);
+
+            $email_msg = "Votre compte a été désactivé par un administrateur ! \n\n";
+            $email_msg .= "Si vous souhaitez utilisé de nouveau votre compte,\n";
+            $email_msg .= "veuillez contacter un administrateur\n";
+            $email_msg .= "à l'adresse suivante : TKT@hotmail.com\n";
+
+            $dest = $user->getMail();
+            $sujet = "Confirmation de compte";
+
+            $headers = 'From: TKT@hotmail.com' . "\r\n" .
+                'Reply-To: '. $user->getMail(). ' "\r\n"' .
+                'X-Mailer: PHP/' . phpversion();
+
+            mb_send_mail($dest, $sujet, $email_msg, $headers);   
+
+            $myView = new View();
+            $myView->redirect("admin/confirmuser");
+        } else {
+
+            var_dump("probleme");
+            die();
+        }
+    }
+
     public function showFeedback()
     {
         $m = new Manager;

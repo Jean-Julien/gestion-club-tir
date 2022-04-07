@@ -1,20 +1,19 @@
-<div class="container">
-    <div class="row justify-content-center align-items-center" style="height:100vh">
-        <div class="col-md-5 col-sm-12 my-2">
-            <form accept="" class="shadow p-4 bg-dark bg-gradient rounded" method="POST" action="<?php echo changePswBdd ?>">
-                <div class="mt-2 mb-5 text-center">
+<div class="container p-4 mt-3" style="margin-bottom: 70px;">
+    <div class="shadow py-3 px-3 bg-dark bg-gradient rounded row g-3">
+        <div class="mb-1">
+            <form method="POST" action="<?php echo changePswBdd ?>">
+                <div class="mt-1 mb-3">
                     <h3 class="text-white">Formulaire de changement de password</h3>
                 </div>
 
                 <?php
-                if (!empty($_SESSION['reserv_error'])) {
-                    echo "<div class='alert alert-danger' role='alert'>" . $_SESSION['reserv_error'] . "</div>";
-                }
+                    if (!empty($_SESSION['reserv_error'])) {
+                        echo "<div class='alert alert-danger' role='alert'>" . $_SESSION['reserv_error'] . "</div>";
+                    }
 
-                if (!empty($_SESSION['succes'])) {
-                    echo "<div class='alert alert-success' role='alert'>" . $_SESSION['succes'] . "</div>";
-                }
-                
+                    if (!empty($_SESSION['succes'])) {
+                        echo "<div class='alert alert-success' role='alert'>" . $_SESSION['succes'] . "</div>";
+                    }
                 ?>
 
                 <div class="mb-3">
@@ -34,22 +33,20 @@
 
                 <hr>
 
-                <div class="d-grid gap-2">
+                <div class="d-grid gap-2 mb-3">
                     <button type="submit" class="btn btn-primary">Valider</button>
                 </div>
-
             </form>
         </div>
     </div>
 </div>
 
 <?php
-if (!empty($_SESSION['reserv_error'])) {
-    unset($_SESSION['reserv_error']);
-}
+    if (!empty($_SESSION['reserv_error'])) {
+        unset($_SESSION['reserv_error']);
+    }
 
-if (!empty($_SESSION['succes'])) {
-    unset($_SESSION['succes']);;
-}
-
+    if (!empty($_SESSION['succes'])) {
+        unset($_SESSION['succes']);;
+    }
 ?>

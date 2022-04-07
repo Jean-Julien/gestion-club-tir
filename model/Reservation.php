@@ -10,6 +10,8 @@ class Reservation
     private $pseudo;
     private $pasTir_id;
     private $user_id;
+    private $pasTir_name;
+    private $taillePdt_description;
 
 
     /**
@@ -108,6 +110,46 @@ class Reservation
     public function setUser_id($user_id)
     {
         $this->user_id = $user_id;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of pasTir_name
+     */
+    public function getPasTir_name()
+    {
+        return $this->pasTir_name;
+    }
+
+    /**
+     * Set the value of pasTir_name
+     *
+     * @return  self
+     */
+    public function setPasTir_name($pasTir_name)
+    {
+        $this->pasTir_name = $pasTir_name;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of taillePdt_description
+     */
+    public function getTaillePdt_description()
+    {
+        return $this->taillePdt_description;
+    }
+
+    /**
+     * Set the value of taillePdt_description
+     *
+     * @return  self
+     */
+    public function setTaillePdt_description($taillePdt_description)
+    {
+        $this->taillePdt_description = $taillePdt_description;
 
         return $this;
     }
