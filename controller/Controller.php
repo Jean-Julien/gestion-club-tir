@@ -33,8 +33,11 @@ class Controller
             exit();
         }*/
 
+        $m = new Manager;
+        $blogs = $m->getAllBlogs();
+
         $myView = new View('home');
-        $myView->render();
+        $myView->render($blogs);
     }
 
     /**

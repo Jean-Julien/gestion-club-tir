@@ -780,4 +780,25 @@ class Manager
         }
 
     }
+
+    public function getAllBlogs(){
+        $db = $this->db;
+        $req = $db->prepare('SELECT * FROM Blog ORDER BY date_publish DESC');
+        if ($req->execute()) {
+
+            while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
+                $blog = new Blog();
+                $blog->setId($row['id']);
+                $blog->setContent($row['Content']);
+                $blog->setDatePublish($row['date_publish']);
+                $blog->setImage($row['Image']);
+                $blog->setTitle($row['Title']);
+                
+                $blogs[] = $blog;
+            }
+
+            return $blogs;
+        }
+        
+    }
 }
