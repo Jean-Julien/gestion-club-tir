@@ -153,7 +153,7 @@ class Controller
         $myView->render();
     }
 
-    public function showProfil()
+    public function showProfile()
     {
         // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
         if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
@@ -164,10 +164,44 @@ class Controller
 
         $manager = new Manager();
 
-        $reservations = $manager->getReservationById($_SESSION['id']);
+        $infos = $manager->getMyProfile($_SESSION['id']);
 
         $myView = new View('profil');
-        $myView->render($reservations);
+        $myView->render($infos);
+    }
+
+    public function updateProfile()
+    {
+        $m = new Manager;
+
+        try {
+
+            if (!empty($_POST['nom']) && !empty($_POST['prenom'])) {
+
+                $name = trim($_POST['nom']);
+                $firstname = trim($_POST['prenom']);
+
+                if($m->modifyProfileInfo($_SESSION['id'], $name, $firstname)) {
+
+                    $myView = new View;
+
+                    $_SESSION['profile_success'] = "Vos informations ont bien été mis à jour";
+                    $myView->redirect('myProfile');
+
+                } else {
+
+                    throw new Exception ("Un probleme est survenu lors de la mise à jour de vos informations !");
+                }
+            } else {
+
+                throw new Exception("Tous les champs doivent être remplis !");
+            }
+        } catch (Exception $e) {
+
+            $_SESSION['profile_error'] = $e->getMessage();
+            $myView = new View();
+            $myView->redirect('myProfile');
+        }
     }
 
     public function showMyReservation()
@@ -322,7 +356,8 @@ class Controller
         $myView->redirect('home');
     }
 
-    public function showChangePsw() {
+    public function showChangePsw()
+    {
         $myView = new View('changePsw');
         $myView->render();
     }
@@ -339,33 +374,43 @@ class Controller
                 $newPassword = trim($_POST['newPassword']);
                 $confirmPassword = trim($_POST['confirmPassword']);
 
-                if ($newPassword === $confirmPassword){
-                    if ( $m->encrypt_decrypt($oldPassword) === $user->getPassword()){
+                if ($newPassword === $confirmPassword) {
+
+                    if ( $m->encrypt_decrypt($oldPassword) === $user->getPassword()) {
+
                         $newPasswordEncrypted = $m->encrypt_decrypt($newPassword);
 
-                        if($m->insertChangePassword($newPasswordEncrypted)){
-                            $myView = new View;
-                            if (!empty($_SESSION['reserv_error'])) {
-                                unset($_SESSION['reserv_error']);
-                            }
-                            $_SESSION['succes'] = "Votre mot de passe à bien été mis à jour";
-                            $myView->redirect('changePsw');
+                        if($m->insertChangePassword($newPasswordEncrypted)) {
 
-                        }else{
+                            $myView = new View;
+
+                            if (!empty($_SESSION['password_error'])) {
+
+                                unset($_SESSION['password_error']);
+                            }
+
+                            $_SESSION['password_success'] = "Votre mot de passe à bien été mis à jour";
+                            $myView->redirect('changePsw');
+                        } else {
+
                             throw new Exception ("Un probleme est survenu lors de l'update en db !");
                         }
 
-                    }else{
+                    } else {
+
                         throw new Exception("L'ancien mot de passe ne correspond pas ! ");
                     }
-                }else{
+                } else {
+
                     throw new Exception("Le nouveau password doit être identique au confirm password !");
                 }
-            }else{
+            } else {
+
                 throw new Exception("Tous les champs doivent être remplis !");
             }
-        }catch (Exception $e){
-            $_SESSION['reserv_error'] = $e->getMessage();
+        } catch (Exception $e) {
+
+            $_SESSION['password_error'] = $e->getMessage();
             $myView = new View();
             $myView->redirect('changePsw');
         }

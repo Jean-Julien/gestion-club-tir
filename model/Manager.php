@@ -150,6 +150,46 @@ class Manager
         $db = null;
     }
 
+    public function getMyProfile($id)
+    {
+        $user = new User();
+        $db = $this->db;
+        $req = $db->prepare('SELECT * FROM tkt_user WHERE u_id = ?');
+
+        if($req->execute(array($id))){
+
+        while($row = $req->fetch(PDO::FETCH_ASSOC)) {
+            
+                $user->setId($row['u_id']);
+                $user->setName($row['u_name']);
+                $user->setFirstname($row['u_firstname']);
+                $user->setMail($row['u_mail']);
+            }
+        }
+        
+        return $user;
+
+        $req->closeCursor();
+        $db = null;
+    }
+
+    public function modifyProfileInfo($id, $name, $firstname)
+    {
+        $db = $this->db;
+        $req = $db->prepare('UPDATE tkt_user SET u_name = ?, u_firstname = ?  WHERE u_id = ?');
+
+        if($req->execute(array($name, $firstname, $id))) {
+
+            return true;
+        } else {
+
+            return false;
+        }
+        
+        $req->closeCursor();
+        $db = null;
+    }
+
     public function activateUserDb($id)
     {
         $db = $this->db;

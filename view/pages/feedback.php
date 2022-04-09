@@ -4,15 +4,19 @@
             <h3 class="text-white">Votre avis nous interresse</h3>
         </div>
 
-        <?php
-        if (!empty($_SESSION['contact_error'])) {
-            echo "<div class='alert alert-danger' role='alert'>" . $_SESSION['contact_error'] . "</div>";
-        }
+        <?php if (!empty($_SESSION['contact_error'])) { ?>
+            <div class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                <strong>Oups ! </strong><?php echo $_SESSION['contact_error'] ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php } ?>
 
-        if (!empty($_SESSION['contact_success'])) {
-            echo "<div class='alert alert-success' role='alert'>" . $_SESSION['contact_success'] . "</div>";
-        }
-        ?>
+        <?php if (!empty($_SESSION['contact_success'])) { ?>
+            <div class="alert alert-success alert-dismissible fade show mt-1" role="alert">
+                <strong>Youpie ! </strong><?php echo $_SESSION['contact_success'] ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php } ?>
 
         <div class="col-12">
             <label for="commentaire" class="form-label text-white-50">Votre message</label>

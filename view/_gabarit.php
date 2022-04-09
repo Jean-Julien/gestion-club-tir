@@ -515,7 +515,7 @@
                                 <?php echo "Bienvenue " . $_SESSION['prenom']; ?>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-lg-end dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser2">
-                                <li><a class="dropdown-item" href="#">Mon profil</a></li>
+                                <li><a class="dropdown-item" href="index.php?r=myProfile">Mon profil</a></li>
                                 <li><a class="dropdown-item" href="index.php?r=mesReservation">Mes réservations</a></li>
                                 <li><a class="dropdown-item" href="index.php?r=changePsw">Changer mon mot de passe</a></li>
                                 <?php if ($_SESSION['idRole'] == '1') { ?>

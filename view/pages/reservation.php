@@ -4,15 +4,19 @@
             <h3 class="text-white">Réservation pas de tir </h3>
         </div>
 
-        <?php
-            if (!empty($_SESSION['reserv_error'])) {
-                echo "<div class='alert alert-danger' role='alert'>" . $_SESSION['reserv_error'] . "</div>";
-            }
+        <?php if (!empty($_SESSION['reserv_error'])) { ?>
+            <div class="alert alert-danger alert-dismissible fade show mt-1" role="alert">
+                <strong>Oups ! </strong><?php echo $_SESSION['reserv_error'] ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php } ?>
 
-            if (!empty($_SESSION['reserv_success'])) {
-                echo "<div class='alert alert-success' role='alert'>" . $_SESSION['reserv_success'] . "</div>";
-            }
-        ?>
+        <?php if (!empty($_SESSION['reserv_success'])) { ?>
+            <div class="alert alert-success alert-dismissible fade show mt-1" role="alert">
+                <strong>Youpie ! </strong><?php echo $_SESSION['reserv_success'] ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php } ?>
 
         <form action="index.php?r=reservation" method="POST">
             <label for="pastir" class="form-label text-white-50">Type de pas de tir</label>

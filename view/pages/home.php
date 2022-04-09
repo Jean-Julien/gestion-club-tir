@@ -9,8 +9,8 @@
                         <div class="rounded shadow border border-2 border-secondary py-3 px-1 mt-4">
                             <div class="row px-3">
                                 <div class="col-sm-4 py-2 d-flex aligns-items-center">
-                                    <div class="p-0 bg-dark rounded d-flex aligns-items-center">
-                                        <img src="data:<?php echo $data["Type"]; ?>;base64,<?php echo base64_encode($blog->getImage()); ?>" class="rounded img-fluid">
+                                    <div class="p-0 rounded">
+                                        <img src="data:<?php echo $data["Type"]; ?>;base64,<?php echo base64_encode($blog->getImage()); ?>" class="rounded" style="width: 100%">
                                     </div>
                                 </div>
                                 <div class="col pt-2">
