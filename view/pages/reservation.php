@@ -14,7 +14,7 @@
             }
         ?>
 
-        <form action="index.php?r=taillepasdetir" method="POST">
+        <form action="index.php?r=reservation" method="POST">
             <label for="pastir" class="form-label text-white-50">Type de pas de tir</label>
             <select class="form-select" id="pastir" name="taille_pas_de_tir" onChange="this.form.submit();">
                 <option value="" <?php if(empty($_SESSION['taillePdt'])) { echo 'selected="selected"'; } ?> disabled>Selectionnez un type de pas de tir</option>
@@ -114,7 +114,7 @@
                 <select class="form-select" id="pastir" name="reserv_pas_de_tir">
                     <option selected disabled>Selectionnez un pas de tir</option>
                     <?php foreach ($params2 as $pasdetir) : ?>
-                        <option value="<?php echo $pasdetir->idPasDeTir; ?>"><?php echo $pasdetir->nomPasDeTir; ?> <?php echo $pasdetir->getDescriptionPdt(); ?> </option>
+                        <option value="<?php echo $pasdetir->getId(); ?>"><?php echo $pasdetir->getName(); ?> - <?php echo $pasdetir->getDescriptionPdt(); ?> </option>
                     <?php endforeach; ?>
                 </select>
             </div>

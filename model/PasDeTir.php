@@ -8,15 +8,45 @@
         private $idTaille;
         private $descriptionPdt;
 
-        public function __get($attribute)
+        /**
+         * Get the value of id
+         */ 
+        public function getId()
         {
-            return $this->data[$attribute];
+            return $this->idPasDeTir;
         }
 
-        public function __set($attribute, $value)
+        /**
+         * Set the value of id
+         *
+         * @return  self
+         */ 
+        public function setId($id)
         {
-            $this->data[$attribute] = $value;
-        }   
+            $this->idPasDeTir = $id;
+
+            return $this;
+        }
+
+        /**
+         * Get the value of name
+         */ 
+        public function getName()
+        {
+            return $this->nomPasDeTir;
+        }
+
+        /**
+         * Set the value of name
+         *
+         * @return  self
+         */ 
+        public function setName($name)
+        {
+            $this->nomPasDeTir = $name;
+
+            return $this;
+        }  
 
         /**
          * Get the value of idTaille

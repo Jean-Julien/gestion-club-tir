@@ -1,24 +1,13 @@
-<div class="container p-4 mt-4" style="margin-bottom: 60px;">
+<div class="container p-4 mt-3" style="margin-bottom: 60px;">
     <div class="shadow py-4 px-3 bg-dark bg-gradient rounded row g-3">
 		<h1 style="text-align: center; ">
-			<a class="text-white text-decoration-none">Pour nous joindre</a>
+			<a class="text-white text-decoration-none">Comment nous joindre ?</a>
 		</h1>
-	
-		<!--<div class="text-justify text-center">
-			<h5>
-					<a class="text-white text-decoration-none" >
-						Nous sommes ravi de vous acceuillir sur notre nouveau site internet.</br> 
-						Vous pouvez dès aujourd'hui accéder à notre espace tireur via le bouton "se connecter" située dans le coin supérieur droit de cette page.</br> 
-						Il vous sera égelement possible de créer un nouveau compte utilisateur via ce même bouton.</br> 
-						Si vous avez des questions, n'hésistez pas à nous contacter via :
-					</a>
-			</h5>
-		</div>-->	
 
 		<div class="container pb-5">
 			<div class="row">
 				<div class="col p-3">
-					<div class="py-5 px-3 bg-secondary rounded" style="height: 250px;">
+					<div class="py-5 px-3 bg-secondary rounded shadow" style="height: 250px;">
 						<a class="text-white text-decoration-none" id="lien" href="tel:071/53.17.56">
 							<p style="text-align: center;">
 								<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-telephone text-white" viewBox="0 0 16 16">
@@ -31,7 +20,7 @@
 				</div>
 
 				<div class="col p-3">
-					<div class="py-5 px-3 bg-secondary rounded" style="height: 250px;">
+					<div class="py-5 px-3 bg-secondary rounded shadow" style="height: 250px;">
 						<a class="text-white text-decoration-none" id="lien" href="mailto:tkt@gmail.be">
 							<p style="text-align: center;">
 								<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-envelope text-white" viewBox="0 0 16 16">
@@ -44,7 +33,7 @@
 				</div>
 
 				<div class="col p-3">
-					<div class="py-5 px-3 bg-secondary rounded" style="height: 250px;">
+					<div class="py-5 px-3 bg-secondary rounded shadow" style="height: 250px;">
 						<p style="text-align: center;">
 							<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-geo-alt text-white" viewBox="0 0 16 16">
 								<path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>

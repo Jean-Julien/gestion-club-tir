@@ -22,7 +22,6 @@ class Routeur
         "insertMember"          => ["controller" => "Controller", "method" => "addMemberToDb"],
         "registered"            => ["controller" => "Controller", "method" => "showRegistered"],
         "reservation"           => ["controller" => "Controller", "method" => "showReservation"],
-        "taillepasdetir"        => ["controller" => "Controller", "method" => "addPasDeTirByTaille"],
         "calendar"              => ["controller" => "Controller", "method" => "showCalendar"],
         "insertReservation"     => ["controller" => "Controller", "method" => "addReservationToDb"],
         "logout"                => ["controller" => "Controller", "method" => "logout"],
@@ -39,7 +38,8 @@ class Routeur
         "changePswBdd"          => ["controller" => "Controller", 'method' => "changePswBdd"],
         "admin/showFeedback"    => ["controller" => "AdminController", 'method' => "showFeedback"],
         "feedback"              => ["controller" => "Controller", "method" => "showFeedbackForm"],
-        "admin/managePlatform"  => ["controller" => "AdminController", "method" => "platformManager"],
+        "admin/managePasDeTir"  => ["controller" => "AdminController", "method" => "showManagePasDeTir"],
+        "admin/addPasDeTir"     => ["controller" => "AdminController", "method" => "addPasDeTir"],
         "admin/isReadFeedback"  => ["controller" => "AdminController", "method" => "isReadFeedback"],
     ];
 

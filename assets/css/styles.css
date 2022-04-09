@@ -1,3 +1,13 @@
 .container label {
     color: #fff;
 }
+
+iframe {
+    border-radius: 20px;
+}
+
+.image {
+    float: left;
+    display: inline;
+    margin: 0 10px 10px 0;
+}

@@ -8,20 +8,6 @@ class Admincontroller
     public function confirmUserPage()
     {
 
-        /*$m = new Manager();
-
-        if( !$m->hasRole($_SESSION['id'], 'admin')) {
-
-            $myView = new View();
-            $myView->render('404');
-        } else {
-
-            $users = $m->getAllUsers();
-
-            $myView = new View("confirmUserPage");
-            $myView->render($users);
-        }*/
-
         // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
         if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             $myView = new View();
@@ -43,85 +29,76 @@ class Admincontroller
         }
     }
     
-    public function platformManager(){
+    public function showManagePasDeTir()
+    {
         
-        $model = new Manager();
-
-        if( !$model->hasRole($_SESSION['id'], 'admin')) {
-            
-            $myView = new View();
-            $myView->render('404');
-        } else {
-            $_SESSION['admin']=true;
-        }
-
-
-        $_SESSION['delete']="";
-        if ($model->hasRole($_SESSION['id'], 'admin')) {
-         
-            
-            $ptd = $model->getPlatforms(1);
-            $taille=$model->getTaille();
-            $data=array($ptd,$taille);
-            
-           $_SESSION['error_add_pt']="";
-
-            if (isset($_POST['add']) and !empty($_POST['id_taille'])) {
-                
-                $id_taille=$_POST['id_taille'];
-                $p_name=$_POST['p_name'];
-               
-               
-                if ($model->existingPlatforms($p_name)) {
-                    $_SESSION['error_add_pt']="platform already exists choose another name";
-                }
-                else {
-                    $model->insetPlatform($p_name, $id_taille);
-                    $myView = new View();
-                    $myView->redirect('admin/managePlatform');
-                }
-               
-                
-            } else {
-                
-                if (isset($_POST['modify'])) {
-                   
-                   $id_taille=$_POST['id_taille'];
-                   $p_name=$_POST['p_name'];
-                   $id =$_POST['modify'];
-                   
-                   $model->updatePlatform($p_name, $id_taille, $id);
-                   $myView = new View();
-                   $myView->redirect('admin/managePlatform');
-                   
-                } else {
-                    if (isset($_GET['d'])) {
-                        
-                        $id_taille_pdt = $_GET['d'];
-                        $model->deletePlatform($id_taille_pdt); 
-                        $myView = new View();
-                        $myView->redirect('admin/managePlatform');
-                        
-                    }
-                }
-            }
-            
-            
-            $myView = new View('managePlatform');
-            $myView->render($data);
-       }
-        else {
+        // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
+        if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
             $myView = new View();
             $myView->redirect('login');
             exit();
         }
-        
 
-        
-       
+        $manager = new Manager();
+
+        if( !$manager->hasRole($_SESSION['id'], 'admin')) {
+            
+            $myView = new View();
+            $myView->render('404');
+        } else {
+
+            $pasdetir = $manager->getPasDeTir();
+            $taillepasdetir = $manager->getLongueurPdt();
+            $myView = new View('managePasDeTir');
+            $myView->render2($pasdetir, $taillepasdetir);
+        }
+    }
+
+    public function addPasDeTir()
+    {
+
+        try {
+            
+            if (!empty($_POST['nom_pas_de_tir']) && !empty($_POST['taille_pas_de_tir'])) {
+
+                $pasdetir_name = trim(ucfirst($_POST['nom_pas_de_tir']));
+                $pasdetir_type = $_POST['taille_pas_de_tir'];
+
+                $manager = new Manager();
+
+                if ($manager->insertPasDeTirToDb($pasdetir_name, $pasdetir_type) == 0) {
+
+                    $_SESSION['pasdetir_success'] = "Pas de tir ajouté avec succès";
+                    $myView = new View();
+                    $myView->redirect('admin/managePasDeTir');
+                } else if ($manager->insertPasDeTirToDb($pasdetir_name, $pasdetir_type) == 1) {
+
+                    throw new Exception("Error 1");
+                } else if ($manager->insertPasDeTirToDb($pasdetir_name, $pasdetir_type) == 2) {
+
+                    throw new Exception("Pas de tir déjà réservé ! Réitéré votre demande");
+                } else if ($manager->insertPasDeTirToDb($pasdetir_name, $pasdetir_type) == 3) {
+
+                    throw new Exception("Error 3");
+                } else if ($manager->insertPasDeTirToDb($pasdetir_name, $pasdetir_type) == 4) {
+
+                    throw new Exception("Error 4");
+                } else {
+
+                    throw new Exception("Error 5");
+                }
+            } else {
+
+                throw new Exception("Tous les champs doivent être remplis !");
+            }
+        } catch (Exception $e) {
+
+            $_SESSION['pasdetir_error'] = $e->getMessage();
+            $myView = new View();
+            $myView->redirect('admin/managePasDeTir');
+        }
     }
     
-
     public function activateUser()
     {
         $id = intval($_POST['idUser']);

@@ -34,8 +34,33 @@ class View
         $contentPage = ob_get_clean();
         include_once(VIEW . '_gabarit.php');
     }
-
+    
+    /**
+     * render2
+     *
+     * @param  mixed $params1
+     * @param  mixed $params2
+     * @return void
+     */
     public function render2($params1, $params2)
+    {
+        $template = $this->template;
+
+        ob_start();
+        include(VIEW . 'pages/' . $template . '.php');
+        $contentPage = ob_get_clean();
+        include_once(VIEW . '_gabarit.php');
+    }
+
+    /**
+     * render3
+     *
+     * @param  mixed $params1
+     * @param  mixed $params2
+     * @param  mixed $params3
+     * @return void
+     */
+    public function render3($params1, $params2, $params3)
     {
         $template = $this->template;
 

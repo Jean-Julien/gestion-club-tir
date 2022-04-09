@@ -26,15 +26,21 @@ class Controller
 
     public function showHome()
     {
-        // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
-        /*if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-            $myView = new View();
-            $myView->redirect('login');
-            exit();
-        }*/
+        $m = new Manager;
+        $blogs = $m->getAllBlogs();
 
+        if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+
+            $myFuturReservations = false;
+            $myOldReservations = false;
+        } else {
+
+            $myFuturReservations = $m->getMyFuturReservation($_SESSION['id']);
+            $myOldReservations = $m->getMyOldReservation($_SESSION['id']);
+        }
+        
         $myView = new View('home');
-        $myView->render();
+        $myView->render3($blogs, $myFuturReservations, $myOldReservations);
     }
 
     /**
@@ -59,48 +65,28 @@ class Controller
 
         $manager = new Manager();
 
-        if(isset($_POST['taille_pas_de_tir']) && $_POST['taille_pas_de_tir'] != "all") {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-            $_SESSION['taillePdt'] = $_POST['taille_pas_de_tir'];
-            $pasdetir = $manager->getPasDeTirByTaille(intval($_SESSION['taillePdt']));
-            $taillePasdetir = $manager->getLongueurPdt();
-            $myView = new View('reservation');
-            $myView->render2($taillePasdetir, $pasdetir);
+            if (isset($_POST['taille_pas_de_tir']) && $_POST['taille_pas_de_tir'] != "all") {
+                $taillePasdetir = $manager->getLongueurPdt();
+                $_SESSION['taillePdt'] = $_POST['taille_pas_de_tir'];
+                $pasdetir = $manager->getPasDeTirByTaille($_POST['taille_pas_de_tir']);
+                $myView = new View('reservation');
+                $myView->render2($taillePasdetir, $pasdetir);
+            } else {
+                $taillePasdetir = $manager->getLongueurPdt();
+                $_SESSION['taillePdt'] = "all";
+                $pasDeTir = $manager->getPasDeTir();
+                $myView = new View('reservation');
+                $myView->render2($taillePasdetir, $pasDeTir);
+            }
         } else {
 
             $taillePasdetir = $manager->getLongueurPdt();
             $pasDeTir = null;
             $myView = new View('reservation');
             $myView->render2($taillePasdetir, $pasDeTir);
-        }   
-    }
-
-    public function addPasDeTirByTaille()
-    {
-        // Vérifiez si l'utilisateur est connecté, sinon redirigez-le vers la page de connexion
-        if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-            $myView = new View();
-            $myView->redirect('login');
-            exit();
         }
-
-        $manager = new Manager();
-
-        if(isset($_POST['taille_pas_de_tir']) && $_POST['taille_pas_de_tir'] != "all") {
-
-            $taillePasdetir = $manager->getLongueurPdt();
-            $_SESSION['taillePdt'] = $_POST['taille_pas_de_tir'];
-            $pasdetir = $manager->getPasDeTirByTaille(intval($_SESSION['taillePdt']));
-            $myView = new View('reservation');
-            $myView->render2($taillePasdetir, $pasdetir);
-        } else {
-            
-            $taillePasdetir = $manager->getLongueurPdt();
-            $_SESSION['taillePdt'] = "all";
-            $pasDeTir = $manager->getPasDeTir();
-            $myView = new View('reservation');
-            $myView->render2($taillePasdetir, $pasDeTir);
-        }  
     }
 
     public function showFeedbackForm()
@@ -145,16 +131,13 @@ class Controller
                     }
                 }
         }
-
         catch (Exception $e)
         {
             $myView = new View();
             var_dump('test ' . $e); die();
             $myView->redirect('404');
         }
-    
-}
-
+    }
 
     public function showCalendar()
     {
@@ -254,7 +237,6 @@ class Controller
     {
         try {
             
-
             if (!empty($_POST['nomRegister']) && !empty($_POST['prenomRegister']) && !empty($_POST['emailRegister']) && !empty($_POST['datenaissanceRegister']) ) {
 
                 $register_name = trim(ucfirst($_POST['nomRegister']));

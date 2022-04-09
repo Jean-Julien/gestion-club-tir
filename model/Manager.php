@@ -211,7 +211,107 @@ class Manager
     public function getReservationById($id)
     {
         $db = $this->db;
-        $req = $db->prepare('SELECT * FROM tkt_reservation r JOIN tkt_pas_de_tir a ON r.r_pas_de_tir = a.p_id JOIN tkt_taille_pdt b ON a.id_taille = b.id_taille_pdt WHERE r.user_id = ?');
+        $req = $db->prepare('SELECT * FROM tkt_reservation r JOIN tkt_pas_de_tir a ON r.r_pas_de_tir = a.p_id JOIN tkt_taille_pdt b ON a.id_taille = b.id_taille_pdt WHERE r.user_id = ? ORDER BY r.r_datetime');
+        intval($id);
+
+        try {
+
+            if ($req->execute(array($id))) {
+
+                $count = $req->rowCount();
+
+                if ($count > 0) {
+
+                    while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
+                        $reservation = new Reservation();
+
+                        $reservation->setId($row['r_id']);
+                        $reservation->setPasTir_id($row['r_pas_de_tir']);
+                        $reservation->setDatetime($row['r_datetime']);
+                        $reservation->setPasTir_name($row['p_name']);
+                        $reservation->setTaillePdt_description($row['description']);
+
+                        $reservations[] = $reservation;
+                    }
+
+                    $db = null;
+                    $req = null;
+
+                    return $reservations;
+                } else {
+
+                    $db = null;
+                    $req = null;
+
+                    return false;
+                }
+            } else {
+
+                return false;
+            }
+        } catch (Exception $e) {
+
+            $db = null;
+            $req = null;
+
+            return false;
+        }
+    }
+
+    public function getMyFuturReservation($id)
+    {
+        $db = $this->db;
+        $req = $db->prepare('SELECT * FROM tkt_reservation r JOIN tkt_pas_de_tir a ON r.r_pas_de_tir = a.p_id JOIN tkt_taille_pdt b ON a.id_taille = b.id_taille_pdt WHERE r.user_id = ? AND r.r_datetime > NOW() ORDER BY r.r_datetime');
+        intval($id);
+
+        try {
+
+            if ($req->execute(array($id))) {
+
+                $count = $req->rowCount();
+
+                if ($count > 0) {
+
+                    while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
+                        $reservation = new Reservation();
+
+                        $reservation->setId($row['r_id']);
+                        $reservation->setPasTir_id($row['r_pas_de_tir']);
+                        $reservation->setDatetime($row['r_datetime']);
+                        $reservation->setPasTir_name($row['p_name']);
+                        $reservation->setTaillePdt_description($row['description']);
+
+                        $reservations[] = $reservation;
+                    }
+
+                    $db = null;
+                    $req = null;
+
+                    return $reservations;
+                } else {
+
+                    $db = null;
+                    $req = null;
+
+                    return false;
+                }
+            } else {
+
+                return false;
+            }
+        } catch (Exception $e) {
+
+            $db = null;
+            $req = null;
+
+            return false;
+        }
+    }
+
+    public function getMyOldReservation($id)
+    {
+        $db = $this->db;
+        $req = $db->prepare('SELECT * FROM tkt_reservation r JOIN tkt_pas_de_tir a ON r.r_pas_de_tir = a.p_id JOIN tkt_taille_pdt b ON a.id_taille = b.id_taille_pdt WHERE r.user_id = ? AND r.r_datetime <= NOW() ORDER BY r.r_datetime DESC LIMIT 5');
         intval($id);
 
         try {
@@ -275,8 +375,8 @@ class Manager
 
                         $pasdetir = new PasDeTir();
 
-                        $pasdetir->idPasDeTir = $row['p_id'];
-                        $pasdetir->nomPasDeTir = $row['p_name'];
+                        $pasdetir->setId($row['p_id']);
+                        $pasdetir->setName($row['p_name']);
                         $pasdetir->setIdTaille($row['id_taille']);
                         $pasdetir->setDescriptionPdt($row['description']);
 
@@ -360,13 +460,16 @@ class Manager
         
         $db = $this->db;
         $req = $db->prepare('SELECT * FROM tkt_taille_pdt');
+
         if ($req->execute()) {
 
             while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
+
                 $taillePdt = new TaillePdt();
 
                 $taillePdt->setIdTaillePdt($row['id_taille_pdt']);
                 $taillePdt->setDescription($row['description']);
+
                 $taillePdts[] = $taillePdt;
             }
         }
@@ -381,18 +484,19 @@ class Manager
     {
         
         $db = $this->db;
-        $req = $db->prepare('SELECT * FROM tkt_pas_de_tir a JOIN tkt_taille_pdt b ON a.id_taille = b.id_taille_pdt where id_taille=?');
+        $req = $db->prepare('SELECT * FROM tkt_pas_de_tir a JOIN tkt_taille_pdt b ON a.id_taille = b.id_taille_pdt where a.id_taille = ?');
+
         if ($req->execute(array($idTaille))) {
 
             while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
+
                 $pasdetir = new PasDeTir();
-                $pasdetir->idPasDeTir = $row['p_id'];
-                $pasdetir->nomPasDeTir = $row['p_name'];
+                $pasdetir->setId($row['p_id']);
+                $pasdetir->setName($row['p_name']);
                 $pasdetir->setIdTaille($row['id_taille']);
                 $pasdetir->setDescriptionPdt($row['description']);
 
                 $pasdetirs[] = $pasdetir;
-                
             }
         }
         
@@ -495,6 +599,63 @@ class Manager
                     $idRole = 2;
 
                     if ($insert->execute(array($nom, $prenom, $mail, $crypted_password, $date_naissance, $actif, $idRole))) {
+
+                        $db = null;
+                        $req = null;
+                        $insert = null;
+
+                        return 0;
+                    } else {
+
+                        $db = null;
+                        $req = null;
+                        $insert = null;
+
+                        return 1;
+                    }
+                } else {
+
+                    $db = null;
+                    $req = null;
+                    $insert = null;
+
+                    return 2;
+                }
+            } else {
+
+                $db = null;
+                $req = null;
+                $insert = null;
+
+                return 3;
+            }
+        } catch (Exception $e) {
+
+            $db = null;
+            $req = null;
+            $insert = null;
+
+            return 4;
+        }
+    }
+
+    public function insertPasDeTirToDb($nom, $type)
+    {
+
+        $db = $this->db;
+        $req = $db->prepare('SELECT * FROM tkt_pas_de_tir WHERE p_name = ? && id_taille = ?');
+
+        try {
+
+            if ($req->execute(array($nom, $type))) {
+
+                $count = $req->rowCount();
+
+                if ($count == 0) {
+
+                    $insert = $db->prepare('INSERT INTO tkt_pas_de_tir(p_name, id_taille) VALUES(?, ?)');
+
+                    if ($insert->execute(array($nom, $type))) {
 
                         $db = null;
                         $req = null;
@@ -749,7 +910,7 @@ class Manager
 
     }
 
-    public function updatePlatform($p_name, $id_taille, $p_id){
+    public function updatePlatform($p_name, $id_taille, $p_id) {
         $db = $this->db;
             
             $req = $db->prepare("UPDATE `tkt_pas_de_tir` SET `p_name` = ?, `id_taille` = ? WHERE `tkt_pas_de_tir`.`p_id` = ?");
@@ -764,7 +925,7 @@ class Manager
 
     }
 
-    public function deletePlatform($id){
+    public function deletePlatform($id) {
         $db = $this->db;
         $req = $db->prepare('DELETE FROM tkt_pas_de_tir WHERE p_id = ?');
         try {
@@ -779,5 +940,28 @@ class Manager
             
         }
 
+    }
+
+    public function getAllBlogs()
+    {
+        $db = $this->db;
+        $req = $db->prepare('SELECT * FROM tkt_blog ORDER BY date_publish DESC LIMIT 5');
+
+        if ($req->execute()) {
+
+            while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
+                
+                $blog = new Blog();
+                $blog->setId($row['id']);
+                $blog->setContent($row['Content']);
+                $blog->setDatePublish($row['date_publish']);
+                $blog->setImage($row['Image']);
+                $blog->setTitle($row['Title']);
+
+                $blogs[] = $blog;
+            }
+
+            return $blogs;
+        }
     }
 }
