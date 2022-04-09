@@ -3,7 +3,7 @@
         <div class="mb-1">
             <form method="POST" action="<?php echo changePswBdd ?>">
                 <div class="mt-1 mb-3">
-                    <h3 class="text-white">Formulaire de changement de password</h3>
+                    <h3 class="text-white">Changement de mot de passe</h3>
                 </div>
 
                 <?php if (!empty($_SESSION['password_error'])) { ?>

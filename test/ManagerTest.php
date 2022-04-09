@@ -16,7 +16,6 @@ class ManagerTest extends \PHPUnit\Framework\TestCase
         include_once('config/config_test.php');
     }
 
-    
     public function testEncrypt()
     {
         $m = new Manager();
@@ -68,7 +67,6 @@ class ManagerTest extends \PHPUnit\Framework\TestCase
         $this->assertContainsOnlyInstancesOf('Reservation', $reservations);
     }
 
-
     public function testInvalideAccount()
     {
         $m = new Manager();
@@ -84,26 +82,29 @@ class ManagerTest extends \PHPUnit\Framework\TestCase
     public function testInsertReservationWith1()
     {
         $m = new Manager();
-        $this->assertEquals(2, $m->insertReservationToDb('1', '1', '1'));
+        $this->assertEquals(1, $m->insertReservationToDb('1', '1', '1'));
     }
+
     public function testInsertReservationWithEmptyString()
     {
         $m = new Manager();
         $this->assertEquals(1, $m->insertReservationToDb('', '', ''));
     }
 
-
-    public function testHasRoleIsTrue(){
+    public function testHasRoleIsTrue()
+    {
         $m = new Manager();
         $this->assertEquals(true, $m->hasRole('5', 'admin'));
     }
 
-    public function testHasRoleIsFalse(){
+    public function testHasRoleIsFalse()
+    {
         $m = new Manager();
         $this->assertEquals(false, $m->hasRole('5', 'client'));
     }
 
-    public function testAllUserIsActifIsFalse(){
+    public function testAllUserIsActifIsFalse()
+    {
         $m = new Manager();
         $users = $m->getAllUsers();
         $this->assertContainsOnlyInstancesOf('User', $users);
@@ -124,19 +125,16 @@ class ManagerTest extends \PHPUnit\Framework\TestCase
         $this->assertContainsOnlyInstancesOf('Feedback', $f);
     }
 
-   
-
-    public function testInsertChangePassword(){
+    public function testInsertChangePassword()
+    {
         $m = new Manager();
         $password = $m->encrypt_decrypt("Bac3info*");
         $this->assertEquals(true, $m->insertChangePassword($password));
     }
-    public function testInsetPlatform(){
-        $model = new Manager();
-        $this->assertEquals(true, $model->insetPlatform('pas de tirUnitTest 22',3));
 
-        $f = $m->getfeedback(2);
-
-        $this->assertInstanceOf('Feedback', $f);
+    public function testInsertPasDeTir()
+    {
+        $m = new Manager();
+        $this->assertEquals(true, $m->insertPasDeTirToDb('pas de tirUnitTest 22', 3));
     }
 }

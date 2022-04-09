@@ -393,16 +393,16 @@ class Controller
                             $myView->redirect('changePsw');
                         } else {
 
-                            throw new Exception ("Un probleme est survenu lors de l'update en db !");
+                            throw new Exception ("Un probleme est survenu lors de la mise à jour de votre mot de passe !");
                         }
 
                     } else {
 
-                        throw new Exception("L'ancien mot de passe ne correspond pas ! ");
+                        throw new Exception("Votre ancien mot de passe ne correspond pas !");
                     }
                 } else {
 
-                    throw new Exception("Le nouveau password doit être identique au confirm password !");
+                    throw new Exception("Le nouveau mot de passe doit être identique à la confirmation !");
                 }
             } else {
 
