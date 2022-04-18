@@ -83,7 +83,7 @@
                     </div>
                 <?php } else { ?>
 
-                    <?php if ($params2 == false) { ?>
+                    <?php if ($params3 == false) { ?>
 
                         <div class="mb-2">
                             <p class="text-white-50">Aucune réservation trouvée</p>

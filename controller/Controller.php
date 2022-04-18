@@ -289,7 +289,7 @@ class Controller
                     throw new Exception("Error 1");
                 } else if ($manager->insertMemberToDb($register_name, $register_firstname, $register_email, $register_birthday) == 2) {
 
-                    throw new Exception("Pas de tir déjà réservé ! Réitéré votre demande");
+                    throw new Exception("Compte déjà existant, veuillez saisir une adresse mail différente !");
                 } else if ($manager->insertMemberToDb($register_name, $register_firstname, $register_email, $register_birthday) == 3) {
 
                     throw new Exception("Error 3");
