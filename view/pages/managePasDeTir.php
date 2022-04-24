@@ -62,7 +62,7 @@
                             <tr>
                                 <td><?php echo $pasdetir->getId(); ?></td>
                                 <td><?php echo $pasdetir->getName(); ?></td>
-                                <td><?php echo $pasdetir->getName(); ?></td>
+                                <td><?php echo $pasdetir->getDescriptionPdt(); ?></td>
                                 <td>
                                     <form action="" method="POST">
                                         <a class="btn btn-primary btn-sm" href="#">Modifier</a>
